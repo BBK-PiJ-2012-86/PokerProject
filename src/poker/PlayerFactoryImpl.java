@@ -31,6 +31,6 @@ public class PlayerFactoryImpl implements PlayerFactory {
 		int cards = getNumberOfCards(gameType);
 		Player computerPlayer = new ComputerPlayer(computerIDs, gameType);
 		computerIDs++;
-		return computerPlayers;
+		return computerPlayer;
 	}
 }

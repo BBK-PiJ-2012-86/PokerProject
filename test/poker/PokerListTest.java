@@ -15,9 +15,9 @@ public class PokerListTest {
 	public void setUp(){
 		PokerList<Player> classUnderTest = new PokerList<Player>();
 		playerFactory = new PlayerFactoryImpl();
-		Player humanPlayer = playerFactory.createHumanPlayer("Ed");
+		Player humanPlayer = playerFactory.createHumanPlayer("Ed", 1);
 		classUnderTest.add(humanPlayer);
-		Player computerPlayer = playerFactory.createComputerPlayer()
+		Player computerPlayer = playerFactory.createComputerPlayer(1);
 		classUnderTest.add(computerPlayer);
 	}
 	@Test

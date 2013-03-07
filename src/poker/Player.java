@@ -10,7 +10,7 @@ public interface Player {
 	 * to swap.
 	 */
 	
-	public boolean swapCards();
+	public int swapCards();
 	
 	public ArrayList<Integer> swapOneCard();
 	

@@ -13,64 +13,65 @@ public class HumanPlayer implements Player {
 	}
 	
 	@Override
-	public boolean swapCards() {
+	public int swapCards() {
 		System.out.println("How many cards would you like to swap (max 3)?");
 		String str = System.console().readLine();
 		Integer swap = Integer.parseInt(str);
-		switch (swap){
-		case 0: return false;
-		break;
-		case 1: swapOneCard();
-		return true;
-		break;
-		case 2: swapTwoCards();
-		return true;
-		break;
-		case 3: swapThreeCards();
-		return true;
-		break;
-		default: throw new IllegalArgumentException("That is not a valid selection");
+		if(swap <= 3){
+			return swap;
+		}else{
+			throw new IllegalArgumentException("That is not a valid selection");
 		}
 	}
 	
-	public Integer swapCard(){
+	/*
+	 * Returns the number (index in the array) of the card the player would like to swap
+	 * 
+	 * Throws Illegal Argument Exception if the number entered by the user is greater than
+	 * the length of the array or less than one (because an index out of bounds exception will
+	 * be thrown later).
+	 */
+	
+	public Integer cardSwap(){
 		System.out.println("Which card would you like to swap (From 1 - 5)?");
 		String str = System.console().readLine();
 		Integer swap = Integer.parseInt(str);
-		if(swap > 5){
+		if(swap > hand.length || swap < 1){
 			throw new IllegalArgumentException("That is not a valid selection");
 		}
 		return swap - 1;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see poker.Player#swapOneCard()
-	 */
 	public ArrayList<Integer> swapOneCard(){
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		result.add(swapCard());
+		result.add(cardSwap());
 		return result;
 	}
 	
 	public ArrayList<Integer> swapTwoCards(){
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		result.add(swapCard());
-		result.add(swapCard());
+		result.add(cardSwap());
+		result.add(cardSwap());
 		return result;
 	}
 	
 	public ArrayList<Integer> swapThreeCards(){
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		result.add(swapCard());
-		result.add(swapCard());
-		result.add(swapCard());
+		result.add(cardSwap());
+		result.add(cardSwap());
+		result.add(cardSwap());
 		return result;
 	}
 	
 	public void displayCards(){
 		for(Card card: hand){
 			System.out.println(card.toString());
+		}
+	}
+	
+	public void changeCards(ArrayList<Integer> cardNumbers, ArrayList<Card> replacements){
+		for(int i = 0; i < cardNumbers.length(); i++){
+			hand[cardNumbers.get(i)] = replacements.get(i);
 		}
 	}
 
