@@ -13,11 +13,11 @@ public class PokerListTest {
 	
 	@Before
 	public void setUp(){
-		classUnderTest = new CircularLinkedList();
+		PokerList<Player> classUnderTest = new PokerList<Player>();
 		playerFactory = new PlayerFactoryImpl();
-		Player humanPlayer = playerFactory.createHuman();
+		Player humanPlayer = playerFactory.createHumanPlayer("Ed");
 		classUnderTest.add(humanPlayer);
-		Player computerPlayer = playerFactory.createComputer()
+		Player computerPlayer = playerFactory.createComputerPlayer()
 		classUnderTest.add(computerPlayer);
 	}
 	@Test

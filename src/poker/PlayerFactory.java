@@ -2,7 +2,7 @@ package poker;
 
 public interface PlayerFactory {
 	
-	public HumanPlayer createHumanPlayer(String username);
+	public HumanPlayer createHumanPlayer(String username, int gameType);
 	
-	public ComputerPlayer createComputerPlayer();
+	public ComputerPlayer createComputerPlayer(int gameType);
 }
