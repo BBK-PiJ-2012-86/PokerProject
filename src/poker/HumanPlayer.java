@@ -64,15 +64,19 @@ public class HumanPlayer implements Player {
 	}
 	
 	public void displayCards(){
+		System.out.println("Your hand is:");
 		for(Card card: hand){
 			System.out.println(card.toString());
 		}
 	}
 	
 	public void changeCards(ArrayList<Integer> cardNumbers, ArrayList<Card> replacements){
-		for(int i = 0; i < cardNumbers.length(); i++){
+		for(int i = 0; i < cardNumbers.size(); i++){
 			hand[cardNumbers.get(i)] = replacements.get(i);
 		}
 	}
+	
+	@Overide
+	public void 
 
 }
