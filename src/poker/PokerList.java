@@ -30,6 +30,7 @@ public class PokerList<T> implements Iterable<T> {
 		players = (T[]) new Object[INIT_LENGTH];
 		dealer = 0;
 		numItems = 0;
+		index = 0;
 	}
 	
 	public void add(T player){
@@ -127,4 +128,11 @@ public class PokerList<T> implements Iterable<T> {
 		return iterator;
 	}
 	
+	public int getSize(){
+		return numItems;
+	}
+
+	public int getDealer() {
+		return dealer;
+	}
 }
