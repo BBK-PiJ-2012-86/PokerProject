@@ -6,10 +6,14 @@ public class Card {
 	
 	private Rank rank;
 	private Suit suit;
+	private int rankInteger;
+	private int suitInteger;
 	
 	public Card(Rank rank, Suit suit){
 		this.rank = rank;
 		this.suit = suit;
+		setRankInteger();
+		setRankInteger();
 	}
 	
 	public Rank getRank(){
@@ -26,54 +30,50 @@ public class Card {
 		return result;
 	}
 	
-	/*
-	 *Returns a Vector. The integer in place 0 defines the card's rank. The integer in place 1
-	 *defines the card's suit.
-	 *
-	 * @throws an IllegalStateException if the rank or the suit is null.
-	 */
-	public Vector<Integer> getCardValue(){
-		Vector<Integer> cardValue = new Vector<Integer>();
+	public void setRankInteger(){
 		switch(rank){
-		case Two: cardValue.add(2);
+		case Two: rankInteger = 2;
 		break;
-		case Three: cardValue.add(3);
+		case Three: rankInteger = 3;
 		break;
-		case Four: cardValue.add(4);
+		case Four: rankInteger = 4;
 		break;
-		case Five: cardValue.add(5);
+		case Five: rankInteger = 5;
 		break;
-		case Six: cardValue.add(6);
+		case Six: rankInteger = 6;
 		break;
-		case Seven: cardValue.add(7);
+		case Seven: rankInteger = 7;
 		break;
-		case Eight: cardValue.add(8);
+		case Eight: rankInteger = 8;
 		break;
-		case Nine: cardValue.add(9);
+		case Nine: rankInteger = 9;
 		break;
-		case Ten: cardValue.add(10);
+		case Ten: rankInteger = 10;
 		break;
-		case Jack: cardValue.add(11);
+		case Jack: rankInteger = 11;
 		break;
-		case Queen: cardValue.add(12);
+		case Queen: rankInteger = 12;
 		break;
-		case King: cardValue.add(13);
+		case King: rankInteger = 13;
 		break;
-		case Ace: cardValue.add(14);
-		break;
-		default: throw new IllegalStateException();
-		}
-		switch(suit){
-		case Spades: cardValue.add(1);
-		break;
-		case Clubs: cardValue.add(2);
-		break;
-		case Hearts: cardValue.add(3);
-		break;
-		case Diamonds: cardValue.add(4);
+		case Ace: rankInteger = 14;
 		break;
 		default: throw new IllegalStateException();
 		}
-		return cardValue;
 	}
+	
+	public void setSuitInteger(){
+		switch(suit){
+		case Spades: suitInteger = 1;
+		break;
+		case Clubs: suitInteger = 2;
+		break;
+		case Hearts: suitInteger = 3;
+		break;
+		case Diamonds: suitInteger = 4;
+		break;
+		default: throw new IllegalStateException();
+		}
+	}
+
 }
