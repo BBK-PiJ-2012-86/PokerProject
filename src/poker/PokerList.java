@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 
 /*
- * A List Class designed for poker games.
+ * A List Class (backed by an Array) designed for poker games.
  * 
  * This class differs from an ordinary list in that it iterates from the dealer rather
  * than the beginning of the list.
@@ -101,6 +101,7 @@ public class PokerList<T> implements Iterable<T> {
 						temp[i] = players[i];
 					}
 					players = temp;
+					numItems--;
 				}else if(dealer < index){
 					for(int i = 0; i < index - 1; i++){
 						temp[i] = players[i];
@@ -109,6 +110,7 @@ public class PokerList<T> implements Iterable<T> {
 						temp[i] = players[i];
 					}
 					players = temp;
+					numItems--;
 				}else{
 					for(int i = 0; i < index; i++){
 						temp[i] = players[i];
@@ -118,6 +120,7 @@ public class PokerList<T> implements Iterable<T> {
 					}
 					dealer--;
 					players = temp;
+					numItems--;
 				}
 			}
 		};
