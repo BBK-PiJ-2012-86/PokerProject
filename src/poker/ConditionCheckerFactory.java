@@ -15,26 +15,9 @@ public class ConditionCheckerFactory {
 			return ccfactory;
 		}
 		
-		public ConditionChecker getConditionCheckerFor(ConditionType conditionType) {
+		/*public ConditionChecker getConditionCheckerFor(ConditionType conditionType) {
 			switch(conditionType) {
 			case StraightFlush:
-				return null;
-			case FourOfAKind:
-				return null;
-			case FullHouse:
-				return null;
-			case Flush:
-				return null;
-			case Straight:
-				return null;
-			case ThreeOfAKind:
-				return null;
-			case TwoPair:
-				return null;
-			case Pair:
-				return null;
-			case HighCard:
-				return null;
-			}
-		}
+				return null;*/
+			
 }

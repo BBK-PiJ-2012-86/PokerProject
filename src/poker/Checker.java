@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * @author 86
@@ -24,16 +23,18 @@ public class Checker {	//assumes exactly five cards for now
 		this.hand = hand;
 	}
 	
-	public CheckResult check(Hand hand) {
-		checkFlush(hand);
-		checkStraight(hand);
-		checkMultiples(hand);
-		checkStraightFlush(hand); 
+	public CheckResult check() {
+		checkFlush();
+		checkStraight();
+		MultiplesChecker multiplesChecker = new MultiplesChecker(hand);
+		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
+		results.addAll(multiplesResults);
+		checkStraightFlush(); 
 				
 		return Collections.max(results);
 	}
 
-	private void checkStraightFlush(Hand hand) {
+	private void checkStraightFlush() {
 		boolean straight = false;
 		boolean flush = false;
 		for (CheckResult checkResult : results) {
@@ -49,75 +50,7 @@ public class Checker {	//assumes exactly five cards for now
 		}
 	}
 
-	private void checkMultiples(Hand hand) {
-		Map<Rank,List<Card>> rankMap = new HashMap<Rank,List<Card>>();
-		for (Rank rank : Rank.values()) {
-			rankMap.put(rank, new LinkedList<Card>());
-		}
-		for (Card card : hand) {
-			rankMap.get(card.getRank()).add(card);
-		}
-		Rank tripleRank = null;
-		Rank pairRank1 = null;
-		Rank pairRank2 = null;
-		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
-			switch (entry.getValue().size()) {
-			case 4:
-				results.add( new CheckResult(ConditionType.FourOfAKind,orderCards(entry.getValue())));
-				return;
-			case 3:
-				tripleRank = entry.getKey();
-				break;
-			case 2:
-				if (pairRank1 == null) {
-					pairRank1 = entry.getKey();
-				} else {
-					pairRank2 = entry.getKey();
-				}
-			}
-		}
-		if ((tripleRank!=null) && (pairRank1!=null)) {
-			List<Card> cards = rankMap.get(tripleRank);
-			cards.addAll(rankMap.get(pairRank1));
-			results.add( new CheckResult(ConditionType.FullHouse,new Hand(cards)));
-			return;
-		}
-		if ((tripleRank!=null) && (pairRank1==null)) {
-			List<Card> tupleList = rankMap.get(tripleRank);
-			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
-			return;
-		}
-		if (pairRank2!=null) {
-			Rank higher, lower;
-			if (pairRank1.compareTo(pairRank2)<0) {
-				lower = pairRank1;
-				higher = pairRank2;
-			} else {
-				lower = pairRank2;
-				higher = pairRank1;
-			}
-			List<Card> tupleList = rankMap.get(higher);
-			tupleList.addAll(rankMap.get(lower));
-			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
-			return;
-		}
-		if (pairRank1!=null) {
-			List<Card> tupleList = rankMap.get(pairRank1);
-			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
-			return;
-		}
-	}
-	
-	private Hand orderCards (List<Card> relevantCards) {
-		Hand result = new Hand();
-		hand.addCards(relevantCards);
-		List<Card> extras = hand.getCards();
-		extras.removeAll(relevantCards);
-		result.addCards(extras);
-		return result;
-	}
-
-	private void checkStraight(Hand hand) {
+	private void checkStraight() {
 		hand.sortByRank();
 		Iterator<Card> it = hand.iterator();
 		Card curr = it.next();
@@ -129,7 +62,7 @@ public class Checker {	//assumes exactly five cards for now
 		results.add( new CheckResult(ConditionType.Straight,hand));
 	}
 
-	private void checkFlush(Hand hand) {
+	private void checkFlush() {
 		Map<Suit,List<Card>> suitMap = new HashMap<Suit,List<Card>>();
 		for (Suit suit : Suit.values()) {
 			suitMap.put(suit, new LinkedList<Card>());

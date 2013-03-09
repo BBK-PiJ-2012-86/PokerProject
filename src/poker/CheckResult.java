@@ -5,7 +5,6 @@ package poker;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author 86
@@ -34,7 +33,7 @@ public class CheckResult implements Comparable<CheckResult>{
 	public int compareTo(CheckResult other) {
 		int conditionCompareInt = this.getConditionType().compareTo(other.getConditionType());
 		if (conditionCompareInt == 0) {
-			return comparator.compare(this.getSupportingCards(), other.getSupportingCards())
+			return comparator.compare(this.getSupportingCards(), other.getSupportingCards());
 		} else {
 			return conditionCompareInt;
 		}
