@@ -12,10 +12,6 @@ public class GameManagerImpl {
 		checker = retrieveChecker(type);
 	}
 	
-	public Checker getChecker() {
-		return checker;
-	}
-	
 	public void deal(){
 		for(Player player: players){
 			
