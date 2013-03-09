@@ -15,10 +15,17 @@ import java.util.List;
 public class Hand implements Iterable<Card>{
 	private List<Card> cards;
 	
+	public Hand(List<Card> cards) {
+		this.cards = cards;
+	}
+	
+	public Hand() {	//poss delete this one
+		this(null);
+	}
+	
 	public List<Card> getCards() {
 		return cards;
 	}
-	
 	public void addCards (List<Card> cards) {
 		cards.addAll(cards);
 	}

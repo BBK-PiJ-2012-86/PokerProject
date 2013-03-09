@@ -5,12 +5,11 @@ package poker;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * @author 86
@@ -27,23 +26,27 @@ public class Checker {	//assumes exactly five cards for now
 	
 	public CheckResult check(Hand hand) {
 		checkFlush(hand);
-		
 		checkStraight(hand);
-	
 		checkMultiples(hand);
-		
-		Set<ConditionType> conditions = new HashSet<ConditionType>();
+		checkStraightFlush(hand); 
+				
+		return Collections.max(results);
+	}
+
+	private void checkStraightFlush(Hand hand) {
+		boolean straight = false;
+		boolean flush = false;
 		for (CheckResult checkResult : results) {
-			conditions.add(checkResult.getConditionType());
+			if (checkResult.getConditionType().equals(ConditionType.Straight)) {
+				straight = true;
+			}
+			if (checkResult.getConditionType().equals(ConditionType.Flush)) {
+				flush = true;
+			}
 		}
-		if (conditions.contains(ConditionType.Straight) && conditions.contains(ConditionType.Flush) ) {
-			return 
+		if (straight && flush) {
+			results.add( new CheckResult(ConditionType.StraightFlush, hand));
 		}
-		//
-		
-		return Collections.max(results);	//consider straight flush at this level?
-		
-		
 	}
 
 	private void checkMultiples(Hand hand) {
@@ -54,18 +57,54 @@ public class Checker {	//assumes exactly five cards for now
 		for (Card card : hand) {
 			rankMap.get(card.getRank()).add(card);
 		}
-		
-		for (List<Card> list : rankMap.values()) {
-			switch (list.size()) {
+		Rank tripleRank = null;
+		Rank pairRank1 = null;
+		Rank pairRank2 = null;
+		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
+			switch (entry.getValue().size()) {
 			case 4:
-				results.add( new CheckResult(ConditionType.FourOfAKind,orderCards(list)));
+				results.add( new CheckResult(ConditionType.FourOfAKind,orderCards(entry.getValue())));
 				return;
 			case 3:
-				results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(list)));
+				tripleRank = entry.getKey();
 				break;
 			case 2:
-				results.add( new CheckResult(ConditionType.Pair,orderCards(list)));
+				if (pairRank1 == null) {
+					pairRank1 = entry.getKey();
+				} else {
+					pairRank2 = entry.getKey();
+				}
 			}
+		}
+		if ((tripleRank!=null) && (pairRank1!=null)) {
+			List<Card> cards = rankMap.get(tripleRank);
+			cards.addAll(rankMap.get(pairRank1));
+			results.add( new CheckResult(ConditionType.FullHouse,new Hand(cards)));
+			return;
+		}
+		if ((tripleRank!=null) && (pairRank1==null)) {
+			List<Card> tupleList = rankMap.get(tripleRank);
+			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
+			return;
+		}
+		if (pairRank2!=null) {
+			Rank higher, lower;
+			if (pairRank1.compareTo(pairRank2)<0) {
+				lower = pairRank1;
+				higher = pairRank2;
+			} else {
+				lower = pairRank2;
+				higher = pairRank1;
+			}
+			List<Card> tupleList = rankMap.get(higher);
+			tupleList.addAll(rankMap.get(lower));
+			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
+			return;
+		}
+		if (pairRank1!=null) {
+			List<Card> tupleList = rankMap.get(pairRank1);
+			results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
+			return;
 		}
 	}
 	

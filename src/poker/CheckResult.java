@@ -26,7 +26,7 @@ public class CheckResult implements Comparable<CheckResult>{
 		return this.conditionType;
 	}
 	
-	private Hand getSupportingCards() {
+	public Hand getSupportingCards() {
 		return supportingCards;
 	}
 	
