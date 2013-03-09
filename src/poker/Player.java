@@ -2,7 +2,14 @@ package poker;
 
 import java.util.ArrayList;
 
-public interface Player {
+public abstract class Player {
+	
+	private GameManagerImpl game;
+	private Card[] hand;
+	
+	public Player(GameManagerImpl game) {
+		this.game = game;
+	}
 	
 	/*
 	 * 
@@ -10,11 +17,18 @@ public interface Player {
 	 * to swap.
 	 */
 	
-	public int swapCards();
+	public abstract int swapCards();
 	
-	public ArrayList<Integer> swapOneCard();
+	public abstract ArrayList<Integer> swapOneCard();
 	
-	public ArrayList<Integer> swapTwoCards();
+	public abstract ArrayList<Integer> swapTwoCards();
 	
-	public ArrayList<Integer> swapThreeCards();
+	public abstract ArrayList<Integer> swapThreeCards();
+	
+
+	public CheckResult check() {
+		return game.getChecker().check(hand);
+	}
+
+
 }

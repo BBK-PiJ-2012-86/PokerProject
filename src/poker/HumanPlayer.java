@@ -76,7 +76,6 @@ public class HumanPlayer implements Player {
 		}
 	}
 	
-	@Overide
-	public void 
+
 
 }

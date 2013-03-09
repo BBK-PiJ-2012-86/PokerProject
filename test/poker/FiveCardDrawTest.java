@@ -6,12 +6,12 @@ import org.junit.Test;
 
 public class FiveCardDrawTest {
 
-	private FiveCardDraw classUnderTest;
+	private GameManagerImpl classUnderTest;
 	
 	@Before 
 	public void setUP(){
 		
-		classUnderTest = new FiveCardDraw();
+		classUnderTest = new GameManagerImpl();
 	}
 	@Test
 	public void test() {

@@ -11,7 +11,7 @@ public enum ConditionType {
 	HighCard,
 	Pair,
 	TwoPair,
-	TreeOfAKind,
+	ThreeOfAKind,
 	Straight,
 	Flush,
 	FullHouse,
