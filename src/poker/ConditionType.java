@@ -3,6 +3,9 @@
  */
 package poker;
 
+import java.util.Comparator;
+import java.util.Iterator;
+
 /**
  * @author 86
  *
@@ -16,5 +19,5 @@ public enum ConditionType {
 	Flush,
 	FullHouse,
 	FourOfAKind,
-	StraightFlush
+	StraightFlush;
 }

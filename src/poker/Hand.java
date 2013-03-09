@@ -5,16 +5,28 @@ package poker;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author 86
  *
  */
-public class Hand {
+public class Hand implements Iterable<Card>{
 	List<Card> cards;
 	
-	public void sortByRank() {
+	public void sortByRankthenSuit() {
+		sortBySuitOnly();
+		sortByRankOnly();
+	}
+	
+	public void sortBySuitthenRank() {
+		sortByRankOnly();
+		sortBySuitOnly();
+	}
+	
+	
+	private void sortByRankOnly() {
 		Collections.sort(cards, new Comparator<Card>(){
 
 			@Override
@@ -25,7 +37,7 @@ public class Hand {
 		});
 	}
 	
-	public void sortBySuit() {
+	private void sortBySuitOnly() {
 		Collections.sort(cards, new Comparator<Card>(){
 
 			@Override
@@ -35,4 +47,11 @@ public class Hand {
 			
 		});
 	}
+
+	@Override
+	public Iterator<Card> iterator() {
+		return cards.iterator();
+	}
+	
+	
 }

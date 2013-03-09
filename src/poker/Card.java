@@ -1,6 +1,6 @@
 package poker;
 
-public class Card {
+public class Card implements Comparable<Card>{
 	
 	private Rank rank;
 	private Suit suit;
@@ -47,6 +47,10 @@ public class Card {
 		if (suit != other.suit)
 			return false;
 		return true;
+	}
+
+	public int compareTo(Card other) {
+		return this.getRank().compareTo(other.getRank());
 	}
 	
 	
