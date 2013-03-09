@@ -10,6 +10,8 @@ package poker;
 public abstract class ConditionChecker {
 		
 	public CheckResult check(Hand hand) {
+		CheckResult result = new CheckResult();
 		
+		return result;
 	}
 }
