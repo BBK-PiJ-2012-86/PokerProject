@@ -1,15 +1,15 @@
 package poker;
 
 public class CheckerFactory {
+	
+	private static final CheckerFactory instance = new CheckerFactory();	//others depending on game type
 
-	public static CheckerFactory getInstance() {
-		// TODO Auto-generated method stub
-		return null;
+	public static CheckerFactory getInstance(GameType game) {
+		return instance;
 	}
 
-	public Checker getChecker(GameType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Checker getChecker(Hand hand) {
+		return new Checker(hand);	//consider other checker options?
 	}
 
 }

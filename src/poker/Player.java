@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Player {
 	
-	private Checker checker;
+	private CheckerFactory checkerFactory;
 	private Hand hand;
 	
-	public Player(Checker checker) {
-		this.checker = checker;
+	public Player(CheckerFactory checkerFactory) {
+		this.checkerFactory = checkerFactory;
 	}
 	
 	/*
@@ -27,7 +27,8 @@ public abstract class Player {
 	
 
 	public CheckResult check() {
-		return checker.check(hand);
+		Checker checker = checkerFactory.getChecker(hand);
+		return checker.check();
 	}
 
 

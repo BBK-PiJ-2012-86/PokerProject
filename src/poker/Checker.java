@@ -27,7 +27,7 @@ public class Checker {	//assumes exactly five cards for now
 		checkFlush();
 		checkStraight();
 		MultiplesChecker multiplesChecker = new MultiplesChecker(hand);
-		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
+		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples();
 		results.addAll(multiplesResults);
 		checkStraightFlush(); 
 				
