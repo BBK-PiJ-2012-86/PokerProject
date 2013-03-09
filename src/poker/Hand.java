@@ -13,20 +13,28 @@ import java.util.List;
  *
  */
 public class Hand implements Iterable<Card>{
-	List<Card> cards;
+	private List<Card> cards;
 	
-	public void sortByRankthenSuit() {
+	public List<Card> getCards() {
+		return cards;
+	}
+	
+	public void addCards (List<Card> cards) {
+		cards.addAll(cards);
+	}
+	
+	/*public void sortByRankThenSuit() {
 		sortBySuitOnly();
 		sortByRankOnly();
 	}
 	
-	public void sortBySuitthenRank() {
+	public void sortBySuitThenRank() {
 		sortByRankOnly();
 		sortBySuitOnly();
 	}
 	
-	
-	private void sortByRankOnly() {
+	*/
+	public void sortByRank() {
 		Collections.sort(cards, new Comparator<Card>(){
 
 			@Override
@@ -36,6 +44,7 @@ public class Hand implements Iterable<Card>{
 			
 		});
 	}
+	/*
 	
 	private void sortBySuitOnly() {
 		Collections.sort(cards, new Comparator<Card>(){
@@ -46,7 +55,7 @@ public class Hand implements Iterable<Card>{
 			}
 			
 		});
-	}
+	}*/
 
 	@Override
 	public Iterator<Card> iterator() {
