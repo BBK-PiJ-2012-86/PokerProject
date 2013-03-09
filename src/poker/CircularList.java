@@ -9,7 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @author 86
- *
+ * foo
  */
 public class CircularList<T> implements Iterable<T>{
 	
@@ -53,6 +53,14 @@ public class CircularList<T> implements Iterable<T>{
 		}
 		return false;
 	}
+	
+	public void moveHead(int n) {
+		if (size!=0) {
+			for (int i=0; i<n; i++) {
+				head = head.getNext();
+			}
+		}
+	}
 
 	@Override
 	public Iterator<T> iterator() {
@@ -79,6 +87,15 @@ public class CircularList<T> implements Iterable<T>{
 			}
 			
 		};
+	}
+	
+	@Override
+	public String toString() {
+		String str = "";
+		for (T next : this) {
+			str+=next.toString()+",";
+		}
+		return str;
 	}
 
 }

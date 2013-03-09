@@ -43,11 +43,7 @@ public class CircularListTest {
 		list.add(7);
 		list.add(3);
 		list.add(9);
-		String str = "";
-		for (Integer i : list) {
-			str+=i;
-		}
-		assertEquals("739",str);
+		assertEquals("7,3,9,",list.toString());
 	}
 	
 	@Test
@@ -65,11 +61,25 @@ public class CircularListTest {
 		list.add(6);
 		assertTrue(list.remove(6));
 		
-		String str = "";
-		for (Integer i : list) {
-			str+=i;
-		}
-		assertEquals("32",str);
+		assertEquals("3,2,",list.toString());
+	}
+	
+	@Test
+	public void testMoveHead() {
+		list.moveHead(1);
+		
+		list.add(3);
+		list.add(9);
+		list.add(2);
+		list.moveHead(1);
+		assertEquals("9,2,3,",list.toString());
+		
+		list.add(4);
+		list.moveHead(2);
+		assertEquals("3,4,9,2,",list.toString());
+		
+		list.moveHead(4);
+		assertEquals("3,4,9,2,",list.toString());
 	}
 	
 }
