@@ -7,13 +7,9 @@ package poker;
  * @author 86
  *
  */
-public class Checker {
-
+public abstract class ConditionChecker {
+		
 	public CheckResult check(Hand hand) {
-		return new CheckResult();
 		
 	}
-	
-	
-
 }

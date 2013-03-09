@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Player {
 	
-	private GameManagerImpl game;
-	private Card[] hand;
+	private Checker checker;
+	private Hand hand;
 	
-	public Player(GameManagerImpl game) {
-		this.game = game;
+	public Player(Checker checker) {
+		this.checker = checker;
 	}
 	
 	/*
@@ -27,7 +27,7 @@ public abstract class Player {
 	
 
 	public CheckResult check() {
-		return game.getChecker().check(hand);
+		return checker.check(hand);
 	}
 
 
