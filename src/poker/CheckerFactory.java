@@ -8,7 +8,7 @@ public class CheckerFactory {
 		return instance;
 	}
 
-	public Checker getChecker(Hand hand) {
+	public Checker getChecker(HandImpl hand) {
 		return new CheckerImpl(hand);	//consider other checker options?
 	}
 

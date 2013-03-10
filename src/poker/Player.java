@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Player {
 	
 	private CheckerFactory checkerFactory;
-	private Hand hand;
+	private HandImpl hand;
 	
 	public Player(CheckerFactory checkerFactory) {
 		this.checkerFactory = checkerFactory;

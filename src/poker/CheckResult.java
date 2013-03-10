@@ -13,10 +13,10 @@ import java.util.Iterator;
 public class CheckResult implements Comparable<CheckResult>{
 	
 	private final ConditionType conditionType;
-	private final Hand supportingCards;
+	private final HandImpl supportingCards;
 	
 	
-	public CheckResult(ConditionType conditionType, Hand hand) {
+	public CheckResult(ConditionType conditionType, HandImpl hand) {
 		this.conditionType = conditionType;
 		this.supportingCards = hand;
 	}
@@ -25,7 +25,7 @@ public class CheckResult implements Comparable<CheckResult>{
 		return this.conditionType;
 	}
 	
-	public Hand getSupportingCards() {
+	public HandImpl getSupportingCards() {
 		return supportingCards;
 	}
 	
@@ -44,10 +44,10 @@ public class CheckResult implements Comparable<CheckResult>{
 	 * 1. relevant for win condition (decreasing rank)
 	 * 2. other cards (decreasing rank)
 	 */
-	private static final Comparator<Hand> comparator = new Comparator<Hand>() {
+	private static final Comparator<HandImpl> comparator = new Comparator<HandImpl>() {
 
 		@Override
-		public int compare(Hand hand1, Hand hand2) {
+		public int compare(HandImpl hand1, HandImpl hand2) {
 			Iterator<Card> it1 = hand1.iterator();
 			Iterator<Card> it2 = hand2.iterator();
 			int result = 0;

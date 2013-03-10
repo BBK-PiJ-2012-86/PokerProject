@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
 	
-	private Hand hand;
+	private HandImpl hand;
 	private List<CheckResult> results;
 
-	public CheckerImpl(Hand hand) {
+	public CheckerImpl(HandImpl hand) {
 		this.hand = hand;
 	}
 	

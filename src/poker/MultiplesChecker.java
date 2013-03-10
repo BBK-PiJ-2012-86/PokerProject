@@ -99,11 +99,11 @@ public class MultiplesChecker {
 			Rank pairRank1) {
 		List<Card> cards = rankMap.get(tripleRank);
 		cards.addAll(rankMap.get(pairRank1));
-		results.add( new CheckResult(ConditionType.FullHouse,new Hand(cards)));
+		results.add( new CheckResult(ConditionType.FullHouse,new HandImpl(cards)));
 	}
 	
-	private Hand orderCards (List<Card> relevantCards) {
-		Hand result = new Hand();
+	private HandImpl orderCards (List<Card> relevantCards) {
+		HandImpl result = new HandImpl();
 		hand.addCards(relevantCards);
 		List<Card> extras = hand.getCards();
 		extras.removeAll(relevantCards);
