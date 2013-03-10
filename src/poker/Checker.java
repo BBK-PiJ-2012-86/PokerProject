@@ -2,6 +2,6 @@ package poker;
 
 public interface Checker {
 
-	CheckResult check();
+	CheckResult check(Hand hand);
 
 }

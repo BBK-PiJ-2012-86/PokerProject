@@ -16,30 +16,30 @@ import java.util.Map;
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
 	
-	private Hand hand;
+	//private Hand hand;
 	private List<CheckResult> results = new LinkedList<CheckResult>();
 
-	public CheckerImpl(Hand hand) {
-		this.hand = hand;
-	}
+	/*public CheckerImpl(Hand hand) {
+		//this.hand = hand;
+	}*/
 	
 	/* (non-Javadoc)
 	 * @see poker.Checker#check()
 	 */
 	@Override
-	public CheckResult check() {
+	public CheckResult check(Hand hand) {
 		if (hand.getCards().size()==0) {return null;}
-		checkFlush();
-		checkStraight();
+		checkFlush(hand);
+		checkStraight(hand);
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker(hand);
 		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples();
 		results.addAll(multiplesResults);
-		checkStraightFlush(); 
+		checkStraightFlush(hand); 
 				
 		return Collections.max(results);
 	}
 
-	private void checkStraightFlush() {
+	private void checkStraightFlush(Hand hand) {
 		boolean straight = false;
 		boolean flush = false;
 		for (CheckResult checkResult : results) {
@@ -51,12 +51,12 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 			}
 		}
 		if (straight && flush) {
-			results.add( new CheckResult(ConditionType.StraightFlush, hand));
+			results.add( new CheckResult(ConditionType.StraightFlush, hand.sortByRank()));
 		}
 	}
 
-	private void checkStraight() {
-		hand.sortByRank();
+	private void checkStraight(Hand hand) {
+		hand = hand.sortByRank();
 		Iterator<Card> it = hand.iterator();
 		
 		Card curr = it.next();
@@ -71,7 +71,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		results.add( new CheckResult(ConditionType.Straight,hand));
 	}
 
-	private void checkFlush() {
+	private void checkFlush(Hand hand) {
 		Map<Suit,List<Card>> suitMap = new HashMap<Suit,List<Card>>();
 		for (Suit suit : Suit.values()) {
 			suitMap.put(suit, new LinkedList<Card>());
@@ -82,8 +82,8 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 
 		for (List<Card> list : suitMap.values()) {
 			if (list.size()==5) {
-				hand.sortByRank();
-				results.add( new CheckResult(ConditionType.Flush,hand));
+				hand = hand.sortByRank();
+				results.add( new CheckResult(ConditionType.Flush, hand));
 			}
 		}
 	}

@@ -53,7 +53,7 @@ public class HandImpl implements Hand{
 	 * @see poker.Hand#sortByRank()
 	 */
 	@Override
-	public void sortByRank() {
+	public Hand sortByRank() {
 		Collections.sort(cards, new Comparator<Card>(){
 
 			@Override
@@ -62,6 +62,7 @@ public class HandImpl implements Hand{
 			}
 			
 		});
+		return this;
 	}
 	/*
 	

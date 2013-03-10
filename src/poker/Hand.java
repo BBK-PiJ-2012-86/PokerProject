@@ -20,7 +20,7 @@ public interface Hand extends Iterable<Card>{
 	}
 	
 	 */
-	void sortByRank();
+	Hand sortByRank();
 
 	/*
 	
