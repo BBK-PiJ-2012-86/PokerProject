@@ -12,7 +12,7 @@ import java.util.List;
  * @author 86
  *
  */
-public class HandImpl implements Iterable<Card>, Hand{
+public class HandImpl implements Hand{
 	private List<Card> cards;
 	
 	public HandImpl(List<Card> cards) {

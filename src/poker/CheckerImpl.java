@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
 	
-	private HandImpl hand;
-	private List<CheckResult> results;
+	private Hand hand;
+	private List<CheckResult> results = new LinkedList<CheckResult>();
 
-	public CheckerImpl(HandImpl hand) {
+	public CheckerImpl(Hand hand) {
 		this.hand = hand;
 	}
 	
@@ -28,9 +28,10 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	 */
 	@Override
 	public CheckResult check() {
+		if (hand.getCards().size()==0) {return null;}
 		checkFlush();
 		checkStraight();
-		MultiplesChecker multiplesChecker = new MultiplesChecker(hand);
+		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker(hand);
 		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples();
 		results.addAll(multiplesResults);
 		checkStraightFlush(); 
@@ -57,11 +58,15 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	private void checkStraight() {
 		hand.sortByRank();
 		Iterator<Card> it = hand.iterator();
+		
 		Card curr = it.next();
+		Card next = null;
 		while (it.hasNext()) {
-			if ((curr.getRank().ordinal()-1)!=(it.next().getRank().ordinal())) {
+			next = it.next();
+			if ((curr.getRank().ordinal()-1)!=next.getRank().ordinal()) {
 				return;
 			}
+			curr = next;
 		}
 		results.add( new CheckResult(ConditionType.Straight,hand));
 	}

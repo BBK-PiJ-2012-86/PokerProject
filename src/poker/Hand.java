@@ -3,7 +3,7 @@ package poker;
 import java.util.Iterator;
 import java.util.List;
 
-public interface Hand {
+public interface Hand extends Iterable<Card>{
 
 	List<Card> getCards();
 
