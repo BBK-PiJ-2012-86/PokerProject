@@ -9,7 +9,7 @@ public class CheckerFactory {
 	}
 
 	public Checker getChecker(HandImpl hand) {
-		return new CheckerImpl(hand);	//consider other checker options?
+		return new CheckerImpl();	//consider other checker options?
 	}
 
 }

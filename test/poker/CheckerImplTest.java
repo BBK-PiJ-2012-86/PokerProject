@@ -6,6 +6,7 @@ package poker;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyObject;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -122,6 +123,6 @@ public class CheckerImplTest {
 			CheckResult fakeResult = new CheckResult(conditionType, new HandImpl(multiplesExpectedList));
 			multiplesResults.add(fakeResult);
 		}
-		when(mockMultiplesChecker.checkMultiples()).thenReturn(multiplesResults);
+		when(mockMultiplesChecker.checkMultiples((Hand) anyObject())).thenReturn(multiplesResults);
 	}
 }

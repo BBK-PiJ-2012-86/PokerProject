@@ -23,7 +23,7 @@ public class MultiplesCheckerFactory {
 			return mock;
 		}
 		else {
-			return new MultiplesChecker(hand);
+			return new MultiplesChecker();
 		}
 	}
 

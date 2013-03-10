@@ -32,7 +32,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		checkFlush(hand);
 		checkStraight(hand);
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker(hand);
-		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples();
+		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
 		results.addAll(multiplesResults);
 		checkStraightFlush(hand); 
 				

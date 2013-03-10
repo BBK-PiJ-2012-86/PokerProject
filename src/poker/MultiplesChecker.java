@@ -8,27 +8,22 @@ import java.util.Map.Entry;
 
 public class MultiplesChecker {
 
-	private Hand hand;
 	private List<CheckResult> results;
 	
-	public MultiplesChecker(Hand hand) {
-		this.hand = hand;
+	public List<CheckResult> checkMultiples(Hand hand) {
+		analyseMultiples(hand);
+		return results;	//should be just a single result..?
 	}
 	
-	public List<CheckResult> checkMultiples() {
-		analyseMultiples();
-		return results;
-	}
-	
-	private void analyseMultiples() {
-		Map<Rank, List<Card>> rankMap = createRankMap();
+	private void analyseMultiples(Hand hand) {
+		Map<Rank, List<Card>> rankMap = createRankMap(hand);
 		Rank tripleRank = null;
 		Rank pairRank1 = null;
 		Rank pairRank2 = null;
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			switch (entry.getValue().size()) {
 			case 4:
-				results.add( new CheckResult(ConditionType.FourOfAKind,orderCards(entry.getValue())));
+				results.add( new CheckResult(ConditionType.FourOfAKind, orderCards(entry.getValue(), hand)));
 				return;
 			case 3:
 				tripleRank = entry.getKey();
@@ -41,10 +36,10 @@ public class MultiplesChecker {
 				}
 			}
 		}
-		checkTupleConditions(rankMap, tripleRank, pairRank1, pairRank2);
+		checkTupleConditions(rankMap, tripleRank, pairRank1, pairRank2, hand);
 	}
 
-	private Map<Rank, List<Card>> createRankMap() {
+	private Map<Rank, List<Card>> createRankMap(Hand hand) {
 		Map<Rank,List<Card>> rankMap = new HashMap<Rank,List<Card>>();
 		for (Rank rank : Rank.values()) {
 			rankMap.put(rank, new LinkedList<Card>());
@@ -56,27 +51,27 @@ public class MultiplesChecker {
 	}
 
 	private void checkTupleConditions(Map<Rank, List<Card>> rankMap,
-			Rank tripleRank, Rank pairRank1, Rank pairRank2) {
+			Rank tripleRank, Rank pairRank1, Rank pairRank2, Hand hand) {
 		if ((tripleRank!=null) && (pairRank1!=null)) {
 			addFullHouse(rankMap, tripleRank, pairRank1);
 			return;
 		}
 		if ((tripleRank!=null) && (pairRank1==null)) {
-			addThreeOfAKind(rankMap, tripleRank);
+			addThreeOfAKind(rankMap, tripleRank, hand);
 			return;
 		}
 		if (pairRank2!=null) {
-			addTwoPair(rankMap, pairRank1, pairRank2);
+			addTwoPair(rankMap, pairRank1, pairRank2, hand);
 			return;
 		}
 		if (pairRank1!=null) {
-			addThreeOfAKind(rankMap, pairRank1);
+			addThreeOfAKind(rankMap, pairRank1, hand);
 			return;
 		}
 	}
 
 	private void addTwoPair(Map<Rank, List<Card>> rankMap, Rank pairRank1,
-			Rank pairRank2) {
+			Rank pairRank2, Hand hand) {
 		Rank higher, lower;
 		if (pairRank1.compareTo(pairRank2)<0) {
 			lower = pairRank1;
@@ -87,12 +82,12 @@ public class MultiplesChecker {
 		}
 		List<Card> tupleList = rankMap.get(higher);
 		tupleList.addAll(rankMap.get(lower));
-		results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
+		results.add( new CheckResult(ConditionType.ThreeOfAKind, orderCards(tupleList, hand)));
 	}
 
-	private void addThreeOfAKind(Map<Rank, List<Card>> rankMap, Rank tripleRank) {
+	private void addThreeOfAKind(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
 		List<Card> tupleList = rankMap.get(tripleRank);
-		results.add( new CheckResult(ConditionType.ThreeOfAKind,orderCards(tupleList)));
+		results.add( new CheckResult(ConditionType.ThreeOfAKind, orderCards(tupleList, hand)));
 	}
 
 	private void addFullHouse(Map<Rank, List<Card>> rankMap, Rank tripleRank,
@@ -102,7 +97,8 @@ public class MultiplesChecker {
 		results.add( new CheckResult(ConditionType.FullHouse,new HandImpl(cards)));
 	}
 	
-	private HandImpl orderCards (List<Card> relevantCards) {
+	private Hand orderCards (List<Card> relevantCards, Hand hand) {
+		hand = hand.sortByRank();
 		HandImpl result = new HandImpl();
 		hand.addCards(relevantCards);
 		List<Card> extras = hand.getCards();
