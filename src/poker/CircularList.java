@@ -9,7 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @author 86
- * foo
+ * 
  */
 public class CircularList<T> implements Iterable<T>{
 	

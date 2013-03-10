@@ -16,16 +16,8 @@ import java.util.Map;
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
 	
-	//private Hand hand;
 	private List<CheckResult> results = new LinkedList<CheckResult>();
 
-	/*public CheckerImpl(Hand hand) {
-		//this.hand = hand;
-	}*/
-	
-	/* (non-Javadoc)
-	 * @see poker.Checker#check()
-	 */
 	@Override
 	public CheckResult check(Hand hand) {
 		if (hand.getCards().size()==0) {return null;}
