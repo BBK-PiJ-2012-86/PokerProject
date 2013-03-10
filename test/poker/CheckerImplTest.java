@@ -7,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,73 +18,73 @@ import org.junit.Test;
  *
  */
 public class CheckerImplTest {
-	private static Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	private static Card NINE_OF_SPADES = new Card(Rank.Nine, Suit.Spades);
+	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
+	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
+	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
+	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
+	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
+	private static final Card NINE_OF_SPADES = new Card(Rank.Nine, Suit.Spades);
 	
-	private static Card JACK_OF_HEARTS = new Card(Rank.Jack, Suit.Hearts);
-	private static Card JACK_OF_CLUBS = new Card(Rank.Jack, Suit.Clubs);
-	private static Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
+	private static final Card JACK_OF_HEARTS = new Card(Rank.Jack, Suit.Hearts);
+	private static final Card JACK_OF_CLUBS = new Card(Rank.Jack, Suit.Clubs);
+	private static final Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
 	
-	private static Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
+	private static final Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
 	
 	@Test
 	public void testCheckStraightFlush() {
-		Card[] straightFlush = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
-		CheckResult result = checkHandConditionNoMultiples(straightFlush);
+		Card[] cardArray = new Card[] {TEN_OF_SPADES, KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES, ACE_OF_SPADES};
+		Card[] multiplesExpected = new Card[] {};
+		Card[] expectedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
 		
-		assertEquals(ConditionType.StraightFlush, result.getConditionType());
-		assertEquals(Arrays.asList(straightFlush), result.getSupportingCards().getCards());
+		
+		testForConditionType(ConditionType.StraightFlush, cardArray, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testCheckFlush() {
-		Card[] flush = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, NINE_OF_SPADES};
-		CheckResult result = checkHandConditionNoMultiples(flush);
+		Card[] cardArray = new Card[] {ACE_OF_SPADES, NINE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, KING_OF_SPADES};
+		Card[] multiplesExpected = new Card[] {};
+		Card[] expectedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, NINE_OF_SPADES};
 		
-		assertEquals(ConditionType.Flush, result.getConditionType());
-		assertEquals(Arrays.asList(flush), result.getSupportingCards().getCards());
+		testForConditionType(ConditionType.Flush, cardArray, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testCheckStraight() {
-		Card[] cardArray = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_CLUBS};
+		Card[] cardArray = new Card[] {QUEEN_OF_SPADES, KING_OF_SPADES, TEN_OF_CLUBS, JACK_OF_SPADES, ACE_OF_SPADES};
 		Card[] multiplesExpected = new Card[] {};
+		Card[] expectedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_CLUBS};
 		
-		testForConditionType(ConditionType.Straight, cardArray, multiplesExpected);
-		/*CheckResult result = checkHandConditionNoMultiples(straight);
-		
-		assertEquals(ConditionType.Straight, result.getConditionType());
-		assertEquals(Arrays.asList(straight), result.getSupportingCards().getCards());*/
+		testForConditionType(ConditionType.Straight, cardArray, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testCheckFourOfAKind() {
 		Card[] cardArray = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, QUEEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
 		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
+		Card[] expectedCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
 		
-		testForConditionType(ConditionType.FourOfAKind, cardArray, multiplesExpected);
+		testForConditionType(ConditionType.FourOfAKind, cardArray, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testFullHouse() {
 		Card[] cardArray = new Card[] {JACK_OF_HEARTS, TEN_OF_CLUBS, TEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
 		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_SPADES, JACK_OF_DIAMONDS, TEN_OF_CLUBS, TEN_OF_SPADES};
+		Card[] expectedCards = new Card[] {JACK_OF_HEARTS,  JACK_OF_SPADES, JACK_OF_DIAMONDS, TEN_OF_CLUBS, TEN_OF_SPADES,};
 		
-		testForConditionType(ConditionType.FullHouse, cardArray, multiplesExpected);
+		testForConditionType(ConditionType.FullHouse, cardArray, multiplesExpected, expectedCards);
 	}
 
-	private void testForConditionType(ConditionType conditionType, Card[] cardArray, Card[] multiplesExpected) {
+	private void testForConditionType(ConditionType conditionType, Card[] cardArray, Card[] multiplesExpected, Card[] expectedCards) {
 		List<Card> list = Arrays.asList(cardArray);
 		Hand mockHand = mock(Hand.class);
 		
-		MultiplesChecker mockChecker = mock(MultiplesChecker.class);
-		MultiplesCheckerFactory.getInstance().setMockChecker(mockChecker);
+		MultiplesChecker mockMultiplesChecker = mock(MultiplesChecker.class);
+		MultiplesCheckerFactory.getInstance().setMockChecker(mockMultiplesChecker);
 		
-		when(mockHand.getCards()).thenReturn(list).thenReturn(list);
+		when(mockHand.getCards()).thenReturn(list).thenReturn(list).thenReturn(list).thenReturn(list);
 		when(mockHand.iterator()).thenReturn(list.iterator()).thenReturn(list.iterator());
 				
 		List<Card> multiplesExpectedList = Arrays.asList(multiplesExpected);
@@ -93,27 +92,13 @@ public class CheckerImplTest {
 		List<CheckResult> multiplesResults = new LinkedList<CheckResult>();
 		multiplesResults.add(fakeResult);
 		
-		when(mockChecker.checkMultiples()).thenReturn(multiplesResults);
+		when(mockMultiplesChecker.checkMultiples()).thenReturn(multiplesResults);
 		
 		CheckResult result = (new CheckerImpl(mockHand)).check();
 		
+		List<Card> expectedCardsList = Arrays.asList(expectedCards);
+		
 		assertEquals(conditionType, result.getConditionType());
-		assertEquals(multiplesExpectedList, result.getSupportingCards().getCards());
+		assertEquals(expectedCardsList, result.getSupportingCards().getCards());
 	}
-
-	/*private CheckResult checkHandConditionNoMultiples(Card[] cards) {
-		List<Card> list = Arrays.asList(cards);
-		Hand flushHand = mock(Hand.class);
-		
-		when(flushHand.getCards()).thenReturn(list).thenReturn(list);
-		when(flushHand.iterator()).thenReturn(list.iterator()).thenReturn(list.iterator());
-		
-		MultiplesChecker mockChecker = mock(MultiplesChecker.class);
-		MultiplesCheckerFactory.getInstance().setMockChecker(mockChecker);
-		
-		when(mockChecker.checkMultiples()).thenReturn(new ArrayList<CheckResult>());
-		CheckResult result = (new CheckerImpl(flushHand)).check();
-		return result;
-	}*/
-
 }
