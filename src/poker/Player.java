@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 public abstract class Player {
 	
-	protected CheckerFactory checkerFactory;
+	protected GameType gameType;
 	protected HandImpl hand;
 	protected String username;
+	protected Checker checker;
 	
-	public Player(String username, CheckerFactory checkerFactory) {
-		this.checkerFactory = checkerFactory;
+	
+	public Player(String username, GameType gameType) {
+		this.gameType = gameType;
 		this.username = username;
+		this.checker = CheckerFactory.getInstance(gameType).getChecker();
 	}
 	
 	public CheckResult check() {
-		Checker checker = checkerFactory.getChecker();
 		return checker.check(hand);
 	}
 		
