@@ -15,15 +15,15 @@ import java.util.List;
  *
  */
 public class HandImpl implements Hand{
-	private List<Card> cards;
+	private List<Card> cards = new LinkedList<Card>();
 	
 	public HandImpl(List<Card> cards) {
-		this.cards = cards;				// make so cards is only updated through Hand??
+		this.cards.addAll(cards);				// make so cards is only updated through Hand??
 	}
 	
-	public HandImpl() {	//poss delete this one
+	/*public HandImpl() {	//poss delete this one
 		this(new LinkedList<Card>());
-	}
+	}*/
 	
 	@Override
 	public List<Card> getCards() {

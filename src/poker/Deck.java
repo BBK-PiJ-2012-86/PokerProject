@@ -1,6 +1,7 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
 
@@ -23,6 +24,6 @@ public class Deck {
 		}
 		
 		public void shuffleDeck(){
-			deck.shuffle();
+			Collections.shuffle(deck);
 		}
 }
