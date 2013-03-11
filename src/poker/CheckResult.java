@@ -30,6 +30,14 @@ public class CheckResult implements Comparable<CheckResult>{
 	}
 	
 	@Override
+	public String toString() {
+		String result = "";
+		result+=this.getConditionType()+",";
+		result+=this.getSupportingCards();
+		return result;
+	}
+	
+	@Override
 	public int compareTo(CheckResult other) {
 		int conditionCompareInt = this.getConditionType().compareTo(other.getConditionType());
 		if (conditionCompareInt == 0) {

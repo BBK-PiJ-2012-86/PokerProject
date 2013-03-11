@@ -6,6 +6,7 @@ package poker;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class HandImpl implements Hand{
 	}
 	
 	public HandImpl() {	//poss delete this one
-		this(null);
+		this(new LinkedList<Card>());
 	}
 	
 	@Override
@@ -29,8 +30,8 @@ public class HandImpl implements Hand{
 	}
 
 	@Override
-	public void addCards (List<Card> cards) {
-		cards.addAll(cards);
+	public void addCards (List<Card> cardsToAdd) {
+		cards.addAll(cardsToAdd);
 	}
 	
 	@Override
@@ -49,6 +50,17 @@ public class HandImpl implements Hand{
 	@Override
 	public Iterator<Card> iterator() {
 		return cards.iterator();
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		if (cards!=null) {
+			for (Card card: cards) {
+				result+=card;
+			}
+		}
+		return result;
 	}
 	
 	

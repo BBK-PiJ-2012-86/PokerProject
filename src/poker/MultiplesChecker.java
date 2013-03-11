@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 public class MultiplesChecker {
 
-	private List<CheckResult> results;
+	private List<CheckResult> results = new LinkedList<CheckResult>();
 	
 	public List<CheckResult> checkMultiples(Hand hand) {
 		analyseMultiples(hand);
@@ -99,8 +99,8 @@ public class MultiplesChecker {
 	
 	private Hand orderCards (List<Card> relevantCards, Hand hand) {
 		hand = hand.sortByRank();
-		HandImpl result = new HandImpl();
-		hand.addCards(relevantCards);
+		Hand result = new HandImpl();
+		result.addCards(relevantCards);
 		List<Card> extras = hand.getCards();
 		extras.removeAll(relevantCards);
 		result.addCards(extras);

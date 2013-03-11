@@ -57,31 +57,59 @@ public class MultiplesCheckerTest {
 	public void testFourOfAKind() {
 		Card[] inputCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, QUEEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
 		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
-		List<Card> inputList = Arrays.asList(inputCards);
-		List<Card> multiplesExpectedList = Arrays.asList(multiplesExpected);
+		Card[] rankSortedCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
+		final List<Card> inputListMoo = Arrays.asList(inputCards);
+		List<Card> multiplesExpectedListMoo = Arrays.asList(multiplesExpected);
+		List<Card> rankSortedCardsListMoo = Arrays.asList(rankSortedCards);
+		
+		final List<Card> inputList = new LinkedList<Card>();
+		inputList.addAll(inputListMoo);
+		List<Card> multiplesExpectedList = new LinkedList<Card>();
+		multiplesExpectedList.addAll(multiplesExpectedListMoo);
+		List<Card> rankSortedCardsList = new LinkedList<Card>();
+		rankSortedCardsList.addAll(rankSortedCardsListMoo);
+		
+		
+		
+		Hand sortedMockHand = mock(Hand.class);
+		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
+		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator()).thenReturn(rankSortedCardsList.iterator());
+		
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.getCards()).thenReturn(inputList).thenReturn(inputList).thenReturn(inputList).thenReturn(inputList);
 		when(mockHand.iterator()).thenReturn(inputList.iterator()).thenReturn(inputList.iterator());
+		when(mockHand.sortByRank()).thenReturn(sortedMockHand).thenReturn(sortedMockHand);
 		Hand mockResultHand = mock(Hand.class);
 		when(mockResultHand.getCards()).thenReturn(multiplesExpectedList).thenReturn(multiplesExpectedList).thenReturn(multiplesExpectedList).thenReturn(multiplesExpectedList);
-				/// hand.addCards problem.........!
 		
 		doAnswer(new Answer<Object>() {
 		        public Object answer(InvocationOnMock invocation) {
 		            Object[] args = invocation.getArguments();
-		            return "called with arguments: " + args;		// hum hum confused
+		        	inputList.addAll((List<Card>) args[0]);
+		        	return null;
 		        }
-		    }).when(mockHand).addCards((List<Card>) anyObject());	//consider
+		    }).when(mockHand).addCards((List<Card>) anyObject());
+		
+		doAnswer(new Answer<Object>() {
+	        public Object answer(InvocationOnMock invocation) {
+	            Object[] args = invocation.getArguments();
+	        	inputList.addAll((List<Card>) args[0]);
+	        	return null;
+	        }
+	    }).when(mockResultHand).addCards((List<Card>) anyObject());	//consider
 		
 		//
 		MultiplesChecker multiplesChecker = new MultiplesChecker();
 		List<CheckResult> actual = multiplesChecker.checkMultiples(mockHand);
 		
-		CheckResult fourJacks = new CheckResult(ConditionType.FourOfAKind, mockResultHand);
-		List<CheckResult> expected = new LinkedList<CheckResult>();
-		expected.add(fourJacks);
+		//CheckResult fourJacks = new CheckResult(ConditionType.FourOfAKind, mockResultHand);
+		//List<CheckResult> expected = new LinkedList<CheckResult>();
+		//expected.add(fourJacks);
 		
-		assertEquals(expected, actual);
+		assertEquals(1, actual.size());
+		assertEquals(ConditionType.FourOfAKind, actual.get(0).getConditionType());
+		assertEquals(multiplesExpectedList, actual.get(0).getSupportingCards().getCards());
+		
 	}
 
 }
