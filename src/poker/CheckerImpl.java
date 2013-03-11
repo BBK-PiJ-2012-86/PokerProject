@@ -67,13 +67,14 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	}
 
 	private void checkFlush(Hand hand) {
-		Map<Suit,List<Card>> suitMap = new HashMap<Suit,List<Card>>();
+		/*Map<Suit,List<Card>> suitMap = new HashMap<Suit,List<Card>>();
 		for (Suit suit : Suit.values()) {
 			suitMap.put(suit, new LinkedList<Card>());
 		}
 		for (Card card : hand) {
 			suitMap.get(card.getSuit()).add(card);
-		}
+		}*/
+		Map<Suit,List<Card>> suitMap = Utilities.suitMap(hand);
 
 		for (List<Card> list : suitMap.values()) {
 			if (list.size()==5) {
