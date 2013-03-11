@@ -21,9 +21,9 @@ public class HandImpl implements Hand{
 		this.cards.addAll(cards);				// make so cards is only updated through Hand??
 	}
 	
-	/*public HandImpl() {	//poss delete this one
+	public HandImpl() {	//poss delete this one
 		this(new LinkedList<Card>());
-	}*/
+	}
 	
 	@Override
 	public List<Card> getCards() {

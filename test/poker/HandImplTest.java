@@ -1,15 +1,10 @@
 package poker;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HandImplTest {		//NB TODO: allow remove cards on Hand then change Impl for checkers
