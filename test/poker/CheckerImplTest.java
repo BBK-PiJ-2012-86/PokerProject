@@ -102,13 +102,13 @@ public class CheckerImplTest {
 		setFakeCheckMultiples(conditionType, multiplesExpectedList, mockMultiplesChecker);
 		
 		Hand sortedMockHand = mock(Hand.class);
-		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList).thenReturn(rankSortedCardsList);
-		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator()).thenReturn(rankSortedCardsList.iterator());
+		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
+		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator());
 		
 		Hand mockHand = mock(Hand.class);
-		when(mockHand.getCards()).thenReturn(inputList).thenReturn(inputList).thenReturn(inputList).thenReturn(inputList);
-		when(mockHand.iterator()).thenReturn(inputList.iterator()).thenReturn(inputList.iterator());
-		when(mockHand.sortByRank()).thenReturn(sortedMockHand).thenReturn(sortedMockHand);
+		when(mockHand.getCards()).thenReturn(inputList);
+		when(mockHand.iterator()).thenReturn(inputList.iterator());
+		when(mockHand.sortByRank()).thenReturn(sortedMockHand);
 		
 		CheckResult result = (new CheckerImpl()).check(mockHand);
 		
