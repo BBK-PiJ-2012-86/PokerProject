@@ -10,8 +10,9 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
 	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
 	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	
-	private static final Card ACE_OF_HEARTS = new Card(Rank.Ace, Suit.Hearts);
+	private static final Card TEN_OF_HEARTS = new Card(Rank.Ten, Suit.Hearts);
+	private static final Card SIX_OF_HEARTS = new Card(Rank.Six, Suit.Hearts);
+	private static final Card SIX_OF_DIAMONDS = new Card(Rank.Six, Suit.Diamonds);
 
 	public static void main (String[] args) {
 		IntegrationTesting joined = new IntegrationTesting();
@@ -19,42 +20,54 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 	}
 	
 	public void launch() {
-		// put some cards in a hand
-		Card[] straightFlush = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
-		List<Card> straightFlushCards = new LinkedList<Card>();
-		for (Card card : straightFlush) {
-			straightFlushCards.add(card);
-		}
-		Hand straightFlushHand = new HandImpl(straightFlushCards);
 		
-		// get a checker given a GameType and use it to check the hand
 		GameType type = GameType.fiveCardDraw;
+		
+		// get a checker given the GameType
 		Checker checker = CheckerFactory.getInstance(type).getChecker();
-		CheckResult result1 = checker.check(straightFlushHand);
 		
-		//print out the result
-		System.out.println(result1);		//yay!
-		
-		//REPEAT
-		// put some cards in a hand
-		Card[] highCard = new Card[] {TEN_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, ACE_OF_HEARTS};
-		List<Card> highCardCards = new LinkedList<Card>();
-		for (Card card : highCard) {
-			highCardCards.add(card);
+		//*** try it for a straight flush
+		// make a list of relevant cards
+		Card[] cardArray = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
+		List<Card> cardList = new LinkedList<Card>();
+		for (Card card : cardArray) {
+			cardList.add(card);
 		}
-		Hand highCardHand = new HandImpl(highCardCards);
+		//make a hand out of those cards
+		Hand hand = new HandImpl(cardList);
+		// get the checker to check the hand
+		CheckResult result = checker.check(hand);
+		//print out the result
+		System.out.println(result);
 		
-		// use same checker to check the hand
-		CheckResult result2 = checker.check(highCardHand);
-		System.out.println(result2);		//hmmmmmmmmmmmmm... didn't work.. try with a new checker..
+		//*** try it for a high card
+		// make a list of relevant cards
+		cardArray = new Card[] {TEN_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, SIX_OF_HEARTS};
+		cardList = new LinkedList<Card>();
+		for (Card card : cardArray) {
+			cardList.add(card);
+		}
+		//make a hand out of those cards
+		Hand highCardHand = new HandImpl(cardList);
+		// get the checker to check the hand
+		result = checker.check(highCardHand);
+		//print out the result
+		System.out.println(result);
 		
-		// get a checker given a GameType and use it to check the hand
-		Checker checker2 = CheckerFactory.getInstance(type).getChecker();
-		result2 = checker.check(highCardHand);
-		System.out.println(result2);	//still wrong, try not SF first.. ok, yes, then works..! (sort this bug)
+		//*** try it for a two pair
+		// make a list of relevant cards
+		cardArray = new Card[] {TEN_OF_SPADES, SIX_OF_DIAMONDS, QUEEN_OF_SPADES, TEN_OF_HEARTS, SIX_OF_HEARTS};
+		cardList = new LinkedList<Card>();
+		for (Card card : cardArray) {
+			cardList.add(card);
+		}
+		//make a hand out of those cards
+		hand = new HandImpl(cardList);
+		// get the checker to check the hand
+		result = checker.check(hand);
+		//print out the result
+		System.out.println(result);
 
-		
-		
 	}
-
+		
 }

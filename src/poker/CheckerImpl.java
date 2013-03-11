@@ -28,8 +28,10 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		results.add(multiplesChecker.checkMultiples(hand));
 		//results.addAll(multiplesResults);
 		checkStraightFlush(hand); 
-				
-		return Collections.max(results);
+		
+		CheckResult result = Collections.max(results);
+		results.clear();		// to allow for reuse. Bodge: do better.
+		return result;
 	}
 
 	private void checkStraightFlush(Hand hand) {
