@@ -1,7 +1,7 @@
 package poker;
 
 public class Card implements Comparable<Card>{
-	// a change
+	// a change again again! again ad infinitum?
 	private Rank rank;
 	private Suit suit;
 	

@@ -28,7 +28,7 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		
 		//*** try it for a straight flush
 		// make a list of relevant cards
-		Card[] cardArray = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
+		Card[] cardArray = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
