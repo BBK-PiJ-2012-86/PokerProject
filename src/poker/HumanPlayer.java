@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HumanPlayer implements Player {
 
-	private Card[] hand;
+	private Hand hand;
 	private String username;
 	
 	public HumanPlayer(String username, int cards){
