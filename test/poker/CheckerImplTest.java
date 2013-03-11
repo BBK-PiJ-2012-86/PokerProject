@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.anyObject;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -118,11 +117,12 @@ public class CheckerImplTest {
 
 	private void setFakeCheckMultiples(ConditionType conditionType, List<Card> multiplesExpectedList,
 			MultiplesChecker mockMultiplesChecker) {
-		List<CheckResult> multiplesResults = new LinkedList<CheckResult>();
-		if (!(conditionType.equals(ConditionType.StraightFlush)||conditionType.equals(ConditionType.Straight)||conditionType.equals(ConditionType.Flush))) {
-			CheckResult fakeResult = new CheckResult(conditionType, new HandImpl(multiplesExpectedList));
-			multiplesResults.add(fakeResult);
+		CheckResult fakeResult;
+		if (conditionType.equals(ConditionType.StraightFlush)||conditionType.equals(ConditionType.Straight)||conditionType.equals(ConditionType.Flush)) {
+			fakeResult = new CheckResult(ConditionType.HighCard, new HandImpl(multiplesExpectedList));
+		} else {
+			fakeResult = new CheckResult(conditionType, new HandImpl(multiplesExpectedList));
 		}
-		when(mockMultiplesChecker.checkMultiples((Hand) anyObject())).thenReturn(multiplesResults);
+		when(mockMultiplesChecker.checkMultiples((Hand) anyObject())).thenReturn(fakeResult);
 	}
 }

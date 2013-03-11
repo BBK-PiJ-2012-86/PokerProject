@@ -10,8 +10,6 @@ import static org.mockito.Mockito.when;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -39,7 +37,6 @@ public class MultiplesCheckerTest {
 		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
 		
 		checkForConditionType(ConditionType.FourOfAKind, inputCards, rankSortedCards, multiplesExpected);
-
 	}
 	
 	@Test
@@ -111,11 +108,10 @@ public class MultiplesCheckerTest {
 		when(mockHand.sortByRank()).thenReturn(sortedMockHand);
 		
 		MultiplesChecker multiplesChecker = new MultiplesChecker();
-		List<CheckResult> actual = multiplesChecker.checkMultiples(mockHand);
+		CheckResult actual = multiplesChecker.checkMultiples(mockHand);
 		
-		assertEquals(1, actual.size());
-		assertEquals(conditionType, actual.get(0).getConditionType());
-		assertEquals(multiplesExpectedList, actual.get(0).getSupportingCards().getCards());
+		assertEquals(conditionType, actual.getConditionType());
+		assertEquals(multiplesExpectedList, actual.getSupportingCards().getCards());
 	}
 	
 	/*doAnswer(new Answer<Object>() {

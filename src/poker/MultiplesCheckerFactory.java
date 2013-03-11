@@ -18,7 +18,7 @@ public class MultiplesCheckerFactory {
 		this.mock = mock;
 	}
 	
-	public MultiplesChecker getMultiplesChecker(Hand hand) {
+	public MultiplesChecker getMultiplesChecker() {
 		if(mock != null) {
 			return mock;
 		}

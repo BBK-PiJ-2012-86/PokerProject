@@ -23,9 +23,10 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		if (hand.getCards().size()==0) {return null;}
 		checkFlush(hand);
 		checkStraight(hand);
-		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker(hand);
-		List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
-		results.addAll(multiplesResults);
+		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
+		//List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
+		results.add(multiplesChecker.checkMultiples(hand));
+		//results.addAll(multiplesResults);
 		checkStraightFlush(hand); 
 				
 		return Collections.max(results);
