@@ -16,7 +16,7 @@ import java.util.Iterator;
  * from the list using this function.
  */
 
-public class PokerList<T> implements Iterable<T> {
+public class CircularArrayList<T> implements Iterable<T> {
 	
 	private int numItems;
 	private T[] players;
@@ -25,7 +25,7 @@ public class PokerList<T> implements Iterable<T> {
 	private int index;
 	
 	@SuppressWarnings("unchecked")
-	public PokerList(){
+	public CircularArrayList(){
 		
 		players = (T[]) new Object[INIT_LENGTH];
 		dealer = 0;
