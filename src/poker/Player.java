@@ -1,11 +1,12 @@
 package poker;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-public abstract class Player {
+public abstract class Player implements Comparator <Player> {
 	
 	protected GameType gameType;
-	protected HandImpl hand;
+	protected Hand hand;
 	protected String username;
 	protected Checker checker;
 	
@@ -14,36 +15,35 @@ public abstract class Player {
 		this.gameType = gameType;
 		this.username = username;
 		this.checker = CheckerFactory.getInstance(gameType).getChecker();
+		Hand hand = new HandImpl();
 	}
+	
+	public void recieveCards(List<Card> cards){
+		for(Card card: cards){
+			hand.getCards().add(card);
+		}
+	}
+	
+	public abstract int exchangeCards();
 	
 	public CheckResult check() {
 		return checker.check(hand);
 	}
-		
-		/*
-		 * 
-		 * Throws IllegalArgumentExcpetion if the player does not enter a valid number of cards
-		 * to swap.
-		 */
 	
-	public abstract int swapCards();
-	
-	public abstract ArrayList<Integer> swapOneCard();
-	
-	public abstract ArrayList<Integer> swapTwoCards();
-	
-	public abstract ArrayList<Integer> swapThreeCards();
+	public abstract void removeCardFromHand(List<Card> cards);
 	
 	public Hand getHand(){
 		return hand;
 	}
-	
-	public abstract ArrayList<Integer> exchangeCards();
-		
-	public void changeCards(ArrayList<Integer> cardNumbers, ArrayList<Card> replacements){
-		for(int i = 0; i < cardNumbers.size(); i++){
-			hand.getCards().get(i) = replacements.get(i);
-		}
-	}
 
+	public void setGameType(GameType type) {
+		this.gameType = type;
+		checker = CheckerFactory.getInstance(gameType).getChecker();
+	}
+	
+	@Override
+	public int compare(Player p1, Player p2){
+		
+	}
+	
 }

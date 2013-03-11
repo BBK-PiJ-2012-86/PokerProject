@@ -2,12 +2,14 @@ package poker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Deck {
 
-		private ArrayList<Card> deck;
+		private List<Card> deck;
 		
 		public Deck(int size){
+			List<Card> deck = new ArrayList<Card>();
 			for(int i = 0; i < size; i++){
 				for(Suit suit: Suit.values()){
 					for(Rank rank: Rank.values()){
@@ -19,7 +21,7 @@ public class Deck {
 			}
 		}
 		
-		public ArrayList<Card> getDeck(){
+		public List<Card> getDeck(){
 			return deck;
 		}
 		
