@@ -21,4 +21,15 @@ public class Utilities {
 		}
 		return result;
 	}
+	
+	public static Map<Rank, List<Card>> rankMap(Hand hand) {
+		Map<Rank,List<Card>> result = new HashMap<Rank,List<Card>>();
+		for (Rank rank : Rank.values()) {
+			result.put(rank, new LinkedList<Card>());
+		}
+		for (Card card : hand) {
+			result.get(card.getRank()).add(card);
+		}
+		return result;
+	}
 }
