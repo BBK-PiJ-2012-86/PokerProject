@@ -2,7 +2,7 @@ package poker;
 
 public class GameManagerImpl {
 	
-	private PokerList<Player> players;	//Consider CircularList ?
+	private CircularArrayList<Player> players;	//Consider CircularList ?
 	private Deck deck;
 	private final GameType type;
 	private final CheckerFactory checkerFactory;
