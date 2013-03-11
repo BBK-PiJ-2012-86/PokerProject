@@ -29,6 +29,11 @@ public class HandImpl implements Hand{
 	public List<Card> getCards() {
 		return cards;
 	}
+	
+	@Override
+	public Card getCardAt(int i) {
+		return cards.get(i);
+	}
 
 	@Override
 	public void addCards (List<Card> cardsToAdd) {

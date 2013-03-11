@@ -11,7 +11,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * @author 86
  * 
  */
-public class CircularList<T> implements Iterable<T>{
+public class CircularList<T> implements Iterable<T>{	//Consider making Node and inner class
 	
 	private Node<T> head = null;
 	private int size = 0;

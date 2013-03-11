@@ -4,7 +4,6 @@
 package poker;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,18 +19,15 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 
 	@Override
 	public CheckResult check(Hand hand) {
+		results.clear();
 		if (hand.getCards().size()==0) {return null;}
 		checkFlush(hand);
 		checkStraight(hand);
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
-		//List<CheckResult> multiplesResults = multiplesChecker.checkMultiples(hand);
 		results.add(multiplesChecker.checkMultiples(hand));
-		//results.addAll(multiplesResults);
 		checkStraightFlush(hand); 
 		
-		CheckResult result = Collections.max(results);
-		results.clear();		// to allow for reuse. Bodge: do better.
-		return result;
+		return Collections.max(results);
 	}
 
 	private void checkStraightFlush(Hand hand) {
@@ -67,13 +63,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	}
 
 	private void checkFlush(Hand hand) {
-		Map<Suit,List<Card>> suitMap = new HashMap<Suit,List<Card>>();
-		for (Suit suit : Suit.values()) {
-			suitMap.put(suit, new LinkedList<Card>());
-		}
-		for (Card card : hand) {
-			suitMap.get(card.getSuit()).add(card);
-		}
+		Map<Suit,List<Card>> suitMap = Utilities.suitMap(hand);
 
 		for (List<Card> list : suitMap.values()) {
 			if (list.size()==5) {

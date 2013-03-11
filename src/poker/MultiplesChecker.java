@@ -1,6 +1,5 @@
 package poker;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -8,15 +7,8 @@ import java.util.Map.Entry;
 
 public class MultiplesChecker {
 
-	//private List<CheckResult> results = new LinkedList<CheckResult>();
-	
 	public CheckResult checkMultiples(Hand hand) {
-		return analyseMultiples(hand);
-		//return results;	//should be just a single result..?
-	}
-	
-	private CheckResult analyseMultiples(Hand hand) {
-		Map<Rank, List<Card>> rankMap = createRankMap(hand);
+		Map<Rank, List<Card>> rankMap = Utilities.rankMap(hand);
 		Rank tripleRank = null;
 		Rank pairRank1 = null;
 		Rank pairRank2 = null;
@@ -36,17 +28,6 @@ public class MultiplesChecker {
 			}
 		}
 		return checkTupleConditions(rankMap, tripleRank, pairRank1, pairRank2, hand);
-	}
-
-	private Map<Rank, List<Card>> createRankMap(Hand hand) {
-		Map<Rank,List<Card>> rankMap = new HashMap<Rank,List<Card>>();
-		for (Rank rank : Rank.values()) {
-			rankMap.put(rank, new LinkedList<Card>());
-		}
-		for (Card card : hand) {
-			rankMap.get(card.getRank()).add(card);
-		}
-		return rankMap;
 	}
 
 	private CheckResult checkTupleConditions(Map<Rank, List<Card>> rankMap,
