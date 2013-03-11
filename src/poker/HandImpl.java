@@ -17,7 +17,7 @@ public class HandImpl implements Hand{
 	private List<Card> cards;
 	
 	public HandImpl(List<Card> cards) {
-		this.cards = cards;
+		this.cards = cards;				// make so cards is only updated through Hand??
 	}
 	
 	public HandImpl() {	//poss delete this one

@@ -8,17 +8,17 @@ package poker;
  *
  */
 public enum Rank {
-	Two,
-	Three,
-	Four,
-	Five,
-	Six,
-	Seven,
-	Eight,
-	Nine,
-	Ten,
-	Jack,
-	Queen,
+	Ace,
 	King,
-	Ace
+	Queen,
+	Jack,
+	Ten,
+	Nine,
+	Eight,
+	Seven,
+	Six,
+	Five,
+	Four,
+	Three,
+	Two	
 }
