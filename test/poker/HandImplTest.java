@@ -30,30 +30,18 @@ public class HandImplTest {		//NB TODO: allow remove cards on Hand then change I
 		Hand hand = new HandImpl(cards);
 		
 		assertEquals(cards, hand.getCards());
+		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades]", hand.toString());
 		
 		List<Card> extraCards = new LinkedList<Card>();
 		extraCards.add(TEN_OF_SPADES);
 		hand.addCards(extraCards);
-		System.out.println("after add to hand:"+hand.getCards());
 		
-		Card[] withExtra = new Card[] {KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES, ACE_OF_SPADES, TEN_OF_SPADES};
-		List<Card> withExtraCards = new LinkedList<Card>();
-		for (Card card : withExtra) {
-			withExtraCards.add(card);
-		}
-		
-		assertEquals(withExtraCards, hand.getCards());
+		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades, Ten of Spades]", hand.toString());
 		
 		hand.sortByRank();
-		System.out.println("after sorting:"+hand.getCards());
 		
-		Card[] inOrder = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
-		List<Card> cardsInOrder = new LinkedList<Card>();
-		for (Card card : inOrder) {
-			cardsInOrder.add(card);
-		}
 
-		assertEquals(cardsInOrder, hand.getCards());
+		assertEquals("[Ace of Spades, King of Spades, Queen of Spades, Jack of Spades, Ten of Spades]", hand.toString());
 	}
 	
 	/*

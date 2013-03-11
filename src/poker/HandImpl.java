@@ -3,6 +3,7 @@
  */
 package poker;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -54,13 +55,7 @@ public class HandImpl implements Hand{
 	
 	@Override
 	public String toString() {
-		String result = "";
-		if (cards!=null) {
-			for (Card card: cards) {
-				result+=card;
-			}
-		}
-		return result;
+		return(Arrays.toString(cards.toArray()));
 	}
 	
 	

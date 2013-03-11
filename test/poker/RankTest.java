@@ -13,8 +13,8 @@ public class RankTest {
 		Rank rankC = Rank.Jack;
 		Rank rankD = Rank.Jack;
 		
-		assertTrue(rankA.compareTo(rankB)<0);
-		assertTrue(rankB.compareTo(rankC)>0);
+		assertTrue(rankA.compareTo(rankB)>0);	//NB orders by increasing, so want higher ranks valued lower
+		assertTrue(rankB.compareTo(rankC)<0);
 		assertTrue(rankC.compareTo(rankD)==0);
 		
 	}
