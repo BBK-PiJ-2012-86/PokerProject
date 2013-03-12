@@ -23,11 +23,25 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		if (hand.getCards().size()==0) {return null;}
 		checkFlush(hand);
 		checkStraight(hand);
+		checkWheelStraight(hand);
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
 		results.add(multiplesChecker.checkMultiples(hand));
 		checkStraightFlush(hand); 
 		
 		return Collections.max(results);
+	}
+
+	private void checkWheelStraight(Hand hand) {
+		hand = hand.sortByRank();
+		
+		if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(0).getRank()==Rank.Five) && (hand.getCardAt(0).getRank()==Rank.Four)
+				&& (hand.getCardAt(0).getRank()==Rank.Three) && (hand.getCardAt(0).getRank()==Rank.Two)) {
+			List wheelOrderHand
+			Hand wheelOrderHand = new Hand(wheelOrderList);
+			results.add( new CheckResult(ConditionType.Straight, wheelOrderHand));
+		}
+		
+		
 	}
 
 	private void checkStraightFlush(Hand hand) {
