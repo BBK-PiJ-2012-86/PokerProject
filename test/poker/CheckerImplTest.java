@@ -7,11 +7,14 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.anyInt;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  * @author 86
@@ -30,6 +33,11 @@ public class CheckerImplTest {
 	private static final Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
 	
 	private static final Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
+	
+	private static final Card FIVE_OF_CLUBS = new Card(Rank.Five, Suit.Clubs);
+	private static final Card FOUR_OF_CLUBS = new Card(Rank.Four, Suit.Clubs);
+	private static final Card THREE_OF_CLUBS = new Card(Rank.Three, Suit.Clubs);
+	private static final Card TWO_OF_CLUBS = new Card(Rank.Two, Suit.Clubs);
 	
 	@Test
 	public void testCheckStraightFlush() {
@@ -63,6 +71,16 @@ public class CheckerImplTest {
 	}
 	
 	@Test
+	public void testCheckWheelStraight() {
+		Card[] inputCards = new Card[] {FIVE_OF_CLUBS, ACE_OF_SPADES, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS};
+		Card[] multiplesExpected = new Card[] {};
+		Card[] rankSortedCards = new Card[] {ACE_OF_SPADES, FIVE_OF_CLUBS, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS};
+		Card[] expectedCards = new Card[] {FIVE_OF_CLUBS, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS, ACE_OF_SPADES};
+		
+		testForConditionType(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+	}
+	
+	@Test
 	public void testCheckFourOfAKind() {
 		Card[] inputCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, QUEEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
 		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
@@ -91,7 +109,7 @@ public class CheckerImplTest {
 		testForConditionTypeLists(conditionType, inputList, rankSortedCardsList, multiplesExpectedList, expectedCardsList);
 	}
 
-	private void testForConditionTypeLists(ConditionType conditionType, List<Card> inputList, List<Card> rankSortedCardsList,
+	private void testForConditionTypeLists(ConditionType conditionType, List<Card> inputList, final List<Card> rankSortedCardsList,
 			List<Card> multiplesExpectedList, List<Card> expectedCardsList) {
 		
 		MultiplesChecker mockMultiplesChecker = mock(MultiplesChecker.class);
@@ -103,6 +121,16 @@ public class CheckerImplTest {
 		Hand sortedMockHand = mock(Hand.class);
 		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
 		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator());
+
+		when(sortedMockHand.getCardAt(anyInt())).thenAnswer(new Answer<Card>() {
+		    @Override
+		    public Card answer(InvocationOnMock invocation) throws Throwable {
+		      Object[] args = invocation.getArguments();
+		      return rankSortedCardsList.get((int) args[0]);
+		    }
+		  });
+
+		
 		
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.getCards()).thenReturn(inputList);
