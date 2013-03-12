@@ -7,58 +7,59 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Ruth
- *
- */
-public class DeciderImpl implements Decider {	//basic first decider
+public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 	
 	@Override
 	public List<Card> decide(CheckResult checkResult) {
-		List<Card> result = new LinkedList<Card>();
 		ConditionType conditionType = checkResult.getConditionType();
-		if (conditionType.compareTo(ConditionType.Straight)<0){
-			Hand hand = checkResult.getSupportingCards();
-			Card possCard;
-			switch(conditionType) {
+		Hand hand = checkResult.getSupportingCards();
+		
+		switch(conditionType) {
 			case ThreeOfAKind:
 				//return lowest leftover, and highest leftover if < 7
-				possCard = hand.getCardAt(3);
-				if (possCard.getRank().compareTo(Rank.Seven)>0) {
-					result.add(possCard);
+				if (hand.getCardAt(3).getRank().compareTo(Rank.Seven)>0) {
+					return bottom(2, hand);
+				} else {
+					return bottom(1, hand);
 				}
-				result.add(hand.getCardAt(4));
-				break;
 				
 			case TwoPair:
 				//return leftover card
-				result.add(hand.getCardAt(4));
-				break;
+				return bottom(1, hand);
 				
 			case Pair:
 				//return lowest 2 leftovers, and highest leftover if < 7
-				possCard = hand.getCardAt(2);
-				if (possCard.getRank().compareTo(Rank.Seven)>0) {
-					result.add(possCard);
+				if (hand.getCardAt(2).getRank().compareTo(Rank.Seven)>0) {
+					return bottom(3, hand);
+				} else {
+					return bottom(2, hand);
 				}
-				result.add(hand.getCardAt(3));
-				result.add(hand.getCardAt(4));
-				break;
 				
 			case HighCard:
-				//keep 3 if of same suit, else return bottom 3
+				//if 3 or more of same suit, return others, else return bottom 3
 				Map<Suit, List<Card>> suitMap = Utilities.suitMap(hand);
 				for (List<Card> list : suitMap.values()) {
-					if (list.size()==3) {
+					if (list.size()>=3) {
 						//remove others
+						hand.removeCards(list);
+						return hand.getCards();
 					}
 				}
+				return bottom(3, hand );
+								
 			default:
-				//should never come here
-			}
+				//straight or better
+				return new LinkedList<Card>();
 		}
-		// else do nothing  - we don't want to remove any cards from such hands
+	}
+	
+	private List<Card> bottom(int n, Hand hand) {
+		List<Card> result = new LinkedList<Card>();
+		for (int i=5-n; i<5; i++) {
+			result.add(hand.getCardAt(i));
+		}
 		return result;
 	}
+
 
 }

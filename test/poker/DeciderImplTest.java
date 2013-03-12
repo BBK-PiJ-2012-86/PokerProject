@@ -149,6 +149,49 @@ public class DeciderImplTest {
 		assertEquals(expected, actual);
 	}
 	
+	@Test
+	public void testHighCardCloseToFlush() {
+		//make a CheckResult (for now) for HC
+		Card [] cardArray = new Card[] {ACE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, SIX_OF_CLUBS, FIVE_OF_CLUBS};
+		List<Card> cardList = new LinkedList<Card>();
+		for (Card card : cardArray) {
+			cardList.add(card);
+		}
+		Hand hand = new HandImpl(cardList);
+		CheckResult checkResult = new CheckResult(ConditionType.HighCard, hand);
+		
+		//make a Decider and get it to decide
+		Decider decider = new DeciderImpl();
+		List<Card> actual = decider.decide(checkResult);
+		List<Card> expected = new LinkedList<Card>();
+		expected.add(SIX_OF_CLUBS);
+		expected.add(FIVE_OF_CLUBS);
+		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testHighCardFarFromFlush() {
+		//make a CheckResult (for now) for HC
+		Card [] cardArray = new Card[] {ACE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_DIAMONDS, SIX_OF_CLUBS, FIVE_OF_CLUBS};
+		List<Card> cardList = new LinkedList<Card>();
+		for (Card card : cardArray) {
+			cardList.add(card);
+		}
+		Hand hand = new HandImpl(cardList);
+		CheckResult checkResult = new CheckResult(ConditionType.HighCard, hand);
+		
+		//make a Decider and get it to decide
+		Decider decider = new DeciderImpl();
+		List<Card> actual = decider.decide(checkResult);
+		List<Card> expected = new LinkedList<Card>();
+		expected.add(JACK_OF_DIAMONDS);
+		expected.add(SIX_OF_CLUBS);
+		expected.add(FIVE_OF_CLUBS);
+		
+		assertEquals(expected, actual);
+	}
+	
 	
 	
 	
