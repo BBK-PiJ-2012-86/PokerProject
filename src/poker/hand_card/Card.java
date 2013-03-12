@@ -2,11 +2,13 @@ package poker.hand_card;
 
 import java.util.Comparator;
 
+import lombok.Data;
 
-public class Card {
+
+/*@Data*/ public class Card {	//to try and get Lombok to work
 	
-	private Rank rank;
-	private Suit suit;
+	private final Rank rank;
+	private final Suit suit;
 	
 	public Card(Rank rank, Suit suit){
 		this.rank = rank;
