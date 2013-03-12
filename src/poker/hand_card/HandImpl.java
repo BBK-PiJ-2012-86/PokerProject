@@ -68,6 +68,11 @@ public class HandImpl implements Hand{
 	public String toString() {
 		return(Arrays.toString(cards.toArray()));
 	}
+
+	@Override
+	public void clearHand() {
+		cards.clear();
+	}
 	
 	
 }

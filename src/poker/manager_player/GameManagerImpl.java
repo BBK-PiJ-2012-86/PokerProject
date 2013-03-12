@@ -71,7 +71,7 @@ public class GameManagerImpl {
 	
 	public void deletePlayerCards(){
 		for(Player player: players){
-			player.getHand().getCards().clear();
+			player.removeCards();
 		}
 	}
 	

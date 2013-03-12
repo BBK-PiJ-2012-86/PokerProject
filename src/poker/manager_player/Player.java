@@ -1,15 +1,8 @@
 package poker.manager_player;
 
-
 import java.util.Comparator;
 import java.util.List;
-
-import poker.hand_card.Card;
-import poker.hand_card.CheckResult;
-import poker.hand_card.Checker;
-import poker.hand_card.CheckerFactory;
-import poker.hand_card.Hand;
-import poker.hand_card.HandImpl;
+import poker.hand_card.*;
 
 
 
@@ -26,6 +19,10 @@ public abstract class Player implements Comparator <Player> {
 		this.username = username;
 		this.checker = CheckerFactory.getInstance(gameType).getChecker();
 		Hand hand = new HandImpl();
+	}
+	
+	public void removeCards(){
+		hand.clearHand();
 	}
 	
 	public void recieveCards(List<Card> cards){

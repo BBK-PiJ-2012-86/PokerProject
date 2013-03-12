@@ -2,6 +2,8 @@ package poker.manager_player;
 
 import java.util.Iterator;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 /*
  * A List Class (backed by an Array) designed for poker games.
@@ -33,6 +35,14 @@ public class CircularArrayList<T> implements Iterable<T> {
 		index = 0;
 	}
 	
+	public T get(int i){
+		if(i < numItems){
+			return players[i];
+		}else{
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
 	public void add(T player){
 		
 		if(numItems < players.length){
@@ -56,7 +66,7 @@ public class CircularArrayList<T> implements Iterable<T> {
 	}
 	
 	public void newDealer(){
-		if(dealer == numItems){
+		if(dealer == numItems - 1){
 			dealer = 0;
 		}else{
 			dealer++;
@@ -64,11 +74,47 @@ public class CircularArrayList<T> implements Iterable<T> {
 	}
 
 	public void setIndex(){
-		if(dealer == numItems){
+		if(dealer == numItems - 1){
 			index = 0;
 		}else{
-			index = dealer++;
+			index = dealer + 1;
 		}
+	}
+	
+	public int getIndex(){
+		return index;
+	}
+	
+	private void reSizeArray(int i){
+		@SuppressWarnings("unchecked")
+		T[] temp = (T[]) new Object[players.length];
+		for(int k = 0; k < i; k++){
+			temp[k] = players[k];
+		}
+		for(int k = i + 1; k < numItems; k++){
+			temp[k - 1] = players[k];
+		}
+		players = temp;
+		numItems--;
+	}
+	
+	public boolean remove(T t){
+		for(int i = 0; i < numItems; i++){
+			if(players[i].equals(t)){
+				if(dealer <= i){
+					reSizeArray(i);
+					if(dealer == numItems - 1){
+						newDealer();
+					}
+					return true;
+				}else{
+					reSizeArray(i);
+					dealer--;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override
@@ -77,56 +123,29 @@ public class CircularArrayList<T> implements Iterable<T> {
 		setIndex();
 		
 		Iterator<T> iterator = new Iterator<T>(){
+			int counter = 0;
 			
 			@Override
 			public boolean hasNext(){
-				return (index != dealer);
+				return (counter != numItems);
 			}
 			
 			@Override
 			public T next(){
-				if(index == numItems){
+				if(index == numItems - 1){
 					index = 0;
-					return players[numItems];
+					counter++;
+					return players[numItems - 1];
 				}else{
 					index++;
-					return players[index--];
+					counter++;
+					return players[index - 1];
 				}
 			}
 
 			@Override
 			public void remove() {
-				@SuppressWarnings("unchecked")
-				T[] temp = (T[]) new Object[players.length];
-				if(index == dealer){
-					for(int i = 0; i < index - 1; i++){
-						temp[i] = players[i];
-					}
-					for(int i = index++; i < numItems; i++){
-						temp[i] = players[i];
-					}
-					players = temp;
-					numItems--;
-				}else if(dealer < index){
-					for(int i = 0; i < index - 1; i++){
-						temp[i] = players[i];
-					}
-					for(int i = index++; i < numItems; i++){
-						temp[i] = players[i];
-					}
-					players = temp;
-					numItems--;
-				}else{
-					for(int i = 0; i < index; i++){
-						temp[i] = players[i];
-					}
-					for(int i = index++; i < numItems; i++){
-						temp[i] = players[i];
-					}
-					dealer--;
-					players = temp;
-					numItems--;
-				}
+				throw new NotImplementedException();
 			}
 		};
 		return iterator;

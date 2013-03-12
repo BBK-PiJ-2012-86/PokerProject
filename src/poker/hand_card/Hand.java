@@ -30,5 +30,11 @@ public interface Hand extends Iterable<Card>{
 	 * @param cardsToRemove
 	 */
 	void removeCards(List<Card> cardsToRemove);
+	
+	/*
+	 * Removes all cards ready for the next deal
+	 */
+	
+	void clearHand();
 
 }
