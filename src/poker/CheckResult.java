@@ -58,9 +58,10 @@ public class CheckResult implements Comparable<CheckResult>{
 		public int compare(Hand hand1, Hand hand2) {
 			Iterator<Card> it1 = hand1.iterator();
 			Iterator<Card> it2 = hand2.iterator();
+			Comparator<Card> cardRankComparator = Card.getCardRankComparator();
 			int result = 0;
 			while ((result == 0) && it1.hasNext() && it2.hasNext()) {
-				result = it1.next().compareTo(it2.next());
+				result = cardRankComparator.compare(it1.next(), it2.next());
 			}
 			return result;
 		}

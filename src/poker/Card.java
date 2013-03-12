@@ -1,6 +1,9 @@
 package poker;
 
-public class Card implements Comparable<Card>{
+import java.util.Comparator;
+import java.util.Iterator;
+
+public class Card /*implements Comparable<Card>*/{
 	//bla
 	private Rank rank;
 	private Suit suit;
@@ -49,8 +52,20 @@ public class Card implements Comparable<Card>{
 		return true;
 	}
 
-	public int compareTo(Card other) {
+	/*public int compareTo(Card other) {
 		return this.getRank().compareTo(other.getRank());
+	}*/
+	
+	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
+
+		@Override
+		public int compare(Card card1, Card card2) {
+			return card1.getRank().compareTo(card2.getRank());
+		}		
+	};
+	
+	public static Comparator<Card> getCardRankComparator() {
+		return cardRankComparator;
 	}
 	
 	

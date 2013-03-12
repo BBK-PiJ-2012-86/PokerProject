@@ -34,12 +34,12 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	private void checkWheelStraight(Hand hand) {
 		hand = hand.sortByRank();
 		
-		if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(0).getRank()==Rank.Five) && (hand.getCardAt(0).getRank()==Rank.Four)
+		/*if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(0).getRank()==Rank.Five) && (hand.getCardAt(0).getRank()==Rank.Four)
 				&& (hand.getCardAt(0).getRank()==Rank.Three) && (hand.getCardAt(0).getRank()==Rank.Two)) {
 			List wheelOrderHand
 			Hand wheelOrderHand = new Hand(wheelOrderList);
 			results.add( new CheckResult(ConditionType.Straight, wheelOrderHand));
-		}
+		}*/
 		
 		
 	}
