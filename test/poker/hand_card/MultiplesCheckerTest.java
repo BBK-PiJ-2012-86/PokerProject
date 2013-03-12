@@ -98,6 +98,10 @@ public class MultiplesCheckerTest {
 			rankSortedCardsList.add(card);
 		}
 				
+		checkForConditionTypeList(conditionType, inputList, multiplesExpectedList, rankSortedCardsList);
+	}
+
+	private void checkForConditionTypeList(ConditionType conditionType, List<Card> inputList, List<Card> multiplesExpectedList, List<Card> rankSortedCardsList) {
 		Hand sortedMockHand = mock(Hand.class);
 		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
 		
