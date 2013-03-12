@@ -20,6 +20,7 @@ public class TestCards {
 	public static final Card JACK_DIAMOND = new Card(Rank.Jack, Suit.Diamonds);
 	
 	public static final Card TEN_CLUB = new Card(Rank.Ten, Suit.Clubs);
+	public static final Card TEN_DIAMOND = new Card(Rank.Ten, Suit.Diamonds);
 	
 	public static final Card SIX_CLUB = new Card(Rank.Six, Suit.Clubs);
 	public static final Card FIVE_CLUB = new Card(Rank.Five, Suit.Clubs);

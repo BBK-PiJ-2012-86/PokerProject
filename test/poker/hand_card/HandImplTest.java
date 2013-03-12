@@ -1,30 +1,22 @@
 package poker.hand_card;
 
 import static org.junit.Assert.assertEquals;
-
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.KING_SPADE;
+import static poker.hand_card.TestCards.QUEEN_SPADE;
+import static poker.hand_card.TestCards.TEN_SPADE;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 
-import poker.hand_card.Card;
-import poker.hand_card.Hand;
-import poker.hand_card.HandImpl;
-import poker.hand_card.Rank;
-import poker.hand_card.Suit;
-
-public class HandImplTest {		//NB TODO: allow remove cards on Hand then change Impl for checkers
+public class HandImplTest {
 	
-	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-
 	@Test
 	public void test() {	//to split and test nicely
-		Card[] initial = new Card[] {KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES, ACE_OF_SPADES};
+		Card[] initial = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE};
 		List<Card> cards = new LinkedList<Card>();	//make a copy rather than point?
 		for (Card card : initial) {
 			cards.add(card);					// change to use mock Card ??
@@ -35,7 +27,7 @@ public class HandImplTest {		//NB TODO: allow remove cards on Hand then change I
 		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades]", hand.toString());
 		
 		List<Card> extraCards = new LinkedList<Card>();
-		extraCards.add(TEN_OF_SPADES);
+		extraCards.add(TEN_SPADE);
 		hand.addCards(extraCards);
 		
 		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades, Ten of Spades]", hand.toString());
@@ -45,7 +37,7 @@ public class HandImplTest {		//NB TODO: allow remove cards on Hand then change I
 
 		assertEquals("[Ace of Spades, King of Spades, Queen of Spades, Jack of Spades, Ten of Spades]", hand.toString());
 		
-		Card[] toRemove = new Card[] {KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES};
+		Card[] toRemove = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE};
 		List<Card> removalCards = new LinkedList<Card>();
 		for (Card card : toRemove) {
 			removalCards.add(card);
