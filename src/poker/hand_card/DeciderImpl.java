@@ -39,7 +39,7 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 				
 			case HighCard:
 				//if 3 or more of same suit, return others, else return bottom 3
-				Map<Suit, List<Card>> suitMap = Utilities.suitMap(hand);
+				Map<Suit, List<Card>> suitMap = Util.suitMap(hand);
 				for (List<Card> list : suitMap.values()) {
 					if (list.size()>=3) {
 						//remove others

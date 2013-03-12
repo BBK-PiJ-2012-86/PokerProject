@@ -1,9 +1,17 @@
-package poker.hand_card;
+package poker.unused;
 
 
 import java.util.LinkedList;
 import java.util.List;
 
+import poker.hand_card.Card;
+import poker.hand_card.CheckResult;
+import poker.hand_card.Checker;
+import poker.hand_card.CheckerFactory;
+import poker.hand_card.Hand;
+import poker.hand_card.HandImpl;
+import poker.hand_card.Rank;
+import poker.hand_card.Suit;
 import poker.manager_player.GameType;
 
 

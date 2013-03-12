@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 public class MultiplesChecker {
 
 	public CheckResult checkMultiples(Hand hand) {
-		Map<Rank, List<Card>> rankMap = Utilities.rankMap(hand);
+		Map<Rank, List<Card>> rankMap = Util.rankMap(hand);
 		Rank tripleRank = null;
 		Rank pairRank1 = null;
 		Rank pairRank2 = null;

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Utilities {
+public class Util {
 
 	
 	public static Map<Suit,List<Card>> suitMap(Hand hand) {
