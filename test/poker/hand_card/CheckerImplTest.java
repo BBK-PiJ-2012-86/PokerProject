@@ -4,11 +4,24 @@
 package poker.hand_card;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.anyInt;
-
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.FIVE_CLUB;
+import static poker.hand_card.TestCards.FOUR_CLUB;
+import static poker.hand_card.TestCards.JACK_CLUB;
+import static poker.hand_card.TestCards.JACK_DIAMOND;
+import static poker.hand_card.TestCards.JACK_HEART;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.KING_SPADE;
+import static poker.hand_card.TestCards.NINE_SPADE;
+import static poker.hand_card.TestCards.QUEEN_SPADE;
+import static poker.hand_card.TestCards.TEN_CLUB;
+import static poker.hand_card.TestCards.TEN_SPADE;
+import static poker.hand_card.TestCards.THREE_CLUB;
+import static poker.hand_card.TestCards.TWO_CLUB;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,57 +30,30 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import poker.hand_card.Card;
-import poker.hand_card.CheckResult;
-import poker.hand_card.CheckerImpl;
-import poker.hand_card.ConditionType;
-import poker.hand_card.Hand;
-import poker.hand_card.HandImpl;
-import poker.hand_card.MultiplesChecker;
-import poker.hand_card.MultiplesCheckerFactory;
-import poker.hand_card.Rank;
-import poker.hand_card.Suit;
-
 
 /**
- * @author 86
+ * 
  *
  */
 public class CheckerImplTest {
-	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	private static final Card NINE_OF_SPADES = new Card(Rank.Nine, Suit.Spades);
-	
-	private static final Card JACK_OF_HEARTS = new Card(Rank.Jack, Suit.Hearts);
-	private static final Card JACK_OF_CLUBS = new Card(Rank.Jack, Suit.Clubs);
-	private static final Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
-	
-	private static final Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
-	
-	private static final Card FIVE_OF_CLUBS = new Card(Rank.Five, Suit.Clubs);
-	private static final Card FOUR_OF_CLUBS = new Card(Rank.Four, Suit.Clubs);
-	private static final Card THREE_OF_CLUBS = new Card(Rank.Three, Suit.Clubs);
-	private static final Card TWO_OF_CLUBS = new Card(Rank.Two, Suit.Clubs);
+	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
+	// to consider mocking these as well - maybe a mcok making factory..?
 	
 	@Test
 	public void testCheckStraightFlush() {
-		Card[] inputCards = new Card[] {TEN_OF_SPADES, KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES, ACE_OF_SPADES};
+		Card[] inputCards = new Card[] {TEN_SPADE, KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE};
 		Card[] multiplesExpected = new Card[] {};
-		Card[] rankSortedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
+		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
 		Card[] expectedCards = rankSortedCards;
-		
 		
 		testForConditionType(ConditionType.StraightFlush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testCheckFlush() {
-		Card[] inputCards = new Card[] {ACE_OF_SPADES, NINE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, KING_OF_SPADES};
+		Card[] inputCards = new Card[] {ACE_SPADE, NINE_SPADE, QUEEN_SPADE, JACK_SPADE, KING_SPADE};
 		Card[] multiplesExpected = new Card[] {};
-		Card[] rankSortedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, NINE_OF_SPADES};
+		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, NINE_SPADE};
 		Card[] expectedCards = rankSortedCards;
 		
 		testForConditionType(ConditionType.Flush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
@@ -75,9 +61,9 @@ public class CheckerImplTest {
 	
 	@Test
 	public void testCheckStraight() {
-		Card[] inputCards = new Card[] {QUEEN_OF_SPADES, KING_OF_SPADES, TEN_OF_CLUBS, JACK_OF_SPADES, ACE_OF_SPADES};
+		Card[] inputCards = new Card[] {QUEEN_SPADE, KING_SPADE, TEN_CLUB, JACK_SPADE, ACE_SPADE};
 		Card[] multiplesExpected = new Card[] {};
-		Card[] rankSortedCards = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_CLUBS};
+		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_CLUB};
 		Card[] expectedCards = rankSortedCards;
 		
 		testForConditionType(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
@@ -85,28 +71,28 @@ public class CheckerImplTest {
 	
 	@Test
 	public void testCheckWheelStraight() {
-		Card[] inputCards = new Card[] {FIVE_OF_CLUBS, ACE_OF_SPADES, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS};
+		Card[] inputCards = new Card[] {FIVE_CLUB, ACE_SPADE, FOUR_CLUB, THREE_CLUB, TWO_CLUB};
 		Card[] multiplesExpected = new Card[] {};
-		Card[] rankSortedCards = new Card[] {ACE_OF_SPADES, FIVE_OF_CLUBS, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS};
-		Card[] expectedCards = new Card[] {FIVE_OF_CLUBS, FOUR_OF_CLUBS, THREE_OF_CLUBS, TWO_OF_CLUBS, ACE_OF_SPADES};
+		Card[] rankSortedCards = new Card[] {ACE_SPADE, FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB};
+		Card[] expectedCards = new Card[] {FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB, ACE_SPADE};
 		
 		testForConditionType(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testCheckFourOfAKind() {
-		Card[] inputCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, QUEEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
-		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
-		Card[] rankSortedCards = new Card[] {QUEEN_OF_SPADES, JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS};
-		Card[] expectedCards = new Card[] {JACK_OF_HEARTS, JACK_OF_CLUBS, JACK_OF_SPADES, JACK_OF_DIAMONDS, QUEEN_OF_SPADES};
+		Card[] inputCards = new Card[] {JACK_HEART, JACK_CLUB, QUEEN_SPADE, JACK_SPADE, JACK_DIAMOND};
+		Card[] multiplesExpected = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND, QUEEN_SPADE};
+		Card[] rankSortedCards = new Card[] {QUEEN_SPADE, JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND};
+		Card[] expectedCards = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND, QUEEN_SPADE};
 		
 		testForConditionType(ConditionType.FourOfAKind, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
 	public void testFullHouse() {
-		Card[] inputCards = new Card[] {JACK_OF_HEARTS, TEN_OF_CLUBS, TEN_OF_SPADES, JACK_OF_SPADES, JACK_OF_DIAMONDS};
-		Card[] multiplesExpected = new Card[] {JACK_OF_HEARTS, JACK_OF_SPADES, JACK_OF_DIAMONDS, TEN_OF_CLUBS, TEN_OF_SPADES};
+		Card[] inputCards = new Card[] {JACK_HEART, TEN_CLUB, TEN_SPADE, JACK_SPADE, JACK_DIAMOND};
+		Card[] multiplesExpected = new Card[] {JACK_HEART, JACK_SPADE, JACK_DIAMOND, TEN_CLUB, TEN_SPADE};
 		Card[] rankSortedCards = multiplesExpected;
 		Card[] expectedCards = multiplesExpected;
 		
@@ -142,8 +128,6 @@ public class CheckerImplTest {
 		      return rankSortedCardsList.get((int) args[0]);
 		    }
 		  });
-
-		
 		
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.getCards()).thenReturn(inputList);

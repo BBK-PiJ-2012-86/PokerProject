@@ -1,43 +1,31 @@
 package poker.hand_card;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.FIVE_CLUB;
+import static poker.hand_card.TestCards.FOUR_CLUB;
+import static poker.hand_card.TestCards.JACK_DIAMOND;
+import static poker.hand_card.TestCards.JACK_HEART;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.KING_SPADE;
+import static poker.hand_card.TestCards.QUEEN_SPADE;
+import static poker.hand_card.TestCards.SIX_CLUB;
+import static poker.hand_card.TestCards.TEN_CLUB;
+import static poker.hand_card.TestCards.TEN_SPADE;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 
-import poker.hand_card.Card;
-import poker.hand_card.CheckResult;
-import poker.hand_card.ConditionType;
-import poker.hand_card.Decider;
-import poker.hand_card.DeciderImpl;
-import poker.hand_card.Hand;
-import poker.hand_card.HandImpl;
-import poker.hand_card.Rank;
-import poker.hand_card.Suit;
-
 public class DeciderImplTest {
-	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	
-	private static final Card JACK_OF_HEARTS = new Card(Rank.Jack, Suit.Hearts);
-	private static final Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
-	
-	private static final Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
-	
-	private static final Card SIX_OF_CLUBS = new Card(Rank.Six, Suit.Clubs);
-	private static final Card FIVE_OF_CLUBS = new Card(Rank.Five, Suit.Clubs);
-	private static final Card FOUR_OF_CLUBS = new Card(Rank.Four, Suit.Clubs);
+	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
+	// to consider mocking these as well - maybe a mcok making factory..?
 
 	@Test
 	public void testStraightFlush() {	// to do properly with mocks etc
 		//make a CheckResult (for now) for a SF
-		Card [] cardArray = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES};
+		Card [] cardArray = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -56,7 +44,7 @@ public class DeciderImplTest {
 	@Test
 	public void testThreeOfAKindReturnOne() {
 		//make a CheckResult (for now) for a SF
-		Card [] cardArray = new Card[] {JACK_OF_DIAMONDS, JACK_OF_SPADES, JACK_OF_HEARTS, KING_OF_SPADES, QUEEN_OF_SPADES,};
+		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, JACK_HEART, KING_SPADE, QUEEN_SPADE,};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -68,7 +56,7 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(QUEEN_OF_SPADES);
+		expected.add(QUEEN_SPADE);
 		
 		assertEquals(expected, actual);
 	}
@@ -76,7 +64,7 @@ public class DeciderImplTest {
 	@Test
 	public void testThreeOfAKindReturnTwo() {
 		//make a CheckResult (for now) for a 3K
-		Card [] cardArray = new Card[] {JACK_OF_DIAMONDS, JACK_OF_SPADES, JACK_OF_HEARTS, SIX_OF_CLUBS, FIVE_OF_CLUBS};
+		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, JACK_HEART, SIX_CLUB, FIVE_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -88,8 +76,8 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(SIX_OF_CLUBS);
-		expected.add(FIVE_OF_CLUBS);
+		expected.add(SIX_CLUB);
+		expected.add(FIVE_CLUB);
 		
 		assertEquals(expected, actual);
 	}
@@ -97,7 +85,7 @@ public class DeciderImplTest {
 	@Test
 	public void testTwoPair() {
 		//make a CheckResult (for now) for TP
-		Card [] cardArray = new Card[] {JACK_OF_DIAMONDS, JACK_OF_SPADES, TEN_OF_SPADES, TEN_OF_CLUBS, FIVE_OF_CLUBS};
+		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, TEN_SPADE, TEN_CLUB, FIVE_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -109,7 +97,7 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(FIVE_OF_CLUBS);
+		expected.add(FIVE_CLUB);
 		
 		assertEquals(expected, actual);
 	}
@@ -117,7 +105,7 @@ public class DeciderImplTest {
 	@Test
 	public void testPairReturnTwo() {
 		//make a CheckResult (for now) for pair
-		Card [] cardArray = new Card[] {JACK_OF_DIAMONDS, JACK_OF_SPADES, QUEEN_OF_SPADES, TEN_OF_CLUBS, FIVE_OF_CLUBS};
+		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, QUEEN_SPADE, TEN_CLUB, FIVE_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -130,8 +118,8 @@ public class DeciderImplTest {
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
 		
-		expected.add(TEN_OF_CLUBS);
-		expected.add(FIVE_OF_CLUBS);
+		expected.add(TEN_CLUB);
+		expected.add(FIVE_CLUB);
 		
 		assertEquals(expected, actual);
 	}
@@ -139,7 +127,7 @@ public class DeciderImplTest {
 	@Test
 	public void testPairReturnThree() {
 		//make a CheckResult (for now) for pair
-		Card [] cardArray = new Card[] {JACK_OF_DIAMONDS, JACK_OF_SPADES, SIX_OF_CLUBS, FIVE_OF_CLUBS, FOUR_OF_CLUBS};
+		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, SIX_CLUB, FIVE_CLUB, FOUR_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -151,9 +139,9 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(SIX_OF_CLUBS);
-		expected.add(FIVE_OF_CLUBS);
-		expected.add(FOUR_OF_CLUBS);
+		expected.add(SIX_CLUB);
+		expected.add(FIVE_CLUB);
+		expected.add(FOUR_CLUB);
 		
 		assertEquals(expected, actual);
 	}
@@ -161,7 +149,7 @@ public class DeciderImplTest {
 	@Test
 	public void testHighCardCloseToFlush() {
 		//make a CheckResult (for now) for HC
-		Card [] cardArray = new Card[] {ACE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_SPADES, SIX_OF_CLUBS, FIVE_OF_CLUBS};
+		Card [] cardArray = new Card[] {ACE_SPADE, QUEEN_SPADE, JACK_SPADE, SIX_CLUB, FIVE_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -173,8 +161,8 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(SIX_OF_CLUBS);
-		expected.add(FIVE_OF_CLUBS);
+		expected.add(SIX_CLUB);
+		expected.add(FIVE_CLUB);
 		
 		assertEquals(expected, actual);
 	}
@@ -182,7 +170,7 @@ public class DeciderImplTest {
 	@Test
 	public void testHighCardFarFromFlush() {
 		//make a CheckResult (for now) for HC
-		Card [] cardArray = new Card[] {ACE_OF_SPADES, QUEEN_OF_SPADES, JACK_OF_DIAMONDS, SIX_OF_CLUBS, FIVE_OF_CLUBS};
+		Card [] cardArray = new Card[] {ACE_SPADE, QUEEN_SPADE, JACK_DIAMOND, SIX_CLUB, FIVE_CLUB};
 		List<Card> cardList = new LinkedList<Card>();
 		for (Card card : cardArray) {
 			cardList.add(card);
@@ -194,9 +182,9 @@ public class DeciderImplTest {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
 		List<Card> expected = new LinkedList<Card>();
-		expected.add(JACK_OF_DIAMONDS);
-		expected.add(SIX_OF_CLUBS);
-		expected.add(FIVE_OF_CLUBS);
+		expected.add(JACK_DIAMOND);
+		expected.add(SIX_CLUB);
+		expected.add(FIVE_CLUB);
 		
 		assertEquals(expected, actual);
 	}
