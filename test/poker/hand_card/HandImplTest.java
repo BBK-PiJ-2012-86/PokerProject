@@ -16,12 +16,9 @@ public class HandImplTest {
 	
 	@Test
 	public void test() {	//to split and test nicely
-		Card[] initial = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE};
-		List<Card> cards = new LinkedList<Card>();	//make a copy rather than point?
-		for (Card card : initial) {
-			cards.add(card);					// change to use mock Card ??
-		}
-		Hand hand = new HandImpl(cards);
+		Card[] initial = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE};  //change to use mock Card??
+		List<Card> cards = TestUtil.toLinkedList(initial);	
+		Hand hand = new HandImpl(cards);	// need mocks here
 		
 		assertEquals(cards, hand.getCards());
 		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades]", hand.toString());
@@ -38,10 +35,7 @@ public class HandImplTest {
 		assertEquals("[Ace of Spades, King of Spades, Queen of Spades, Jack of Spades, Ten of Spades]", hand.toString());
 		
 		Card[] toRemove = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE};
-		List<Card> removalCards = new LinkedList<Card>();
-		for (Card card : toRemove) {
-			removalCards.add(card);
-		}
+		List<Card> removalCards = TestUtil.toLinkedList(toRemove);
 
 		hand.removeCards(removalCards);
 		

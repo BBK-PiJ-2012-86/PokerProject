@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author 86
+ * 
  *
  */
 public class HandImpl implements Hand{

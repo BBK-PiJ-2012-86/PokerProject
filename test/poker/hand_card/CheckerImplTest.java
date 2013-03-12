@@ -23,7 +23,6 @@ import static poker.hand_card.TestCards.TEN_SPADE;
 import static poker.hand_card.TestCards.THREE_CLUB;
 import static poker.hand_card.TestCards.TWO_CLUB;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
 		Card[] expectedCards = rankSortedCards;
 		
-		testForConditionType(ConditionType.StraightFlush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.StraightFlush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -56,7 +55,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, NINE_SPADE};
 		Card[] expectedCards = rankSortedCards;
 		
-		testForConditionType(ConditionType.Flush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.Flush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -66,7 +65,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_CLUB};
 		Card[] expectedCards = rankSortedCards;
 		
-		testForConditionType(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -76,7 +75,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB};
 		Card[] expectedCards = new Card[] {FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB, ACE_SPADE};
 		
-		testForConditionType(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -86,7 +85,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {QUEEN_SPADE, JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND};
 		Card[] expectedCards = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND, QUEEN_SPADE};
 		
-		testForConditionType(ConditionType.FourOfAKind, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.FourOfAKind, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -96,19 +95,19 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = multiplesExpected;
 		Card[] expectedCards = multiplesExpected;
 		
-		testForConditionType(ConditionType.FullHouse, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.FullHouse, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 
-	private void testForConditionType(ConditionType conditionType, Card[] inputCards, Card[] rankSortedCards, Card[] multiplesExpected, Card[] expectedCards) {
-		List<Card> inputList = Arrays.asList(inputCards);
-		List<Card> rankSortedCardsList = Arrays.asList(rankSortedCards);
-		List<Card> multiplesExpectedList = Arrays.asList(multiplesExpected);
-		List<Card> expectedCardsList = Arrays.asList(expectedCards);
+	private void testChecker(ConditionType conditionType, Card[] inputCards, Card[] rankSortedCards, Card[] multiplesExpected, Card[] expectedCards) {
+		List<Card> inputList = TestUtil.toLinkedList(inputCards);
+		List<Card> rankSortedCardsList = TestUtil.toLinkedList(rankSortedCards);
+		List<Card> multiplesExpectedList = TestUtil.toLinkedList(multiplesExpected);
+		List<Card> expectedCardsList = TestUtil.toLinkedList(expectedCards);
 		
-		testForConditionTypeLists(conditionType, inputList, rankSortedCardsList, multiplesExpectedList, expectedCardsList);
+		testCheckerLists(conditionType, inputList, rankSortedCardsList, multiplesExpectedList, expectedCardsList);
 	}
 
-	private void testForConditionTypeLists(ConditionType conditionType, List<Card> inputList, final List<Card> rankSortedCardsList,
+	private void testCheckerLists(ConditionType conditionType, List<Card> inputList, final List<Card> rankSortedCardsList,
 			List<Card> multiplesExpectedList, List<Card> expectedCardsList) {
 		
 		MultiplesChecker mockMultiplesChecker = mock(MultiplesChecker.class);
@@ -137,7 +136,7 @@ public class CheckerImplTest {
 		CheckResult result = (new CheckerImpl()).check(mockHand);
 		
 		assertEquals(conditionType, result.getConditionType());
-		assertEquals(expectedCardsList, result.getSupportingCards().getCards());
+		assertEquals(expectedCardsList, result.getSupportingCards().getCards());	//compare using toString on Hand..?
 	}
 
 	private void setFakeCheckMultiples(ConditionType conditionType, List<Card> multiplesExpectedList,
