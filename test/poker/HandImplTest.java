@@ -37,23 +37,16 @@ public class HandImplTest {		//NB TODO: allow remove cards on Hand then change I
 		
 
 		assertEquals("[Ace of Spades, King of Spades, Queen of Spades, Jack of Spades, Ten of Spades]", hand.toString());
-	}
-	
-	/*
-	@Override
-	public Iterator<Card> iterator() {
-		return cards.iterator();
-	}
-	
-	@Override
-	public String toString() {
-		String result = "";
-		if (cards!=null) {
-			for (Card card: cards) {
-				result+=card;
-			}
+		
+		Card[] toRemove = new Card[] {KING_OF_SPADES, JACK_OF_SPADES, QUEEN_OF_SPADES};
+		List<Card> removalCards = new LinkedList<Card>();
+		for (Card card : toRemove) {
+			removalCards.add(card);
 		}
-		return result;
+
+		hand.removeCards(removalCards);
+		
+		assertEquals("[Ace of Spades, Ten of Spades]", hand.toString());
 	}
-	*/
+	
 }

@@ -25,4 +25,9 @@ public interface Hand extends Iterable<Card>{
 	 */
 	Card getCardAt(int i);
 
+	/**
+	 * @param cardsToRemove
+	 */
+	void removeCards(List<Card> cardsToRemove);
+
 }

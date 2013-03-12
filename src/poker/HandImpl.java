@@ -41,6 +41,11 @@ public class HandImpl implements Hand{
 	}
 	
 	@Override
+	public void removeCards (List<Card> cardsToRemove) {
+		cards.removeAll(cardsToRemove);
+	}
+	
+	@Override
 	public Hand sortByRank() {
 		Collections.sort(cards, new Comparator<Card>(){
 

@@ -5,6 +5,7 @@ package poker;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ruth
@@ -46,8 +47,12 @@ public class DeciderImpl implements Decider {	//basic first decider
 				
 			case HighCard:
 				//keep 3 if of same suit, else return bottom 3
-					//do a map to suit - extract from other bit of code
-				
+				Map<Suit, List<Card>> suitMap = Utilities.suitMap(hand);
+				for (List<Card> list : suitMap.values()) {
+					if (list.size()==3) {
+						//remove others
+					}
+				}
 			default:
 				//should never come here
 			}
