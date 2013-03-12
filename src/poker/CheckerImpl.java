@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Factories.MultiplesCheckerFactory;
 
 /**
  * @author 86

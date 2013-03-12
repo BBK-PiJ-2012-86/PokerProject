@@ -3,7 +3,7 @@ package poker;
 import java.util.Comparator;
 import java.util.List;
 
-import Factories.CheckerFactory;
+
 
 public abstract class Player implements Comparator <Player> {
 	

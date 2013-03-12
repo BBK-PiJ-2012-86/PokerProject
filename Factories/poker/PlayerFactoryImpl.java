@@ -1,4 +1,4 @@
-package Factories;
+package poker;
 
 import poker.ComputerPlayer;
 import poker.GameType;

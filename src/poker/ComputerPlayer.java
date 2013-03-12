@@ -2,7 +2,6 @@ package poker;
 
 import java.util.List;
 
-import Factories.DeciderFactory;
 
 public class ComputerPlayer extends Player {
 	

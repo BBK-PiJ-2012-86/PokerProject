@@ -3,7 +3,6 @@ package poker;
 import java.util.LinkedList;
 import java.util.List;
 
-import Factories.CheckerFactory;
 
 public class IntegrationTesting {		// I will change this to a JUnit test..
 	
