@@ -8,10 +8,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 
-/**
- * @author 86
- *
- */
 public class CheckResult implements Comparable<CheckResult>{
 	
 	private final ConditionType conditionType;

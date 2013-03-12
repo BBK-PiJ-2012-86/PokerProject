@@ -3,7 +3,7 @@ package poker.hand_card;
 import java.util.Comparator;
 
 
-public class Card /*implements Comparable<Card>*/{
+public class Card {
 	
 	private Rank rank;
 	private Suit suit;

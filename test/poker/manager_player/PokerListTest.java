@@ -14,11 +14,11 @@ import poker.manager_player.Player;
 
 public class PokerListTest {
 
-	private PokerList<Player> classUnderTest;
+	private CircularArrayList<Player> classUnderTest;
 	
 	@Before
 	public void setUp(){
-		classUnderTest = new PokerList<Player>();
+		classUnderTest = new CircularArrayList<Player>();
 	}
 	
 	@Test

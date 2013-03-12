@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
 	
-	private List<CheckResult> results = new LinkedList<CheckResult>();	/////TODO: Low-high straight
+	private List<CheckResult> results = new LinkedList<CheckResult>();
 
 	@Override
 	public CheckResult check(Hand hand) {

@@ -17,8 +17,8 @@ public class DeckFactoryTest {
 		for(int n = 0; n < 52; n++){
 			for(int i = 1; i < 4; i++){
 				for(int k = 2; i < 14; i++){
-					assertEquals(i, deck.getDeck().get(n).getSuitInt());
-					assertEquals(k, deck.getDeck().get(n).getRankInt());
+					assertEquals(i, deck.getDeck().get(n).getSuit());
+					assertEquals(k, deck.getDeck().get(n).getRank());
 				}
 			}
 		}
