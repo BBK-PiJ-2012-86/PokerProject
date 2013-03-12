@@ -18,7 +18,7 @@ public abstract class Player implements Comparator <Player> {
 		this.gameType = gameType;
 		this.username = username;
 		this.checker = CheckerFactory.getInstance(gameType).getChecker();
-		Hand hand = new HandImpl();
+		this.hand = new HandImpl();
 	}
 	
 	public void removeCards(){

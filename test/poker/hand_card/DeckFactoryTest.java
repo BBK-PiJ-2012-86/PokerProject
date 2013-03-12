@@ -2,6 +2,8 @@ package poker.hand_card;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import poker.hand_card.Deck;
@@ -14,14 +16,17 @@ public class DeckFactoryTest {
 	public void test() {
 		DeckFactory classUnderTest = new DeckFactory();
 		Deck deck = classUnderTest.getDeck();
-		for(int n = 0; n < 52; n++){
-			for(int i = 1; i < 4; i++){
-				for(int k = 2; i < 14; i++){
-					assertEquals(i, deck.getDeck().get(n).getSuit());
-					assertEquals(k, deck.getDeck().get(n).getRank());
-				}
+
+		List<Card> cardList = deck.getDeck();
+		int i = 0;
+		for(Suit suit: Suit.values()){
+			for(Rank rank: Rank.values()){
+				assertEquals(suit, cardList.get(i).getSuit());
+				assertEquals(rank, cardList.get(i).getRank());
+				i++;
 			}
 		}
 	}
+	
 
 }
