@@ -13,10 +13,8 @@ public class DeciderImplTest {
 	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
 	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
 	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	private static final Card NINE_OF_SPADES = new Card(Rank.Nine, Suit.Spades);
 	
 	private static final Card JACK_OF_HEARTS = new Card(Rank.Jack, Suit.Hearts);
-	private static final Card JACK_OF_CLUBS = new Card(Rank.Jack, Suit.Clubs);
 	private static final Card JACK_OF_DIAMONDS = new Card(Rank.Jack, Suit.Diamonds);
 	
 	private static final Card TEN_OF_CLUBS = new Card(Rank.Ten, Suit.Clubs);
