@@ -17,7 +17,7 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 		switch(conditionType) {
 			case ThreeOfAKind:
 				//return lowest leftover, and highest leftover if < 7
-				if (hand.getCardAt(3).getRank().compareTo(Rank.Seven)>0) {
+				if (hand.getCardAt(3).getRank().compareTo(Rank.Seven)<0) {
 					return bottom(2, hand);
 				} else {
 					return bottom(1, hand);
@@ -29,7 +29,7 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 				
 			case Pair:
 				//return lowest 2 leftovers, and highest leftover if < 7
-				if (hand.getCardAt(2).getRank().compareTo(Rank.Seven)>0) {
+				if (hand.getCardAt(2).getRank().compareTo(Rank.Seven)<0) {
 					return bottom(3, hand);
 				} else {
 					return bottom(2, hand);

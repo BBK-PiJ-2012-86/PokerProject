@@ -68,7 +68,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		Card next = null;
 		while (it.hasNext()) {
 			next = it.next();
-			if ((curr.getRank().ordinal()+1)!=next.getRank().ordinal()) {
+			if ((curr.getRank().ordinal()-1)!=next.getRank().ordinal()) {
 				return;
 			}
 			curr = next;

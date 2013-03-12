@@ -62,11 +62,11 @@ public class MultiplesChecker {
 			Rank pairRank2, Hand hand) {
 		Rank higher, lower;
 		if (pairRank1.compareTo(pairRank2)<0) {
-			higher = pairRank1;
-			lower = pairRank2;
-		} else {
-			higher = pairRank2;
 			lower = pairRank1;
+			higher = pairRank2;
+		} else {
+			lower = pairRank2;
+			higher = pairRank1;
 		}
 		List<Card> tupleList = rankMap.get(higher);
 		tupleList.addAll(rankMap.get(lower));

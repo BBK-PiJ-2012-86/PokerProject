@@ -51,7 +51,7 @@ public class HandImpl implements Hand{
 
 			@Override
 			public int compare(Card card1, Card card2) {
-				return card1.getRank().compareTo(card2.getRank());
+				return -card1.getRank().compareTo(card2.getRank());
 			}
 			
 		});
