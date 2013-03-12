@@ -3,6 +3,8 @@ package poker;
 import java.util.Comparator;
 import java.util.List;
 
+import Factories.CheckerFactory;
+
 public abstract class Player implements Comparator <Player> {
 	
 	protected GameType gameType;
@@ -30,8 +32,6 @@ public abstract class Player implements Comparator <Player> {
 		return checker.check(hand);
 	}
 	
-	public abstract void removeCardFromHand(List<Card> cards);
-	
 	public Hand getHand(){
 		return hand;
 	}
@@ -41,6 +41,11 @@ public abstract class Player implements Comparator <Player> {
 		checker = CheckerFactory.getInstance(gameType).getChecker();
 	}
 	
+	
+	public void removeCardsFromHand(List<Card> cards){
+			hand.removeCards(cards);
+	}
+
 	private static final Comparator<Player> HAND_RANKING = new Comparator<Player>(){
 		
 		@Override

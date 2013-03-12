@@ -18,7 +18,7 @@ public class HumanPlayer extends Player {
 			for(int i = 0; i < swap; i++){
 				cards.add(selectCardsToRemove());
 			}
-			removeCardFromHand(cards);
+			removeCardsFromHand(cards);
 		}
 		return swap;
 	}
@@ -32,12 +32,6 @@ public class HumanPlayer extends Player {
 		}
 		return hand.getCardAt(swap - 1);
 	}
-	
-	public void removeCardFromHand(List<Card> cards){
-		for(Card card: cards){
-			hand.getCards().remove(card);
-		}
-	}
 
 	public void displayCards(){
 		System.out.println("Your hand is:");
@@ -47,8 +41,10 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public int compare(Player o1, Player o2) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compare(Player p1, Player p2){
+		CheckResult p1Result = p1.check();
+		CheckResult p2Result = p2.check();
+		return p1Result.compareTo(p2Result);
 	}
 }
+

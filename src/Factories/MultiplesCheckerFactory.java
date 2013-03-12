@@ -1,4 +1,6 @@
-package poker;
+package Factories;
+
+import poker.MultiplesChecker;
 
 public class MultiplesCheckerFactory {
 	

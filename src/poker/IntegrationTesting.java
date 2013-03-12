@@ -3,6 +3,8 @@ package poker;
 import java.util.LinkedList;
 import java.util.List;
 
+import Factories.CheckerFactory;
+
 public class IntegrationTesting {		// I will change this to a JUnit test..
 	
 	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);

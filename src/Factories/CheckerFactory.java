@@ -1,4 +1,8 @@
-package poker;
+package Factories;
+
+import poker.Checker;
+import poker.CheckerImpl;
+import poker.GameType;
 
 public class CheckerFactory {
 	

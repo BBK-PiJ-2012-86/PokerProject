@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import Factories.DeckFactory;
+
 public class DeckFactoryTest {
 
 	@Test
