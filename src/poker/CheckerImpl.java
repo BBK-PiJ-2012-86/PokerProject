@@ -23,7 +23,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		if (hand.getCards().size()==0) {return null;}
 		checkFlush(hand);
 		checkStraight(hand);
-		checkWheelStraight(hand);
+		checkWheelStraight(hand);// bodged - improve
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
 		results.add(multiplesChecker.checkMultiples(hand));
 		checkStraightFlush(hand); 
@@ -31,17 +31,20 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		return Collections.max(results);
 	}
 
-	private void checkWheelStraight(Hand hand) {
+	private void checkWheelStraight(Hand hand) {//improve
 		hand = hand.sortByRank();
 		
-		/*if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(0).getRank()==Rank.Five) && (hand.getCardAt(0).getRank()==Rank.Four)
-				&& (hand.getCardAt(0).getRank()==Rank.Three) && (hand.getCardAt(0).getRank()==Rank.Two)) {
-			List wheelOrderHand
-			Hand wheelOrderHand = new Hand(wheelOrderList);
+		if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(1).getRank()==Rank.Five) && (hand.getCardAt(2).getRank()==Rank.Four)
+				&& (hand.getCardAt(3).getRank()==Rank.Three) && (hand.getCardAt(4).getRank()==Rank.Two)) {
+			List<Card> wheelOrderList = new LinkedList<Card>();
+			wheelOrderList.add(hand.getCardAt(1));
+			wheelOrderList.add(hand.getCardAt(2));
+			wheelOrderList.add(hand.getCardAt(3));
+			wheelOrderList.add(hand.getCardAt(4));
+			wheelOrderList.add(hand.getCardAt(0));
+			Hand wheelOrderHand = new HandImpl(wheelOrderList);
 			results.add( new CheckResult(ConditionType.Straight, wheelOrderHand));
-		}*/
-		
-		
+		}	
 	}
 
 	private void checkStraightFlush(Hand hand) {
