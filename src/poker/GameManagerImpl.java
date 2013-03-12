@@ -2,6 +2,7 @@ package poker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GameManagerImpl {
@@ -55,7 +56,8 @@ public class GameManagerImpl {
 		for(Player player: players){
 			tempList.add(player);
 		}
-		Collections.sort(tempList);
+		Comparator<Player> c = players.getTheDealer().getCheckResultRanking();
+		Collections.sort(tempList, c);
 		System.out.println("The winner is " + tempList.get(0));
 		System.out.println("Their hand was " + tempList.get(0).getHand().toString());
 	}

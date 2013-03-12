@@ -45,4 +45,10 @@ public class HumanPlayer extends Player {
 			System.out.println(card.toString());
 		}
 	}
+
+	@Override
+	public int compare(Player o1, Player o2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

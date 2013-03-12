@@ -51,6 +51,10 @@ public class CircularArrayList<T> implements Iterable<T> {
 		
 	}
 	
+	public T getTheDealer(){
+		return players[dealer];
+	}
+	
 	public void newDealer(){
 		if(dealer == numItems){
 			dealer = 0;
