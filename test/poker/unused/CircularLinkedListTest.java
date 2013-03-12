@@ -8,23 +8,23 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import poker.unused.CircularList;
+import poker.unused.CircularLinkedListImpl;
 
 
 /**
  * @author 86
  *
  */
-public class CircularListTest {
+public class CircularLinkedListTest {
 	
-	CircularList<Integer> list;
+	CircularLinkedList<Integer> list;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		list = new CircularList<Integer>();
+		list = new CircularLinkedListImpl<Integer>();
 	}
 
 	@Test
