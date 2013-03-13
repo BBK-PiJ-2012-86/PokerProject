@@ -17,8 +17,7 @@ public class MultiplesChecker {
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			switch (entry.getValue().size()) {
 			case 4:
-				hand = hand.moveCardsToStartOthersRankOrder(entry.getValue());
-				return ( new CheckResult(ConditionType.FourOfAKind, hand));
+				return makeFromRank(ConditionType.FourOfAKind, entry.getKey(), rankMap, hand);
 			case 3:
 				tripleRank = entry.getKey();
 				break;
@@ -40,34 +39,31 @@ public class MultiplesChecker {
 	private CheckResult checkTupleConditions(Map<Rank, List<Card>> rankMap,
 			Rank tripleRank, Rank pairRank1, Rank pairRank2, Hand hand) {
 		if ((tripleRank!=null) && (pairRank1!=null)) {
-			return addFullHouse(rankMap, tripleRank, hand);
+			return makeFromRank(ConditionType.FullHouse, tripleRank, rankMap, hand);
 		}
 		if ((tripleRank!=null) && (pairRank1==null)) {
-			return addThreeOfAKind(rankMap, tripleRank, hand);
+			return makeFromRank(ConditionType.ThreeOfAKind, tripleRank, rankMap, hand);
 		}
 		if (pairRank2!=null) {
-			return addTwoPair(rankMap, pairRank1, pairRank2, hand);
+			return makeFromPairs(rankMap, pairRank1, pairRank2, hand);
+			//different
 		}
 		if (pairRank1!=null) {
-			return addPair(rankMap, pairRank1, hand);
+			return makeFromRank(ConditionType.Pair, pairRank1, rankMap, hand);
 		} else {
-			return addHighCard(rankMap, hand);
+			return makeFromHighCard(rankMap, hand);
+			//different
 		}
 	}
 	
-	private CheckResult addHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {
+	private CheckResult makeFromHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {		//three different options - how best to combine?
 		List<Card> tupleList = new LinkedList<Card>();
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.HighCard, hand));
 	}
 	
-	private CheckResult addPair(Map<Rank, List<Card>> rankMap, Rank pairRank1, Hand hand) {
-		List<Card> tupleList = rankMap.get(pairRank1);
-		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.Pair, hand));
-	}
 
-	private CheckResult addTwoPair(Map<Rank, List<Card>> rankMap, Rank pairRank1,
+	private CheckResult makeFromPairs(Map<Rank, List<Card>> rankMap, Rank pairRank1,
 			Rank pairRank2, Hand hand) {
 		Rank higher, lower;
 		if (pairRank1.compareTo(pairRank2)<0) {
@@ -81,18 +77,6 @@ public class MultiplesChecker {
 		tupleList.addAll(rankMap.get(lower));
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.TwoPair, hand));
-	}
-
-	private CheckResult addThreeOfAKind(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
-		List<Card> tupleList = rankMap.get(tripleRank);
-		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.ThreeOfAKind, hand));
-	}
-
-	private CheckResult addFullHouse(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
-		List<Card> tupleList = rankMap.get(tripleRank);
-		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.FullHouse, hand));
 	}
 	
 	private CheckResult makeFromRank(ConditionType conditionType, Rank rank, Map<Rank, List<Card>> rankMap, Hand hand) {
