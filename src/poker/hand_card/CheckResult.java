@@ -10,29 +10,35 @@ import java.util.Iterator;
 import lombok.Data;
 
 
-@Data public class CheckResult implements Comparable<CheckResult>{		//own compareTo !!TODO: change to a Comparator
+@Data public class CheckResult {
 	
 	private final ConditionType conditionType;
 	private final Hand supportingCards;
 	
-	
-	
-	@Override
-	public int compareTo(CheckResult other) {		//change to a comparator..?
-		int conditionCompareInt = this.getConditionType().compareTo(other.getConditionType());
-		if (conditionCompareInt == 0) {
-			return comparator.compare(this.getSupportingCards(), other.getSupportingCards());
-		} else {
-			return conditionCompareInt;
-		}
+	public static Comparator<CheckResult> getComparator() {
+		return comparator;
 	}
+	
+	private static final Comparator<CheckResult> comparator = new Comparator<CheckResult>() {
 
+		@Override
+		public int compare(CheckResult cr1, CheckResult cr2) {
+			int conditionCompareInt = cr1.getConditionType().compareTo(cr2.getConditionType());
+			if (conditionCompareInt == 0) {
+				return crHandComparator.compare(cr1.getSupportingCards(), cr2.getSupportingCards());
+			} else {
+				return conditionCompareInt;
+			}
+		}
+		
+	};
+	
 	/**
 	 * Assumes the supporting cards are in the order:
 	 * 1. relevant for win condition (decreasing rank)
 	 * 2. other cards (decreasing rank)
 	 */
-	private static final Comparator<Hand> comparator = new Comparator<Hand>() {
+	private static final Comparator<Hand> crHandComparator = new Comparator<Hand>() {	//move to Hand..???
 
 		@Override
 		public int compare(Hand hand1, Hand hand2) {
@@ -48,6 +54,8 @@ import lombok.Data;
 		
 	};
 
+	
+	
 	
 	
 	/*@Override

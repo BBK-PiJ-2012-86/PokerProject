@@ -36,7 +36,7 @@ import org.mockito.stubbing.Answer;
  */
 public class CheckerImplTest {
 	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
-	// to consider mocking these as well - maybe a mcok making factory..?
+	// to consider mocking these as well - maybe a mock making factory..?
 	
 	@Test
 	public void testCheckStraightFlush() {

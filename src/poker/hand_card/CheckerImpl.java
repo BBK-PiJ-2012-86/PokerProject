@@ -31,7 +31,7 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		results.add(multiplesChecker.checkMultiples(hand));
 		checkStraightFlush(hand); 
 		
-		return Collections.max(results);
+		return Collections.max(results, CheckResult.getComparator());
 	}
 
 	private void checkWheelStraight(Hand hand) {//improve
