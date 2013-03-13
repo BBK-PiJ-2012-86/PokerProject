@@ -15,7 +15,7 @@ public class DeckFactory {
 	}
 	
 	public Deck getDeck(){
-		Deck deck = new Deck(size);
+		Deck deck = new DeckImpl(size);
 		return deck;
 	}
 	

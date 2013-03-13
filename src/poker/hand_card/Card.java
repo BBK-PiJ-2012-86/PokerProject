@@ -5,7 +5,7 @@ import java.util.Comparator;
 import lombok.Data;
 
 
-@Data public class Card {
+@Data public class Card {	//NB own toString
 	
 	private final Rank rank;
 	private final Suit suit;
