@@ -1,16 +1,11 @@
 package poker.hand_card;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import poker.hand_card.Card;
-import poker.hand_card.Rank;
-import poker.hand_card.Suit;
 
 public class CardTest {
+	
+	// toString doesn't need testing - Lomboked
 
-	@Test
+	/*@Test
 	public void testToString1() {
 		
 		Rank rank = Rank.Ace;  
@@ -32,5 +27,5 @@ public class CardTest {
 		String expected = "King of Spades";
 		String result = card.toString();
 		assertEquals(expected, result);
-	}
+	}*/
 }

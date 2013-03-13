@@ -5,17 +5,11 @@ import java.util.Comparator;
 import lombok.Data;
 
 
-@Data public class Card {	//NB own toString
+@Data public class Card {
 	
 	private final Rank rank;
 	private final Suit suit;
 	
-	@Override
-	public String toString(){
-		String result = rank.toString() + " of " + suit.toString();
-		return result;
-	}
-
 	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
 
 		@Override
@@ -42,6 +36,12 @@ import lombok.Data;
 	
 	public Suit getSuit(){
 		return suit;
+	}
+
+	@Override
+	public String toString(){
+		String result = rank.toString() + " of " + suit.toString();
+		return result;
 	}
 
 	@Override

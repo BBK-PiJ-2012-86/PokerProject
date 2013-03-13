@@ -5,9 +5,8 @@ import static poker.hand_card.TestCards.ACE_SPADE;
 import static poker.hand_card.TestCards.JACK_SPADE;
 import static poker.hand_card.TestCards.KING_SPADE;
 import static poker.hand_card.TestCards.QUEEN_SPADE;
-import static poker.hand_card.TestCards.TEN_SPADE;
+import static poker.hand_card.TestCards.TEN_CLUB;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -15,31 +14,38 @@ import org.junit.Test;
 public class HandImplTest {
 	
 	@Test
-	public void test() {	//to split and test nicely
-		Card[] initial = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE};  //change to use mock Card??
-		List<Card> cards = TestUtil.toLinkedList(initial);	
-		Hand hand = new HandImpl(cards);	// need mocks here
+	public void testaddCards() {		//change to use mock Card??
+		List<Card> cards = TestUtil.toLinkedList(new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE});	
+		List<Card> extraCards = TestUtil.toLinkedList(new Card[] {TEN_CLUB, ACE_SPADE});
+		List<Card> expected = TestUtil.toLinkedList(new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, TEN_CLUB, ACE_SPADE});
 		
-		assertEquals(cards, hand.getCards());
-		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades]", hand.toString());
-		
-		List<Card> extraCards = new LinkedList<Card>();
-		extraCards.add(TEN_SPADE);
+		Hand hand = new HandImpl(cards);
 		hand.addCards(extraCards);
 		
-		assertEquals("[King of Spades, Jack of Spades, Queen of Spades, Ace of Spades, Ten of Spades]", hand.toString());
+		assertEquals(expected, hand.getCards());
+	}
+	
+	@Test
+	public void testSortByRank() {
+		List<Card> cards = TestUtil.toLinkedList(new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE, TEN_CLUB});
+		List<Card> expected = TestUtil.toLinkedList(new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_CLUB});
 		
+		Hand hand = new HandImpl(cards);
 		hand.sortByRank();
 		
+		assertEquals(expected, hand.getCards());
+	}
+	
+	@Test
+	public void testRemoveCards() {
+		List<Card> cards = TestUtil.toLinkedList(new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE, TEN_CLUB});
+		List<Card> toRemove = TestUtil.toLinkedList(new Card[] {TEN_CLUB, JACK_SPADE, QUEEN_SPADE});
+		List<Card> expected = TestUtil.toLinkedList(new Card[] {KING_SPADE, ACE_SPADE});
 
-		assertEquals("[Ace of Spades, King of Spades, Queen of Spades, Jack of Spades, Ten of Spades]", hand.toString());
+		Hand hand = new HandImpl(cards);
+		hand.removeCards(toRemove);
 		
-		Card[] toRemove = new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE};
-		List<Card> removalCards = TestUtil.toLinkedList(toRemove);
-
-		hand.removeCards(removalCards);
-		
-		assertEquals("[Ace of Spades, Ten of Spades]", hand.toString());
+		assertEquals(expected, hand.getCards());
 	}
 	
 }
