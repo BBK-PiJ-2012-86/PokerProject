@@ -11,24 +11,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import lombok.Getter;
+
 /**
  * 
  *
  */
 public class HandImpl implements Hand{
-	private List<Card> cards = new LinkedList<Card>();
+	@Getter private final List<Card> cards = new LinkedList<Card>();
 	
-	public HandImpl(List<Card> cards) {
-		this.cards.addAll(cards);				// make so cards is only updated through Hand??
+	public HandImpl(List<Card> cards) {			//override Lombok atm..  ?
+		this.cards.addAll(cards);				// make so cards is only updated through Hand?? done?
 	}
 	
-	public HandImpl() {	//poss delete this one
+	public HandImpl() {	//poss delete this one   ? Need to look at my Mocks
 		this(new LinkedList<Card>());
-	}
-	
-	@Override
-	public List<Card> getCards() {
-		return cards;
 	}
 	
 	@Override
@@ -75,4 +72,10 @@ public class HandImpl implements Hand{
 	}
 	
 	
+	
+	
+	/*@Override
+	public List<Card> getCards() {
+		return cards;
+	}*/
 }

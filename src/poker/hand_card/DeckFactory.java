@@ -3,11 +3,11 @@ package poker.hand_card;
 
 public class DeckFactory {
 
-	private int defaultSize = 1;
-	private int size;
+	private static final int DEFAULT_SIZE = 1;
+	private final int size;
 	
 	public DeckFactory(){
-		size = defaultSize;
+		size = DEFAULT_SIZE;
 	}
 	
 	public DeckFactory(int size){
