@@ -36,7 +36,6 @@ import org.mockito.stubbing.Answer;
  */
 public class CheckerImplTest {
 	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
-	// to consider mocking these as well - maybe a mock making factory..?
 	
 	@Test
 	public void testCheckStraightFlush() {
@@ -136,7 +135,7 @@ public class CheckerImplTest {
 		CheckResult result = (new CheckerImpl()).check(mockHand);
 		
 		assertEquals(conditionType, result.getConditionType());
-		assertEquals(expectedCardsList, result.getOrderedHand().getCards());	//compare using toString on Hand..?
+		assertEquals(expectedCardsList, result.getOrderedHand().getCards());
 	}
 
 	private void setFakeCheckMultiples(ConditionType conditionType, List<Card> multiplesExpectedList,

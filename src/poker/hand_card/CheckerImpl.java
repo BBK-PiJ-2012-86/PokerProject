@@ -9,12 +9,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 
  * 
  */
-public class CheckerImpl implements Checker {	//assumes exactly five cards for now
+public class CheckerImpl implements Checker {	//assumes exactly five cards
 	
 	private List<CheckResult> results = new LinkedList<CheckResult>();
 
@@ -22,9 +23,11 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 	public CheckResult check(Hand hand) {
 		results.clear();
 		if (hand.getCards().size()==0) {return null;}
-		checkFlush(hand);
-		checkStraight(hand);
-		checkWheelStraight(hand);// bodged - improve
+		//moved earlier
+		checkWheelStraightAlternative(hand);
+		//checkFlush(hand);
+		//checkStraight(hand);
+		//checkWheelStraightAlternative(hand);// bodged - improve
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
 		results.add(multiplesChecker.checkMultiples(hand));
 		checkStraightFlush(hand); 
@@ -43,6 +46,30 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 			list.add(cardToMove);
 			results.add( new CheckResult(ConditionType.Straight, hand));
 		}	
+	}
+	
+	private void checkWheelStraightAlternative(Hand hand) {//to work on
+		System.out.println("Before making map");
+		Map<Rank, List<Card>> rankMap = Util.rankMap(hand);			//problem if we ask it to make it again.
+		System.out.println("After making map");
+		
+		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
+			//System.out.println("entry::"+entry);
+			//System.out.println("cardList::"+entry.getValue());
+			if ((entry.getKey()==Rank.Ace)||(entry.getKey().compareTo(Rank.Six)<0)) {
+				System.out.println("I'm now checking the map");
+				System.out.println(entry.getKey()+"occurs "+entry.getValue().size());
+				if (entry.getValue().size()!=1) {return;}
+			}
+		}
+		// to sort better
+		List<Card> list = hand.getCards();
+		Card cardToMove = rankMap.get(Rank.Ace).get(0);//list.get(0);
+		list.remove(cardToMove);
+		list.add(cardToMove);
+		//System.out.println(hand);
+		
+		results.add( new CheckResult(ConditionType.Straight, hand));
 	}
 
 	private void checkStraightFlush(Hand hand) {

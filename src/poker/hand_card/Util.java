@@ -29,7 +29,11 @@ public class Util {
 			result.put(rank, new LinkedList<Card>());
 		}
 		for (Card card : hand) {
-			result.get(card.getRank()).add(card);
+			//System.out.println("card::"+card);
+			List<Card> cards = result.get(card.getRank());
+			//System.out.println("cardsBef::"+cards);
+			cards.add(card);
+			//System.out.println("cardsAft::"+cards);
 		}
 		return result;
 	}
