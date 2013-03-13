@@ -2,6 +2,8 @@ package poker.manager_player;
 
 import java.util.Iterator;
 
+import lombok.Getter;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
@@ -20,11 +22,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CircularArrayList<T> implements Iterable<T> {
 	
-	private int numItems;
+	private int numItems;	//not Lomboked as called different name - consider renaming
 	private T[] players;
-	private int dealer;
+	@Getter private int dealer;
 	private static final int INIT_LENGTH = 10;
-	private int index;
+	@Getter private int index;
 	
 	@SuppressWarnings("unchecked")
 	public CircularArrayList(){
@@ -79,10 +81,6 @@ public class CircularArrayList<T> implements Iterable<T> {
 		}else{
 			index = dealer + 1;
 		}
-	}
-	
-	public int getIndex(){
-		return index;
 	}
 	
 	private void reSizeArray(int i){
@@ -155,7 +153,13 @@ public class CircularArrayList<T> implements Iterable<T> {
 		return numItems;
 	}
 
-	public int getDealer() {
+	
+	
+	/*public int getDealer() {
 		return dealer;
 	}
+	
+	public int getIndex(){
+		return index;
+	}*/
 }
