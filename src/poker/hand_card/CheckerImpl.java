@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 /**
- * @author 86
+ * 
  * 
  */
 public class CheckerImpl implements Checker {	//assumes exactly five cards for now
