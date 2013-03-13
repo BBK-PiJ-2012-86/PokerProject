@@ -7,25 +7,13 @@ package poker.hand_card;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import lombok.Data;
 
-public class CheckResult implements Comparable<CheckResult>{
+
+@Data public class CheckResult implements Comparable<CheckResult>{		//own toString and compareTo !!TODO: change to a Comparator
 	
 	private final ConditionType conditionType;
 	private final Hand supportingCards;
-	
-	
-	public CheckResult(ConditionType conditionType, Hand hand) {
-		this.conditionType = conditionType;
-		this.supportingCards = hand;
-	}
-
-	public ConditionType getConditionType() {
-		return this.conditionType;
-	}
-	
-	public Hand getSupportingCards() {
-		return supportingCards;
-	}
 	
 	@Override
 	public String toString() {
@@ -36,7 +24,7 @@ public class CheckResult implements Comparable<CheckResult>{
 	}
 	
 	@Override
-	public int compareTo(CheckResult other) {
+	public int compareTo(CheckResult other) {		//change to a comparator..?
 		int conditionCompareInt = this.getConditionType().compareTo(other.getConditionType());
 		if (conditionCompareInt == 0) {
 			return comparator.compare(this.getSupportingCards(), other.getSupportingCards());
@@ -69,4 +57,18 @@ public class CheckResult implements Comparable<CheckResult>{
 	
 	
 	
+	
+	/*public CheckResult(ConditionType conditionType, Hand hand) {
+		this.conditionType = conditionType;
+		this.supportingCards = hand;
+	}
+	
+	public ConditionType getConditionType() {
+		return this.conditionType;
+	}
+	
+	public Hand getSupportingCards() {
+		return supportingCards;
+	}*/
+		
 }
