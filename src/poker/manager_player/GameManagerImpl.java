@@ -31,8 +31,8 @@ public class GameManagerImpl {
 		deck = new DeckFactory().getDeck();
 		for(Player player: players){
 			for(int i = 0; i < 5; i++){
-				player.getHand().getCards().add(deck.getDeck().get(0));
-				deck.getDeck().remove(0);
+				player.getHand().getCards().add(deck.getCards().get(0));
+				deck.getCards().remove(0);
 			}
 		}
 	}
@@ -50,8 +50,8 @@ public class GameManagerImpl {
 			if(cardsToSwap > 0){
 				List<Card> cards = new ArrayList<Card>();
 				for(int i = 0; i < cardsToSwap; i++){
-					cards.add(deck.getDeck().get(0));
-					deck.getDeck().remove(0);
+					cards.add(deck.getCards().get(0));
+					deck.getCards().remove(0);
 				}
 				player.recieveCards(cards);
 			}
