@@ -48,4 +48,17 @@ public class HandImplTest {
 		assertEquals(expected, hand.getCards());
 	}
 	
+	@Test
+	public void testmoveCardsToStartOthersRankOrder() {
+		List<Card> cards = TestUtil.toLinkedList(new Card[] {KING_SPADE, JACK_SPADE, QUEEN_SPADE, ACE_SPADE, TEN_CLUB});
+		List<Card> toMove = TestUtil.toLinkedList(new Card[] {TEN_CLUB, JACK_SPADE, QUEEN_SPADE});
+		List<Card> expected = TestUtil.toLinkedList(new Card[] {TEN_CLUB, JACK_SPADE, QUEEN_SPADE, ACE_SPADE, KING_SPADE});
+
+		Hand hand = new HandImpl(cards);
+		hand.moveCardsToStartOthersRankOrder(toMove);
+		
+		assertEquals(expected, hand.getCards());
+	}
+	
+	
 }

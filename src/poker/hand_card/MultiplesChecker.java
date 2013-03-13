@@ -17,7 +17,8 @@ public class MultiplesChecker {
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			switch (entry.getValue().size()) {
 			case 4:
-				return ( new CheckResult(ConditionType.FourOfAKind, orderCards(entry.getValue(), hand)));
+				orderCards(entry.getValue(), hand);
+				return ( new CheckResult(ConditionType.FourOfAKind, hand));
 			case 3:
 				tripleRank = entry.getKey();
 				break;
@@ -39,7 +40,7 @@ public class MultiplesChecker {
 	private CheckResult checkTupleConditions(Map<Rank, List<Card>> rankMap,
 			Rank tripleRank, Rank pairRank1, Rank pairRank2, Hand hand) {
 		if ((tripleRank!=null) && (pairRank1!=null)) {
-			return addFullHouse(rankMap, tripleRank, pairRank1);
+			return addFullHouse(rankMap, tripleRank, hand);
 		}
 		if ((tripleRank!=null) && (pairRank1==null)) {
 			return addThreeOfAKind(rankMap, tripleRank, hand);
@@ -56,12 +57,14 @@ public class MultiplesChecker {
 	
 	private CheckResult addHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {
 		List<Card> tupleList = new LinkedList<Card>();
-		return( new CheckResult(ConditionType.HighCard, orderCards(tupleList, hand)));
+		orderCards(tupleList, hand);
+		return( new CheckResult(ConditionType.HighCard, hand));
 	}
 	
 	private CheckResult addPair(Map<Rank, List<Card>> rankMap, Rank pairRank1, Hand hand) {
 		List<Card> tupleList = rankMap.get(pairRank1);
-		return( new CheckResult(ConditionType.Pair, orderCards(tupleList, hand)));
+		orderCards(tupleList, hand);
+		return( new CheckResult(ConditionType.Pair, hand));
 	}
 
 	private CheckResult addTwoPair(Map<Rank, List<Card>> rankMap, Rank pairRank1,
@@ -76,29 +79,24 @@ public class MultiplesChecker {
 		}
 		List<Card> tupleList = rankMap.get(higher);
 		tupleList.addAll(rankMap.get(lower));
-		return( new CheckResult(ConditionType.TwoPair, orderCards(tupleList, hand)));
+		orderCards(tupleList, hand);
+		return( new CheckResult(ConditionType.TwoPair, hand));
 	}
 
 	private CheckResult addThreeOfAKind(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
 		List<Card> tupleList = rankMap.get(tripleRank);
-		return( new CheckResult(ConditionType.ThreeOfAKind, orderCards(tupleList, hand)));
+		orderCards(tupleList, hand);
+		return( new CheckResult(ConditionType.ThreeOfAKind, hand));
 	}
 
-	private CheckResult addFullHouse(Map<Rank, List<Card>> rankMap, Rank tripleRank,
-			Rank pairRank1) {
-		List<Card> cards = rankMap.get(tripleRank);
-		cards.addAll(rankMap.get(pairRank1));
-		return( new CheckResult(ConditionType.FullHouse, new HandImpl(cards)));	//consider..
+	private CheckResult addFullHouse(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
+		List<Card> tupleList = rankMap.get(tripleRank);
+		orderCards(tupleList, hand);
+		return( new CheckResult(ConditionType.FullHouse, hand));
 	}
 	
-	private Hand orderCards (List<Card> relevantCards, Hand hand) {
-		hand = hand.sortByRank();
-		Hand result = new HandImpl();	// use a factory instead so it uses a mockHand when checking?
-		result.addCards(relevantCards);
-		List<Card> extras = hand.getCards();
-		extras.removeAll(relevantCards);
-		result.addCards(extras);
-		return result;
+	private void orderCards (List<Card> relevantCards, Hand hand) {
+		hand.moveCardsToStartOthersRankOrder(relevantCards);
 	}
 
 }

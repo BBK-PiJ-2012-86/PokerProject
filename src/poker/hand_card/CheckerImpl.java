@@ -37,14 +37,11 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards for n
 		
 		if ((hand.getCardAt(0).getRank()==Rank.Ace) && (hand.getCardAt(1).getRank()==Rank.Five) && (hand.getCardAt(2).getRank()==Rank.Four)
 				&& (hand.getCardAt(3).getRank()==Rank.Three) && (hand.getCardAt(4).getRank()==Rank.Two)) {
-			List<Card> wheelOrderList = new LinkedList<Card>();
-			wheelOrderList.add(hand.getCardAt(1));
-			wheelOrderList.add(hand.getCardAt(2));
-			wheelOrderList.add(hand.getCardAt(3));
-			wheelOrderList.add(hand.getCardAt(4));
-			wheelOrderList.add(hand.getCardAt(0));
-			Hand wheelOrderHand = new HandImpl(wheelOrderList);
-			results.add( new CheckResult(ConditionType.Straight, wheelOrderHand));
+			List<Card> list = hand.getCards();
+			Card cardToMove = list.get(0);
+			list.remove(cardToMove);
+			list.add(cardToMove);
+			results.add( new CheckResult(ConditionType.Straight, hand));
 		}	
 	}
 

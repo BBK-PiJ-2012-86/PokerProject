@@ -6,6 +6,7 @@ package poker.hand_card;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.anyObject;
 import static poker.hand_card.TestCards.ACE_SPADE;
 import static poker.hand_card.TestCards.JACK_CLUB;
 import static poker.hand_card.TestCards.JACK_DIAMOND;
@@ -42,7 +43,7 @@ public class MultiplesCheckerTest {
 	}
 	
 	@Test
-	public void testFullHouseOfAKind() {
+	public void testFullHouse() {
 		Card[] inHand = new Card[] {TEN_DIAMOND, JACK_CLUB, TEN_SPADE, JACK_SPADE, TEN_CLUB};
 		Card[] rankSorted = new Card[] {JACK_CLUB, JACK_SPADE, TEN_DIAMOND, TEN_SPADE, TEN_CLUB};
 		Card[] expected = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB, JACK_CLUB, JACK_SPADE};
@@ -92,6 +93,7 @@ public class MultiplesCheckerTest {
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.iterator()).thenReturn(inHandList.iterator());
 		when(mockHand.sortByRank()).thenReturn(sortedMockHand);
+		//when(mockHand.moveCardsToStartOthersRankOrder((List<Card>) anyObject()).thenReturn(sortedMockHand);	//doAnswer..
 		
 		MultiplesChecker multiplesChecker = new MultiplesChecker();
 		CheckResult actual = multiplesChecker.checkMultiples(mockHand);

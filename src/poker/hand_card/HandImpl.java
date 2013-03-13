@@ -68,6 +68,20 @@ public class HandImpl implements Hand{
 		cards.clear();
 	}
 	
+	@Override
+	public void moveCardsToStartOthersRankOrder(List<Card> cardsToMove) {
+		this.sortByRank();
+		
+		@SuppressWarnings("unchecked")
+		List<Card> others = (List<Card>) ((LinkedList<Card>)cards).clone();
+
+		others.removeAll(cardsToMove);
+		
+		this.clearHand();
+		this.addCards(cardsToMove);
+		this.addCards(others);
+	}
+	
 	
 	
 	
