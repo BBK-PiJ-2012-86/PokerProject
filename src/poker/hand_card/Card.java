@@ -16,6 +16,7 @@ import lombok.Data;
 		return result;
 	}
 
+	@SuppressWarnings("unused")	//Lombok makes a getter
 	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
 
 		@Override
@@ -24,11 +25,11 @@ import lombok.Data;
 		}		
 	};
 	
-	public static Comparator<Card> getCardRankComparator() {
+	/*public static Comparator<Card> getCardRankComparator() {
 		return cardRankComparator;
 	}
 	
-	/*public Card(Rank rank, Suit suit){
+	public Card(Rank rank, Suit suit){
 		this.rank = rank;
 		this.suit = suit;
 	}
