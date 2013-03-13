@@ -5,28 +5,40 @@ import java.util.Comparator;
 import lombok.Data;
 
 
-/*@Data*/ public class Card {	//to try and get Lombok to work
+@Data public class Card {
 	
 	private final Rank rank;
 	private final Suit suit;
 	
-	public Card(Rank rank, Suit suit){
+	@Override
+	public String toString(){
+		String result = rank.toString() + " of " + suit.toString();
+		return result;
+	}
+
+	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
+
+		@Override
+		public int compare(Card card1, Card card2) {
+			return card1.getRank().compareTo(card2.getRank());
+		}		
+	};
+	
+	public static Comparator<Card> getCardRankComparator() {
+		return cardRankComparator;
+	}
+	
+	/*public Card(Rank rank, Suit suit){
 		this.rank = rank;
 		this.suit = suit;
 	}
-
+	
 	public Rank getRank(){
 		return rank;
 	}
 	
 	public Suit getSuit(){
 		return suit;
-	}
-	
-	@Override
-	public String toString(){
-		String result = rank.toString() + " of " + suit.toString();
-		return result;
 	}
 
 	@Override
@@ -52,20 +64,5 @@ import lombok.Data;
 		if (suit != other.suit)
 			return false;
 		return true;
-	}
-
-	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
-
-		@Override
-		public int compare(Card card1, Card card2) {
-			return card1.getRank().compareTo(card2.getRank());
-		}		
-	};
-	
-	public static Comparator<Card> getCardRankComparator() {
-		return cardRankComparator;
-	}
-	
-	
-
+	}*/
 }
