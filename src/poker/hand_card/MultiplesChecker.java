@@ -17,7 +17,7 @@ public class MultiplesChecker {
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			switch (entry.getValue().size()) {
 			case 4:
-				orderCards(entry.getValue(), hand);
+				hand = hand.moveCardsToStartOthersRankOrder(entry.getValue());
 				return ( new CheckResult(ConditionType.FourOfAKind, hand));
 			case 3:
 				tripleRank = entry.getKey();
@@ -57,13 +57,13 @@ public class MultiplesChecker {
 	
 	private CheckResult addHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {
 		List<Card> tupleList = new LinkedList<Card>();
-		orderCards(tupleList, hand);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.HighCard, hand));
 	}
 	
 	private CheckResult addPair(Map<Rank, List<Card>> rankMap, Rank pairRank1, Hand hand) {
 		List<Card> tupleList = rankMap.get(pairRank1);
-		orderCards(tupleList, hand);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.Pair, hand));
 	}
 
@@ -79,24 +79,26 @@ public class MultiplesChecker {
 		}
 		List<Card> tupleList = rankMap.get(higher);
 		tupleList.addAll(rankMap.get(lower));
-		orderCards(tupleList, hand);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.TwoPair, hand));
 	}
 
 	private CheckResult addThreeOfAKind(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
 		List<Card> tupleList = rankMap.get(tripleRank);
-		orderCards(tupleList, hand);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.ThreeOfAKind, hand));
 	}
 
 	private CheckResult addFullHouse(Map<Rank, List<Card>> rankMap, Rank tripleRank, Hand hand) {
 		List<Card> tupleList = rankMap.get(tripleRank);
-		orderCards(tupleList, hand);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
 		return( new CheckResult(ConditionType.FullHouse, hand));
 	}
 	
-	private void orderCards (List<Card> relevantCards, Hand hand) {
-		hand.moveCardsToStartOthersRankOrder(relevantCards);
+	private CheckResult makeFromRank(ConditionType conditionType, Rank rank, Map<Rank, List<Card>> rankMap, Hand hand) {
+		List<Card> tupleList = rankMap.get(rank);
+		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
+		return( new CheckResult(conditionType, hand));
 	}
 
 }

@@ -14,7 +14,7 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 	@Override
 	public List<Card> decide(CheckResult checkResult) {
 		ConditionType conditionType = checkResult.getConditionType();
-		Hand hand = checkResult.getSupportingCards();
+		Hand hand = checkResult.getOrderedHand();
 		
 		switch(conditionType) {
 			case ThreeOfAKind:

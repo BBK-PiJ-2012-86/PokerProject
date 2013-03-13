@@ -37,7 +37,7 @@ public interface Hand extends Iterable<Card>{
 	
 	void clearHand();
 
-	void moveCardsToStartOthersRankOrder(List<Card> cardsToMove);
+	Hand moveCardsToStartOthersRankOrder(List<Card> cardsToMove);
 
 
 }

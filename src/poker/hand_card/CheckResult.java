@@ -13,7 +13,7 @@ import lombok.Data;
 @Data public class CheckResult {
 	
 	private final ConditionType conditionType;
-	private final Hand supportingCards;
+	private final Hand orderedHand;
 	
 	public static Comparator<CheckResult> getComparator() {
 		return comparator;
@@ -25,7 +25,7 @@ import lombok.Data;
 		public int compare(CheckResult cr1, CheckResult cr2) {
 			int conditionCompareInt = cr1.getConditionType().compareTo(cr2.getConditionType());
 			if (conditionCompareInt == 0) {
-				return crHandComparator.compare(cr1.getSupportingCards(), cr2.getSupportingCards());
+				return crHandComparator.compare(cr1.getOrderedHand(), cr2.getOrderedHand());
 			} else {
 				return conditionCompareInt;
 			}

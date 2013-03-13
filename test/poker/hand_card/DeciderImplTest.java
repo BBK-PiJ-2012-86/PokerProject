@@ -13,7 +13,6 @@ import static poker.hand_card.TestCards.SIX_CLUB;
 import static poker.hand_card.TestCards.TEN_CLUB;
 import static poker.hand_card.TestCards.TEN_SPADE;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -87,10 +86,7 @@ public class DeciderImplTest {
 	}
 	
 	private CheckResult makeCheckResult(ConditionType conditionType, Card[] cardArray) {
-		List<Card> cardList = new LinkedList<Card>();
-		for (Card card : cardArray) {
-			cardList.add(card);
-		}
+		List<Card> cardList = TestUtil.toLinkedList(cardArray);
 		Hand hand = new HandImpl(cardList);
 		CheckResult checkResult = new CheckResult(conditionType, hand);
 		return checkResult;
@@ -99,11 +95,7 @@ public class DeciderImplTest {
 	private void testDecider(CheckResult checkResult, Card[] expectedCards) {
 		Decider decider = new DeciderImpl();
 		List<Card> actual = decider.decide(checkResult);
-		List<Card> expected = new LinkedList<Card>();
-		for (Card card : expectedCards) {
-			expected.add(card);
-		}
-		
+		List<Card> expected = TestUtil.toLinkedList(expectedCards);
 		assertEquals(expected, actual);
 	}
 	

@@ -136,7 +136,7 @@ public class CheckerImplTest {
 		CheckResult result = (new CheckerImpl()).check(mockHand);
 		
 		assertEquals(conditionType, result.getConditionType());
-		assertEquals(expectedCardsList, result.getSupportingCards().getCards());	//compare using toString on Hand..?
+		assertEquals(expectedCardsList, result.getOrderedHand().getCards());	//compare using toString on Hand..?
 	}
 
 	private void setFakeCheckMultiples(ConditionType conditionType, List<Card> multiplesExpectedList,

@@ -68,8 +68,9 @@ public class HandImpl implements Hand{
 		cards.clear();
 	}
 	
+	// changed to return Hand for mocking (to consider..)
 	@Override
-	public void moveCardsToStartOthersRankOrder(List<Card> cardsToMove) {
+	public Hand moveCardsToStartOthersRankOrder(List<Card> cardsToMove) {
 		this.sortByRank();
 		
 		@SuppressWarnings("unchecked")
@@ -80,6 +81,7 @@ public class HandImpl implements Hand{
 		this.clearHand();
 		this.addCards(cardsToMove);
 		this.addCards(others);
+		return this;
 	}
 	
 	
