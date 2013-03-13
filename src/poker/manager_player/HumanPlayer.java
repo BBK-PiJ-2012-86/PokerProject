@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poker.hand_card.Card;
-import poker.hand_card.CheckResult;
 
 
 
@@ -46,11 +45,5 @@ public class HumanPlayer extends Player {
 		}
 	}
 
-	@Override
-	public int compare(Player p1, Player p2){
-		CheckResult p1Result = p1.check();
-		CheckResult p2Result = p2.check();
-		return p1Result.compareTo(p2Result);
-	}
 }
 
