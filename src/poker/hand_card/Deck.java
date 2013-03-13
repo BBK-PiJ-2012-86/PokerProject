@@ -7,7 +7,7 @@ public interface Deck {
 	/**
 	 * @return
 	 */
-	public abstract List<Card> getDeck();
+	public abstract List<Card> getCards();
 
 	/**
 	 * 

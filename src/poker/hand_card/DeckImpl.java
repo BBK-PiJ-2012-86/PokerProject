@@ -9,15 +9,15 @@ import lombok.Getter;
 
 public class DeckImpl implements Deck {
 
-	@Getter private final List<Card> deck;
+	@Getter private final List<Card> cards;
 	
 	public DeckImpl(int size){
-		deck = new ArrayList<Card>();
+		cards = new ArrayList<Card>();
 		for(int i = 0; i < size; i++){
 			for(Suit suit: Suit.values()){
 				for(Rank rank: Rank.values()){
 					Card card = new Card(rank, suit);
-					deck.add(card);
+					cards.add(card);
 				}
 				
 			}
@@ -26,7 +26,7 @@ public class DeckImpl implements Deck {
 		
 	@Override
 	public void shuffleDeck(){
-		Collections.shuffle(deck);
+		Collections.shuffle(cards);
 	}
 	
 	
