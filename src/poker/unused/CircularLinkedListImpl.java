@@ -91,11 +91,19 @@ public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedLis
 	
 	@Override
 	public String toString() {
-		String str = "";
-		for (T next : this) {
-			str+=next.toString()+",";
+		String result = "";
+		if (head==null) {
+			return result;
 		}
-		return str;
+		Node<T> curr = head;
+		StringBuffer buf = new StringBuffer();
+		do {
+			buf.append(curr.equals(head)?"":",");
+			buf.append(curr.toString());
+			curr = curr.next;
+		} while (!curr.equals(head));
+		result = buf.toString();
+		return result;
 	}
 	
 	public class Node<V> {
@@ -107,6 +115,11 @@ public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedLis
 			this.contents = v;
 			this.next = this;
 			this.previous = this;
+		}
+		
+		@Override
+		public String toString() {
+			return contents.toString();
 		}
 	}
 }

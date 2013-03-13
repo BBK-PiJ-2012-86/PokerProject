@@ -11,11 +11,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * 
  *
  */
+@ToString
 public class HandImpl implements Hand{
 	@Getter private final List<Card> cards = new LinkedList<Card>();
 	

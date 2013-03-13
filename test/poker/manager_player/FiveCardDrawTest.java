@@ -1,21 +1,16 @@
 package poker.manager_player;
 
-import static org.junit.Assert.*;
-
-
 import org.junit.Before;
 import org.junit.Test;
 
-import poker.manager_player.GameManagerImpl;
-
 public class FiveCardDrawTest {
 
-	private GameManagerImpl classUnderTest;
+	//private GameManagerImpl classUnderTest; TODO:
 	
 	@Before 
 	public void setUP(){
 		
-		//classUnderTest = new GameManagerImpl();
+		//classUnderTest = new GameManagerImpl();	TODO:
 	}
 	@Test
 	public void test() {

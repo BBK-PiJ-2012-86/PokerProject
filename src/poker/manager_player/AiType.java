@@ -7,6 +7,6 @@ package poker.manager_player;
  * 
  *
  */
-public enum aiType {
+public enum AiType {
 	normal
 }

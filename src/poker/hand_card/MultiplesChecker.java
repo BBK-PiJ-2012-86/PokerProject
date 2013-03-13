@@ -27,6 +27,10 @@ public class MultiplesChecker {
 				} else {
 					pairRank2 = entry.getKey();
 				}
+				break;
+			default:
+				//do nothing
+				break;
 			}
 		}
 		return checkTupleConditions(rankMap, tripleRank, pairRank1, pairRank2, hand);

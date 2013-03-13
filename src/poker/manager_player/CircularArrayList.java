@@ -6,6 +6,22 @@ import lombok.Getter;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+/* TODO:: Suggests poss error. Not so relevant for circular list, but still (esp if empty?)
+
+"It: Iterator next() method can't throw NoSuchElementException (IT_NO_SUCH_ELEMENT)
+This class implements the java.util.Iterator interface.  However, its next() method is not
+capable of throwing java.util.NoSuchElementException.  The next() method should be changed
+so it throws NoSuchElementException if is called when there are no more elements to return"
+ */
+	
+	
+	
+
+
+
+
+
+
 
 /*
  * A List Class (backed by an Array) designed for poker games.
@@ -129,7 +145,7 @@ public class CircularArrayList<T> implements Iterable<T> {
 			}
 			
 			@Override
-			public T next(){
+			public T next(){		// TODO: see note
 				if(index == numItems - 1){
 					index = 0;
 					counter++;
@@ -152,8 +168,6 @@ public class CircularArrayList<T> implements Iterable<T> {
 	public int getSize(){
 		return numItems;
 	}
-
-	
 	
 	/*public int getDealer() {
 		return dealer;
@@ -162,4 +176,5 @@ public class CircularArrayList<T> implements Iterable<T> {
 	public int getIndex(){
 		return index;
 	}*/
+
 }

@@ -16,14 +16,14 @@ public class GameManagerImpl {
 	
 	private CircularArrayList<Player> players;
 	private Deck deck;
-	private final GameType type;
+	//private final GameType type;	//TODO: decide where this is used
 	
 	public GameManagerImpl(GameType type, CircularArrayList<Player> players) {
-		this.type = type;
+		//this.type = type;
 		this.deck = null;
 		this.players = players;
 		for(Player player: players){
-			player.setGameType(type);
+			player.changeGameType(type);
 		}
 	}
 	

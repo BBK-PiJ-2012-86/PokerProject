@@ -16,7 +16,7 @@ public class DeckFactoryTest {
 		DeckFactory classUnderTest = new DeckFactory();
 		Deck deck = classUnderTest.getDeck();
 
-		List<Card> cardList = deck.getDeck();
+		List<Card> cardList = deck.getCards();
 		int i = 0;
 		for(Suit suit: Suit.values()){
 			for(Rank rank: Rank.values()){
