@@ -1,4 +1,8 @@
-package poker.hand_card;
+package poker.unused;
+
+import poker.hand_card.Card;
+import poker.hand_card.Rank;
+import poker.hand_card.Suit;
 
 
 public class CardFactory {	//not currently used
