@@ -10,18 +10,12 @@ import java.util.Iterator;
 import lombok.Data;
 
 
-@Data public class CheckResult implements Comparable<CheckResult>{		//own toString and compareTo !!TODO: change to a Comparator
+@Data public class CheckResult implements Comparable<CheckResult>{		//own compareTo !!TODO: change to a Comparator
 	
 	private final ConditionType conditionType;
 	private final Hand supportingCards;
 	
-	@Override
-	public String toString() {
-		String result = "";
-		result+=this.getConditionType()+",";
-		result+=this.getSupportingCards();
-		return result;
-	}
+	
 	
 	@Override
 	public int compareTo(CheckResult other) {		//change to a comparator..?
@@ -56,9 +50,15 @@ import lombok.Data;
 
 	
 	
+	/*@Override
+	public String toString() {
+		String result = "";
+		result+=this.getConditionType()+",";
+		result+=this.getSupportingCards();
+		return result;
+	}
 	
-	
-	/*public CheckResult(ConditionType conditionType, Hand hand) {
+	public CheckResult(ConditionType conditionType, Hand hand) {
 		this.conditionType = conditionType;
 		this.supportingCards = hand;
 	}
