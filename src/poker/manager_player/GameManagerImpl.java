@@ -12,6 +12,10 @@ import poker.hand_card.DeckFactory;
 
 
 
+/**
+ * This is the manager class for the poker game
+ *
+ */
 public class GameManagerImpl {
 	
 	private CircularArrayList<Player> players;

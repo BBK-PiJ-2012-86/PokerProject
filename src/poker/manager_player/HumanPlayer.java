@@ -8,6 +8,10 @@ import poker.hand_card.Card;
 
 
 
+/**
+ * A HumanPayer plays poker and needs input to make its card replacement decisions
+ *
+ */
 public class HumanPlayer extends Player {
 	
 	public HumanPlayer(String username, GameType gameType){

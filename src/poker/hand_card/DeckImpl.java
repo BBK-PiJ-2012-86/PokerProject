@@ -29,10 +29,4 @@ public class DeckImpl implements Deck {
 		Collections.shuffle(cards);
 	}
 	
-	
-	
-	
-	/*public List<Card> getDeck(){
-		return deck;
-	}*/
 }

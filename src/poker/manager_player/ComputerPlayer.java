@@ -8,6 +8,10 @@ import poker.hand_card.Decider;
 import poker.hand_card.DeciderFactory;
 
 
+/**
+ * A ComputerPlayer plays poker with a Decider to make its card replacement decisions
+ *
+ */
 public class ComputerPlayer extends Player {
 	
 	private Decider computerAI;
@@ -25,15 +29,4 @@ public class ComputerPlayer extends Player {
 		return cards.size();
 	}
 	
-	
-	
-	// not needed - has a Comparator in Player instead
-	/*@Override
-	public int compare(Player p1, Player p2){
-		CheckResult p1Result = p1.check();
-		CheckResult p2Result = p2.check();
-		Comparator<CheckResult> comparator = CheckResult.getComparator();
-		return comparator.compare(p1Result, p2Result);
-	} */
-
 }

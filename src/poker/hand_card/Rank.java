@@ -4,7 +4,7 @@
 package poker.hand_card;
 
 /**
- * 
+ * Rank is the rank of a card
  *
  */
 public enum Rank {

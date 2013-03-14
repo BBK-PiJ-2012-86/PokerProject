@@ -7,8 +7,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 
+/**
+ * A MultiplesChecker is used to check for the poker hands which are based on multiples
+ * i.e. Full house, 4/3/2 of a kind, Two pair, High card
+ *
+ */
 public class MultiplesChecker {
 
+	/**
+	 * @param hand the hand to be checked
+	 * @return the result corresponding the the best possible multiples based results
+	 */
 	public CheckResult checkMultiples(Hand hand) {
 		Map<Rank, List<Card>> rankMap = Util.rankMap(hand);
 		Rank tripleRank = null;
