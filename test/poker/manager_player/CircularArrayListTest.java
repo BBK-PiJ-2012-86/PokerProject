@@ -8,32 +8,6 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-/* TODO: note this warning - not the end of the world here, but still good to do nicely I think
- 
- "SBSC: Method concatenates strings using + in a loop (SBSC_USE_STRINGBUFFER_CONCATENATION)
-The method seems to be building a String using concatenation in a loop. In each iteration,
-the String is converted to a StringBuffer/StringBuilder, appended to, and converted back to a
-String. This can lead to a cost quadratic in the number of iterations, as the growing string
-is recopied in each iteration.
-Better performance can be obtained by using a StringBuffer explicitly.
-
-For example:
-
-  // This is bad
-  String s = "";
-  for (int i = 0; i < field.length; ++i) {
-    s = s + field[i];
-  }
-
-  // This is better
-  StringBuffer buf = new StringBuffer();
-  for (int i = 0; i < field.length; ++i) {
-    buf.append(field[i]);
-  }
-  String s = buf.toString();
- */
-
-
 
 public class CircularArrayListTest {
 
@@ -78,11 +52,12 @@ public class CircularArrayListTest {
 		
 		Iterator<Integer> itr = classUnderTest.iterator();
 		int n = 0;
-		String str = "";
+		StringBuffer buffer = new StringBuffer();
 		while(itr.hasNext()){
-			str += itr.next();
+			buffer.append(itr.next());
 			n++;
 		}
+		String str = buffer.toString();
 		assertEquals(4,n);
 		assertEquals("3451", str);
 	}
@@ -118,10 +93,11 @@ public class CircularArrayListTest {
 			classUnderTest.newDealer();
 		}
 		Iterator<Integer> itr = classUnderTest.iterator();
-		String str = "";
+		StringBuffer buffer = new StringBuffer();
 		while(itr.hasNext()){
-			str += itr.next();
+			buffer.append(itr.next());
 		}
+		String str = buffer.toString();
 		assertEquals("678910012345", str);
 	}
 	
@@ -139,12 +115,12 @@ public class CircularArrayListTest {
 				classUnderTest.remove(i);
 			}
 		}
-		String str = "";
+		StringBuffer buffer = new StringBuffer();
 		itr = classUnderTest.iterator();
 		while(itr.hasNext()){
-			str += itr.next().toString();
+			buffer.append(itr.next().toString());
 		}
-		assertEquals("124567890", str);
+		assertEquals("124567890", buffer.toString());
 	}
 	
 	@Test
@@ -164,11 +140,11 @@ public class CircularArrayListTest {
 			}
 		}
 		itr = classUnderTest.iterator();
-		String str = "";
+		StringBuffer buffer = new StringBuffer();
 		while(itr.hasNext()){
-			str += itr.next();
+			buffer.append(itr.next());
 		}
-		assertEquals("678901345", str);
+		assertEquals("678901345", buffer.toString());
 	}
 	
 	@Test
@@ -177,12 +153,12 @@ public class CircularArrayListTest {
 			classUnderTest.add(i);
 		}
 		assertTrue(classUnderTest.remove(0));
-		String str = "";
 		Iterator<Integer> itr = classUnderTest.iterator();
+		StringBuffer buffer = new StringBuffer();
 		while(itr.hasNext()){
-			str += itr.next();
+			buffer.append(itr.next());
 		}
-		assertEquals("234567891", str);
+		assertEquals("234567891", buffer.toString());
 	}
 }
 
