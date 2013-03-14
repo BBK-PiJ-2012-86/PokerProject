@@ -15,7 +15,7 @@ import java.util.Map.Entry;
  * 
  * 
  */
-public class CheckerImpl implements Checker {	//assumes exactly five cards
+public class CheckerImpl implements Checker {
 	
 	private List<CheckResult> results = new LinkedList<CheckResult>();
 
@@ -23,9 +23,11 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards
 	public CheckResult check(Hand hand) {
 		results.clear(); //to allow checker reuse
 		
-		if(checkStraight(hand)&&checkFlush(hand)) {
+		boolean straight = checkStraight(hand);	//adds to results if true
+		boolean flush = checkFlush(hand);	//adds to results if true
+		if(straight && flush) {
 			hand = hand.sortByRank();
-			results.add( new CheckResult(ConditionType.StraightFlush, hand));
+			return new CheckResult(ConditionType.StraightFlush, hand);
 		}
 
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
@@ -35,7 +37,9 @@ public class CheckerImpl implements Checker {	//assumes exactly five cards
 	}
 
 	private boolean checkStraight(Hand hand) {
-		checkWheelStraight(hand);
+		if (checkWheelStraight(hand)) {
+			return true;
+		}
 		
 		hand = hand.sortByRank();
 		Iterator<Card> it = hand.iterator();
