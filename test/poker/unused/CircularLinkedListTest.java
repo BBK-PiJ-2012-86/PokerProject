@@ -14,7 +14,7 @@ import poker.unused.CircularLinkedListImpl;
 
 
 /**
- * @author 86
+ * 
  *
  */
 public class CircularLinkedListTest {
@@ -70,7 +70,7 @@ public class CircularLinkedListTest {
 		
 	}
 	
-	/*@Test
+	@Test
 	public void testIteratorRemoveNotHeadTail() {
 		list.add(7);
 		list.add(3);
@@ -95,7 +95,11 @@ public class CircularLinkedListTest {
 		it.remove();
 		
 		assertEquals("3,9",list.toString());
-		//broken
+		
+		it.next();
+		it.remove();
+		
+		assertEquals("9",list.toString());
 	}
 	
 	@Test
@@ -112,10 +116,27 @@ public class CircularLinkedListTest {
 		
 		assertEquals("7,3",list.toString());
 		
-		//this bit broken
 		list.add(9);
 		assertEquals("7,3,9",list.toString());
-	}*/
+	}
+	
+	@Test
+	public void testIteratorRemoveOnRun() {
+		
+		for (int i = 0; i<10; i++) {
+			list.add(i);
+		}
+		
+		Iterator<Integer> it = list.iterator();
+		while (it.hasNext()){
+			if ((it.next()%3) == 0) {
+				it.remove();
+			}
+		}
+
+		assertEquals("1,2,4,5,7,8",list.toString());
+		
+	}
 	
 	@Test
 	public void testRemove() {

@@ -119,7 +119,7 @@ public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedLis
 			@Override
 			public void remove() {
 				//throw new UnsupportedOperationException();
-				/*if (before == null) {
+				if (before == null) {
 					throw new UnsupportedOperationException();
 				} else if (isEmpty()) {
 					throw new UnsupportedOperationException();
@@ -128,13 +128,20 @@ public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedLis
 	            	head = null;
 	            	tail = null;
 	            	curr = null;
-	            	}
+	            }
 	            Node<T> x = before.previous;
 	            Node<T> y = before.next;
 	            x.next = y;
 	            y.previous = x;
+	            if (before.equals(head)) {
+	            	head = before.next;
+	            }
+	            if (before.equals(tail)) {
+	            	tail = before.previous;
+	            }
 	            before = null;
-	            size--;*/
+	            size--;
+	            
 			}
 
 		};
