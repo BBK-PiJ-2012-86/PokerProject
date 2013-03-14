@@ -46,23 +46,20 @@ public class MultiplesChecker {
 		}
 		if (pairRank2!=null) {
 			return makeFromPairs(rankMap, pairRank1, pairRank2, hand);
-			//different
 		}
 		if (pairRank1!=null) {
 			return makeFromRank(ConditionType.Pair, pairRank1, rankMap, hand);
 		} else {
 			return makeFromHighCard(rankMap, hand);
-			//different
 		}
 	}
 	
-	private CheckResult makeFromHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {		//three different options - how best to combine?
-		List<Card> tupleList = new LinkedList<Card>();
+	private CheckResult makeFromRank(ConditionType conditionType, Rank rank, Map<Rank, List<Card>> rankMap, Hand hand) {
+		List<Card> tupleList = rankMap.get(rank);
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.HighCard, hand));
+		return( new CheckResult(conditionType, hand));
 	}
-	
-
+		
 	private CheckResult makeFromPairs(Map<Rank, List<Card>> rankMap, Rank pairRank1,
 			Rank pairRank2, Hand hand) {
 		Rank higher, lower;
@@ -79,10 +76,10 @@ public class MultiplesChecker {
 		return( new CheckResult(ConditionType.TwoPair, hand));
 	}
 	
-	private CheckResult makeFromRank(ConditionType conditionType, Rank rank, Map<Rank, List<Card>> rankMap, Hand hand) {
-		List<Card> tupleList = rankMap.get(rank);
+	private CheckResult makeFromHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {
+		List<Card> tupleList = new LinkedList<Card>();
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(conditionType, hand));
+		return( new CheckResult(ConditionType.HighCard, hand));
 	}
 
 }

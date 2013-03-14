@@ -45,7 +45,7 @@ public class MultiplesCheckerTest {
 	public void testFullHouse() {
 		Card[] inHand = new Card[] {TEN_DIAMOND, JACK_CLUB, TEN_SPADE, JACK_SPADE, TEN_CLUB};
 		Card[] expectedStart = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB};
-		Card[] expected /*= expectedStart;*/ = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB, JACK_CLUB, JACK_SPADE};
+		Card[] expected = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB, JACK_CLUB, JACK_SPADE};
 		
 		testMultiples(ConditionType.FullHouse, inHand, expectedStart, expected);		
 	}

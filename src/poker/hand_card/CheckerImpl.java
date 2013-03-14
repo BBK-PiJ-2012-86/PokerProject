@@ -69,6 +69,7 @@ public class CheckerImpl implements Checker {
 	private boolean checkWheelStraight(Hand hand) {
 		Map<Rank, List<Card>> rankMap = Util.rankMap(hand);
 		
+		// catch hand of form 5432A
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			if ((entry.getKey()==Rank.Ace)||(entry.getKey().compareTo(Rank.Six)<0)) {
 				if (entry.getValue().size()<1) {return false;}
@@ -86,9 +87,10 @@ public class CheckerImpl implements Checker {
 
 	private boolean checkFlush(Hand hand) {
 		Map<Suit,List<Card>> suitMap = Util.suitMap(hand);
-		hand = hand.sortByRank();
+		
 		for (List<Card> list : suitMap.values()) {
 			if (list.size()==FLUSH_SIZE) {
+				hand = hand.sortByRank();
 				results.add( new CheckResult(ConditionType.Flush, hand));
 				return true;
 			}
