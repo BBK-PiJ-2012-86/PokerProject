@@ -17,6 +17,7 @@ import java.util.Map.Entry;
  */
 public class CheckerImpl implements Checker {
 	
+	private final static int FLUSH_SIZE = 5;
 	private List<CheckResult> results = new LinkedList<CheckResult>();
 
 	@Override
@@ -37,10 +38,14 @@ public class CheckerImpl implements Checker {
 	}
 
 	private boolean checkStraight(Hand hand) {
-		if (checkWheelStraight(hand)) {
+		if (checkNormalStraight(hand)) {
 			return true;
+		} else {
+			return checkWheelStraight(hand);
 		}
-		
+	}
+
+	private boolean checkNormalStraight(Hand hand) {
 		hand = hand.sortByRank();
 		Iterator<Card> it = hand.iterator();
 		
@@ -56,7 +61,7 @@ public class CheckerImpl implements Checker {
 		results.add( new CheckResult(ConditionType.Straight,hand));
 		return true;
 	}
-		
+	
 	private boolean checkWheelStraight(Hand hand) {
 		Map<Rank, List<Card>> rankMap = Util.rankMap(hand);
 		
@@ -79,7 +84,7 @@ public class CheckerImpl implements Checker {
 		Map<Suit,List<Card>> suitMap = Util.suitMap(hand);
 		hand = hand.sortByRank();
 		for (List<Card> list : suitMap.values()) {
-			if (list.size()==5) {
+			if (list.size()==FLUSH_SIZE) {
 				results.add( new CheckResult(ConditionType.Flush, hand));
 				return true;
 			}

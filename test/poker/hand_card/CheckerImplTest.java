@@ -4,7 +4,6 @@
 package poker.hand_card;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,8 +25,6 @@ import static poker.hand_card.TestCards.TWO_CLUB;
 import java.util.List;
 
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 
 /**
@@ -118,19 +115,9 @@ public class CheckerImplTest {
 		Hand sortedMockHand = mock(Hand.class);
 		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
 		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator());
-		when(sortedMockHand.sortByRank()).thenReturn(sortedMockHand);
-
-		/*when(sortedMockHand.getCardAt(anyInt())).thenAnswer(new Answer<Card>() {
-		    @Override
-		    public Card answer(InvocationOnMock invocation) throws Throwable {
-		      Object[] args = invocation.getArguments();
-		      return rankSortedCardsList.get((int) args[0]);
-		    }
-		  });*/
 		
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.getCards()).thenReturn(inputList);
-		//when(mockHand.iterator()).thenReturn(inputList.iterator());
 		when(mockHand.sortByRank()).thenReturn(sortedMockHand);
 		
 		CheckResult result = (new CheckerImpl()).check(mockHand);
@@ -149,4 +136,12 @@ public class CheckerImplTest {
 		}
 		when(mockMultiplesChecker.checkMultiples((Hand) anyObject())).thenReturn(fakeResult);
 	}
+	
+	/*when(sortedMockHand.getCardAt(anyInt())).thenAnswer(new Answer<Card>() {
+    @Override
+    public Card answer(InvocationOnMock invocation) throws Throwable {
+      Object[] args = invocation.getArguments();
+      return rankSortedCardsList.get((int) args[0]);
+    }
+  });*/
 }
