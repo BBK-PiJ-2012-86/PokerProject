@@ -118,18 +118,19 @@ public class CheckerImplTest {
 		Hand sortedMockHand = mock(Hand.class);
 		when(sortedMockHand.getCards()).thenReturn(rankSortedCardsList);
 		when(sortedMockHand.iterator()).thenReturn(rankSortedCardsList.iterator());
+		when(sortedMockHand.sortByRank()).thenReturn(sortedMockHand);
 
-		when(sortedMockHand.getCardAt(anyInt())).thenAnswer(new Answer<Card>() {
+		/*when(sortedMockHand.getCardAt(anyInt())).thenAnswer(new Answer<Card>() {
 		    @Override
 		    public Card answer(InvocationOnMock invocation) throws Throwable {
 		      Object[] args = invocation.getArguments();
 		      return rankSortedCardsList.get((int) args[0]);
 		    }
-		  });
+		  });*/
 		
 		Hand mockHand = mock(Hand.class);
 		when(mockHand.getCards()).thenReturn(inputList);
-		when(mockHand.iterator()).thenReturn(inputList.iterator());
+		//when(mockHand.iterator()).thenReturn(inputList.iterator());
 		when(mockHand.sortByRank()).thenReturn(sortedMockHand);
 		
 		CheckResult result = (new CheckerImpl()).check(mockHand);

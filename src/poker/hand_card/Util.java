@@ -17,7 +17,7 @@ public class Util {
 		for (Suit suit : Suit.values()) {
 			result.put(suit, new LinkedList<Card>());
 		}
-		for (Card card : hand) {
+		for (Card card : hand.getCards()) {
 			result.get(card.getSuit()).add(card);
 		}
 		return result;
@@ -28,12 +28,9 @@ public class Util {
 		for (Rank rank : Rank.values()) {
 			result.put(rank, new LinkedList<Card>());
 		}
-		for (Card card : hand) {
-			//System.out.println("card::"+card);
+		for (Card card : hand.getCards()) {
 			List<Card> cards = result.get(card.getRank());
-			//System.out.println("cardsBef::"+cards);
 			cards.add(card);
-			//System.out.println("cardsAft::"+cards);
 		}
 		return result;
 	}
