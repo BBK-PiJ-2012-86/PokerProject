@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * 
- * 
- */
 public class CheckerImpl implements Checker {
 	
 	private final static int FLUSH_SIZE = 5;

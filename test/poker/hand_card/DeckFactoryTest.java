@@ -13,7 +13,7 @@ public class DeckFactoryTest {
 
 	@Test
 	public void test() {
-		DeckFactory classUnderTest = new DeckFactory();
+		DeckFactory classUnderTest = DeckFactory.getDeckFactory();
 		Deck deck = classUnderTest.getDeck();
 
 		List<Card> cardList = deck.getCards();

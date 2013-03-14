@@ -4,7 +4,7 @@
 package poker.hand_card;
 
 /**
- * 
+ * A ConditionType is the name of a particular hand in poker
  *
  */
 public enum ConditionType {

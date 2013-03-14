@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * This Decider returns the following:
+ * Better than high card - all cards irrelevant to the poker hand type except the highest if over 7 
+ * High card: bottom three - unless within two cards of a flush when it returns non matched suits
+ */
 public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 	
 	@Override

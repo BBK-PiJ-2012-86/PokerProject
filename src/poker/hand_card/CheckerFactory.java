@@ -2,11 +2,19 @@ package poker.hand_card;
 
 import poker.manager_player.GameType;
 
+/**
+ * A CheckerFactory produces Checkers
+ *
+ */
 public class CheckerFactory {
 	
 	private static final CheckerFactory instance = new CheckerFactory();	//others depending on game type
 
-	public static CheckerFactory getInstance(GameType game) {
+	/**
+	 * @param gameType the type of game to be played
+	 * @return a CheckerFactory
+	 */
+	public static CheckerFactory getInstance(GameType gameType) {	//NB doesn't depend on gameType atm
 		return instance;
 	}
 

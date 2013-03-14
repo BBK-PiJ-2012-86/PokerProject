@@ -28,7 +28,7 @@ public class GameManagerImpl {
 	}
 	
 	public void deal(){
-		deck = new DeckFactory().getDeck();
+		deck = DeckFactory.getDeckFactory().getDeck();
 		for(Player player: players){
 			for(int i = 0; i < 5; i++){
 				player.getHand().getCards().add(deck.getCards().get(0));

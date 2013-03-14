@@ -1,19 +1,34 @@
 package poker.hand_card;
 
 
+/**
+ * A DeckFactory enables production of decks
+ *
+ */
 public class DeckFactory {
 
+	private static DeckFactory instance = new DeckFactory();
 	private static final int DEFAULT_SIZE = 1;
 	private final int size;
 	
-	public DeckFactory(){
+	/**
+	 * @return a DeckFactory to enable deck production
+	 */
+	public static DeckFactory getDeckFactory() {
+		return instance;
+	}
+	
+	private DeckFactory(){
 		size = DEFAULT_SIZE;
 	}
 	
-	public DeckFactory(int size){
+	private DeckFactory(int size){
 		this.size = size;
 	}
 	
+	/**
+	 * @return a deck of cards
+	 */
 	public Deck getDeck(){
 		Deck deck = new DeckImpl(size);
 		return deck;
