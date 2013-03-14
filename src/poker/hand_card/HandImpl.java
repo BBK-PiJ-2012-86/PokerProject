@@ -50,8 +50,8 @@ public class HandImpl implements Hand{
 
 			@Override
 			public int compare(Card card1, Card card2) {
-				// use -compareTo to get high->low ordering
-				return -card1.getRank().compareTo(card2.getRank());
+				// reversed order of operands to get high->low ordering
+				return card2.getRank().compareTo(card1.getRank());
 			}
 			
 		});

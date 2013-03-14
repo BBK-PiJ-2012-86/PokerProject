@@ -5,6 +5,8 @@ package poker.unused;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +33,9 @@ public class CircularLinkedListTest {
 	public void testAdd() {
 		list.add(7);
 		list.add(3);
+		assertEquals("7,3",list.toString());
+		list.add(8);
+		assertEquals("7,3,8",list.toString());
 	}
 	
 	@Test
@@ -42,12 +47,75 @@ public class CircularLinkedListTest {
 	}
 	
 	@Test
-	public void testIterator() {
+	public void testSize() {
+		assertEquals(0,list.size());
+				
+		list.add(7);
+		list.add(3);
+		
+		assertEquals(2,list.size());
+	}
+	
+	@Test
+	public void testIteratorNext() {
 		list.add(7);
 		list.add(3);
 		list.add(9);
-		assertEquals("7,3,9",list.toString());
+		Iterator<Integer> it1 = list.iterator();
+		
+		assertEquals((Integer) 7, it1.next());
+		assertEquals((Integer) 3, it1.next());
+		assertEquals((Integer) 9, it1.next());
+		assertFalse(it1.hasNext());
+		
 	}
+	
+	/*@Test
+	public void testIteratorRemoveNotHeadTail() {
+		list.add(7);
+		list.add(3);
+		list.add(9);
+		Iterator<Integer> it = list.iterator();
+		
+		it.next();
+		it.next();
+		it.remove();
+		
+		assertEquals("7,9",list.toString());
+	}
+	
+	@Test
+	public void testIteratorRemoveHead() {
+		list.add(7);
+		list.add(3);
+		list.add(9);
+		Iterator<Integer> it = list.iterator();
+		
+		it.next();
+		it.remove();
+		
+		assertEquals("3,9",list.toString());
+		//broken
+	}
+	
+	@Test
+	public void testIteratorRemoveTail() {
+		list.add(7);
+		list.add(3);
+		list.add(9);
+		Iterator<Integer> it = list.iterator();
+		
+		it.next();
+		it.next();
+		it.next();
+		it.remove();
+		
+		assertEquals("7,3",list.toString());
+		
+		//this bit broken
+		list.add(9);
+		assertEquals("7,3,9",list.toString());
+	}*/
 	
 	@Test
 	public void testRemove() {
@@ -69,7 +137,6 @@ public class CircularLinkedListTest {
 	
 	@Test
 	public void testMoveHead() {
-		list.moveHead(1);
 		
 		list.add(3);
 		list.add(9);

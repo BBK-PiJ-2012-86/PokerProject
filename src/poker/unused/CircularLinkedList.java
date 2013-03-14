@@ -38,4 +38,9 @@ public interface CircularLinkedList<T> {
 	 */
 	public abstract String toString();
 
+	/**
+	 * @return
+	 */
+	int size();
+
 }
