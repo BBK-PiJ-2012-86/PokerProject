@@ -27,14 +27,18 @@ public class CheckerImpl implements Checker {
 		boolean straight = checkStraight(hand);	//adds to results if true
 		boolean flush = checkFlush(hand);	//adds to results if true
 		if(straight && flush) {
-			hand = hand.sortByRank();
-			return new CheckResult(ConditionType.StraightFlush, hand);
+			return itsStraightFlush(hand);
 		}
 
 		MultiplesChecker multiplesChecker = MultiplesCheckerFactory.getInstance().getMultiplesChecker();
 		results.add(multiplesChecker.checkMultiples(hand));
 		
 		return Collections.max(results, CheckResult.getComparator());
+	}
+	
+	private CheckResult itsStraightFlush(Hand hand) {
+		hand = hand.sortByRank();
+		return new CheckResult(ConditionType.StraightFlush, hand);
 	}
 
 	private boolean checkStraight(Hand hand) {
