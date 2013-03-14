@@ -5,8 +5,6 @@ package poker.unused;
 
 import java.util.Iterator;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedList<T>{
 	
 	private Node<T> head = null;
@@ -83,7 +81,7 @@ public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedLis
 
 			@Override
 			public void remove() {
-				throw new NotImplementedException();
+				throw new UnsupportedOperationException();
 			}
 			
 		};

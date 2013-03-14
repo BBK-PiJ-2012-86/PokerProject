@@ -4,8 +4,6 @@ import java.util.Iterator;
 
 import lombok.Getter;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /* TODO:: Suggests poss error. Not so relevant for circular list, but still (esp if empty?)
 
 "It: Iterator next() method can't throw NoSuchElementException (IT_NO_SUCH_ELEMENT)
@@ -159,7 +157,7 @@ public class CircularArrayList<T> implements Iterable<T> {
 
 			@Override
 			public void remove() {
-				throw new NotImplementedException();
+				throw new UnsupportedOperationException();
 			}
 		};
 		return iterator;
@@ -168,13 +166,5 @@ public class CircularArrayList<T> implements Iterable<T> {
 	public int getSize(){
 		return numItems;
 	}
-	
-	/*public int getDealer() {
-		return dealer;
-	}
-	
-	public int getIndex(){
-		return index;
-	}*/
 
 }

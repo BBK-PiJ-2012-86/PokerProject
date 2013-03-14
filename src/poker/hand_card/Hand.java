@@ -30,7 +30,7 @@ public interface Hand extends Iterable<Card>{
 	/**
 	 * TO REMOVE...?
 	 * @param i
-	 * @return
+	 * @return card
 	 */
 	Card getCardAt(int i);
 
@@ -48,7 +48,7 @@ public interface Hand extends Iterable<Card>{
 	/**
 	 * THINK ABOUT THIS
 	 * @param cardsToMove
-	 * @return
+	 * @return hand
 	 */
 	Hand moveCardsToStartOthersRankOrder(List<Card> cardsToMove);
 
