@@ -28,4 +28,8 @@ import lombok.Data;
 	public static Comparator<Card> getCardRankComparator() {
 		return cardRankComparator;
 	}
+
+	public String prettyPrint() {
+		return rank.toString() + " of " + suit.toString();
+	}
 }
