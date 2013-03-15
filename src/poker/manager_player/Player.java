@@ -62,12 +62,4 @@ public abstract class Player {
 	public Comparator<Player> getCheckResultRanking(){
 		return HAND_RANKING; 
 	}
-	
-	
-	
-	/*
-	public Hand getHand(){
-		return hand;
-	}
-	*/
 }

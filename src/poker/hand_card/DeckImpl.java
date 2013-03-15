@@ -29,4 +29,12 @@ public class DeckImpl implements Deck {
 		Collections.shuffle(cards);
 	}
 	
+	public List<Card> dealCards(int n){
+		List<Card> result = new ArrayList<Card>();
+		for(int i = 0; i < n; i++){
+			result.add(cards.get(i));
+		}
+		cards.removeAll(result);
+		return result;
+	}
 }

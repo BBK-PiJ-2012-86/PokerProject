@@ -18,5 +18,12 @@ public interface Deck {
 	 * Shuffles the deck
 	 */
 	public abstract void shuffleDeck();
+	
+	/**
+	 * The cards returned are removed from the deck
+	 * @return a list of cards for the player 
+	 * @param the number of cards in the hand
+	 */
 
+	public abstract List<Card> dealCards(int handSize);
 }
