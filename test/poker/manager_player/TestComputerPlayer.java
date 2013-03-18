@@ -93,6 +93,7 @@ public class TestComputerPlayer {
 		cards.add(card8);
 		cards.add(card9);
 		cards.add(card1);
+		computerPlayer.recieveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
