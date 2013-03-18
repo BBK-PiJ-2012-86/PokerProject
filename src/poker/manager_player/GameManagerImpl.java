@@ -31,6 +31,10 @@ public class GameManagerImpl {
 		}
 	}
 	
+	public void addPlayer(Player player){
+		players.add(player);
+	}
+	
 	public void deal(){
 		deck = DeckFactory.getDeckFactory().getDeck();
 		for(Player player: players){
