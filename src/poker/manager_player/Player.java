@@ -1,5 +1,6 @@
 package poker.manager_player;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -55,6 +56,9 @@ public abstract class Player {
 	
 	
 	public void removeCardsFromHand(List<Card> cards){
+		for(Card card: cards){
+			System.out.println(card.prettyPrint());
+		}
 		hand.removeCards(cards);
 	}
 

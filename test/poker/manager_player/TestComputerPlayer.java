@@ -11,7 +11,6 @@ import org.junit.Test;
 import poker.hand_card.Card;
 import poker.hand_card.Rank;
 import poker.hand_card.Suit;
-import poker.manager_player.*;
 
 public class TestComputerPlayer {
 
@@ -26,6 +25,10 @@ public class TestComputerPlayer {
 	private Card card8 = new Card(Rank.Seven, Suit.Clubs);
 	private Card card9 = new Card(Rank.Seven, Suit.Hearts);
 	private Card card10 = new Card(Rank.Ten, Suit.Diamonds);
+	private Card card11 = new Card(Rank.Five, Suit.Clubs);
+	private Card card12 = new Card(Rank.Two, Suit.Spades);
+	private Card card13 = new Card(Rank.Four, Suit.Hearts);
+	private Card card14 = new Card(Rank.Ace, Suit.Clubs);
 	private List<Card> cards;
 	
 	@Before
@@ -98,4 +101,83 @@ public class TestComputerPlayer {
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	public void testExchangeCardsThreeOfAKindFacecard(){
+		cards.add(card2);
+		cards.add(card7);
+		cards.add(card8);
+		cards.add(card1);
+		cards.add(card6);
+		computerPlayer.recieveCards(cards);
+		int expected = 1;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testExchangeCardsThreeOfAKindExtraCardsLessThanSeven(){
+		cards.add(card2);
+		cards.add(card7);
+		cards.add(card8);
+		cards.add(card1);
+		cards.add(card11);
+		computerPlayer.recieveCards(cards);
+		int expected = 2;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testExchangeCardsTwoPair(){
+		cards.add(card2);
+		cards.add(card7);
+		cards.add(card5);
+		cards.add(card10);
+		cards.add(card6);
+		computerPlayer.recieveCards(cards);
+		int expected = 1;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testExchangeCardsPair(){
+		cards.add(card2);
+		cards.add(card7);
+		cards.add(card3);
+		cards.add(card11);
+		cards.add(card6);
+		computerPlayer.recieveCards(cards);
+		int expected = 2;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testExchangeCardsShotAtFlush(){
+		cards.add(card1);
+		cards.add(card6);
+		cards.add(card3);
+		cards.add(card12);
+		cards.add(card10);
+		computerPlayer.recieveCards(cards);
+		int expected = 1;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testExchangeCardsNoFlush(){
+		cards.add(card2);
+		cards.add(card12);
+		cards.add(card10);
+		cards.add(card13);
+		cards.add(card14);
+		computerPlayer.recieveCards(cards);
+		int expected = 3;
+		int result = computerPlayer.exchangeCards();
+		assertEquals(expected, result);
+	}
+	
 }

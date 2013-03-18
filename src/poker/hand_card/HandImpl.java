@@ -41,6 +41,9 @@ public class HandImpl implements Hand{
 	
 	@Override
 	public void removeCards (List<Card> cardsToRemove) {
+		for(Card card: cardsToRemove){
+			System.out.println(card.prettyPrint());
+		}
 		cards.removeAll(cardsToRemove);
 	}
 	
@@ -83,17 +86,4 @@ public class HandImpl implements Hand{
 		this.addCards(others);
 		return this;
 	}
-	
-	
-	
-	
-	/*@Override
-	public String toString() {
-		return(Arrays.toString(cards.toArray()));
-	}
-	
-	@Override
-	public List<Card> getCards() {
-		return cards;
-	}*/
 }

@@ -25,7 +25,13 @@ public class ComputerPlayer extends Player {
 	@Override
 	public int exchangeCards() {
 		List<Card> cards = computerAI.decide(check());
+		System.out.println(hand.getCards().size());
+		System.out.println(cards.size() + "pre remove");
+		for(Card card: cards){
+			System.out.println(card.prettyPrint());
+		}
 		removeCardsFromHand(cards);
+		System.out.println(cards.size() + "post remove");
 		return cards.size();
 	}
 	
