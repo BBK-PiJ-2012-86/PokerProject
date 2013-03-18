@@ -56,9 +56,6 @@ public abstract class Player {
 	
 	
 	public void removeCardsFromHand(List<Card> cards){
-		for(Card card: cards){
-			System.out.println(card.prettyPrint());
-		}
 		hand.removeCards(cards);
 	}
 
