@@ -26,6 +26,9 @@ public class HumanPlayer extends Player {
 	public int exchangeCards(){
 		System.out.println("How many cards would you like to swap (max 3)?");
 		int swap = userInput.getInteger();
+		if(swap > maxCardSwapped){
+			throw new IllegalArgumentException("Maximum number of cards is " + maxCardSwapped);
+		}
 		if(swap > 0){
 			List<Card> cards = new ArrayList<Card>();
 			for(int i = 0; i < swap; i++){
