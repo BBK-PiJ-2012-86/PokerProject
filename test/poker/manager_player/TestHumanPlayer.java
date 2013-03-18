@@ -36,5 +36,33 @@ public class TestHumanPlayer {
 		Card result = player.selectCardsToRemove();
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	public void removeFirstCard(){
+		UserInput userInput = mock(UserInput.class);
+		when(userInput.getInteger()).thenReturn(5);
+		player.setUserInput(userInput);
+		Card expected = new Card(Rank.King, Suit.Spades);
+		Card result = player.selectCardsToRemove();
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void RemoveLastCard(){
+		UserInput userInput = mock(UserInput.class);
+		when(userInput.getInteger()).thenReturn(1);
+		player.setUserInput(userInput);
+		Card expected = new Card(Rank.Two, Suit.Spades);
+		Card result = player.selectCardsToRemove();
+		assertEquals(expected, result);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testSelectCardsToRemoveIntegerSelectionOutOfBounds(){
+		UserInput userInput = mock(UserInput.class);
+		when(userInput.getInteger()).thenReturn(6);
+		player.setUserInput(userInput);
+		player.selectCardsToRemove();
+	}
 
 }
