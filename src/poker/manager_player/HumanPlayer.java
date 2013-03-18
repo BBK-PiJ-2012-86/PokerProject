@@ -3,11 +3,12 @@ package poker.manager_player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import lombok.Setter;
+
 
 import poker.hand_card.Card;
-
-
+import poker.ui.*;
 
 /**
  * A HumanPayer plays poker and needs input to make its card replacement decisions
@@ -15,15 +16,16 @@ import poker.hand_card.Card;
  */
 public class HumanPlayer extends Player {
 	
+	@Setter private UserInput userInput;
+	
 	public HumanPlayer(String username, GameType gameType){
 		super(username, gameType);
+		userInput = new UserInput();
 	}
 	
 	public int exchangeCards(){
 		System.out.println("How many cards would you like to swap (max 3)?");
-		Scanner keyBoard = new Scanner(System.in);
-		int swap = keyBoard.nextInt();
-		keyBoard.close();
+		int swap = userInput.getInteger();
 		if(swap > 0){
 			List<Card> cards = new ArrayList<Card>();
 			for(int i = 0; i < swap; i++){
@@ -36,9 +38,7 @@ public class HumanPlayer extends Player {
 	
 	public Card selectCardsToRemove(){
 		System.out.println("Which card would you like to swap (From 1 - 5)?");
-		Scanner keyBoard = new Scanner(System.in);
-		int swap = keyBoard.nextInt();
-		keyBoard.close();
+		int swap = userInput.getInteger();
 		if(swap > hand.getCards().size() || swap < 1){
 			throw new IllegalArgumentException("That is not a valid selection");
 		}
