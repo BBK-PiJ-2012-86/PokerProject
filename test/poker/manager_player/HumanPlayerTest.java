@@ -29,6 +29,7 @@ public class HumanPlayerTest {
 	
 	@Test
 	public void testSelectCardsToRemove() {
+		fail("need to sort out the user input");
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(3);
 		//player.setUserInput(userInput);
@@ -37,7 +38,7 @@ public class HumanPlayerTest {
 		assertEquals(expected, result);
 	}
 	
-	@Test
+	/*@Test
 	public void testRemoveFirstCard1(){
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(5);
@@ -111,5 +112,5 @@ public class HumanPlayerTest {
 		int expected = 3;
 		int result = player.exchangeCards();
 		assertEquals(expected, result);
-	}
+	}*/
 }

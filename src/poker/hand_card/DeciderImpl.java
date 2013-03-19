@@ -8,14 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-//we should add functionality for being close to a straight.
 
 /**
  * This Decider returns the following:
  * Better than high card - all cards irrelevant to the poker hand type except the highest if over 7 
- * High card: bottom three - unless within two cards of a flush when it returns non matched suits
+ * High card: bottom three - unless within two cards of a flush when it returns non matched suits, or within 
+ * one card of a straight when it returns the other card
  */
-public class DeciderImpl implements Decider {	//a semi reasonable decider (?) 
+public class DeciderImpl implements Decider {
 	
 	@Override
 	public List<Card> decide(CheckResult checkResult) {
@@ -44,28 +44,10 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 				}
 				
 			case HIGH_CARD:
-				//if 3 or more of same suit, return others, else return bottom 3
-				//this doesn't work if the hand is close to a flush because it removes all the 
-				//cards from the players hand. This method is supposed to return a list of cards 
-				//to be removed. I have changed this so the method works. Your code is at the bottom
-				Map<Suit, List<Card>> suitMap = Util.suitMap(hand);
-				boolean flush = false;
-				for (List<Card> list : suitMap.values()) {
-					if (list.size()>=3) {
-						flush = true;
-					}
-				}
-				if(flush == true){
-					List<Card> cardsToRemove = new LinkedList<Card>();
-					for (List<Card> list : suitMap.values()) {
-						if (list.size()<3) {
-							cardsToRemove.addAll(list);
-						}
-					}
-					return cardsToRemove;
-				}else{
-					return bottom(3, hand);
-				}
+				//if 4 of a straight, return the other
+				//else if 3 or more of same suit, return others
+				//else return bottom 3
+			return doHighCardCase(hand);
 								
 			default:
 				//straight or better
@@ -80,16 +62,46 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 		}
 		return result;
 	}
-	/* Code for your method
-	 * Map<Suit, List<Card>> suitMap = Util.suitMap(hand);
-				for (List<Card> list : suitMap.values()) {
-					if (list.size()>=3) {
-						//remove others
-						hand.removeCards(list);
-						return hand.getCards();
-					}
-				}
-	 */
 
+	private List<Card> doHighCardCase(Hand hand) {
+		List<Card> cardsToRemove = new LinkedList<Card>();
+		
+		//4 of a straight if: rank range of bottom 4 or top 4 cards is less than 5
+		//ignores low Ace case - but if low cards may be better bet to swap out low cards anyway.
+		hand = hand.sortByRank();																	//!!! this will ruin the rest
+		int bottom4range = hand.getCardAt(0).getRank().ordinal()-hand.getCardAt(3).getRank().ordinal();
+		int top4range = hand.getCardAt(1).getRank().ordinal()-hand.getCardAt(4).getRank().ordinal();
+		if (bottom4range<5) {
+			cardsToRemove.add(hand.getCardAt(4));
+			return cardsToRemove;
+		}
+		if (top4range<5) {
+			cardsToRemove.add(hand.getCardAt(0));
+			return cardsToRemove;
+		}
+						
+		//test if close to flush
+		Map<Suit, List<Card>> suitMap = Util.suitMap(hand);
+		boolean nearFlush = false;
+		for (List<Card> list : suitMap.values()) {
+			if (list.size()>=3) {
+				nearFlush = true;
+				break;
+			}
+		}
+		if(nearFlush){
+			for (List<Card> list : suitMap.values()) {
+				if (list.size()<3) {
+					cardsToRemove.addAll(list);
+				}
+			}
+			return cardsToRemove;
+		}
+
+		//otherwise return lowest 3 cards
+		return bottom(3, hand);
+	}
+	
+	
 
 }

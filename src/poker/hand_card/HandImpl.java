@@ -45,7 +45,7 @@ public class HandImpl implements Hand{
 	
 	@Override
 	public Hand sortByRank() {
-		Collections.sort(cards, new Comparator<Card>(){
+		Collections.sort(cards, new Comparator<Card>(){		//change to NOT have side affect?
 
 			@Override
 			public int compare(Card card1, Card card2) {
@@ -56,6 +56,20 @@ public class HandImpl implements Hand{
 		});
 		return this;
 	}
+	
+	//in progress
+	/*public List<Card> getSortedCards() {
+		List<Card> sortedList = new LinkedList<Card>();
+		sortedList.addAll(cards);
+		Collections.sort(sortedList, new Comparator<Card>(){
+			@Override
+			public int compare(Card card1, Card card2) {
+				// reversed order of operands to get high->low ordering
+				return card2.getRank().compareTo(card1.getRank());
+			}
+		});
+		return sortedList;
+	}*/
 
 	@Override
 	public Iterator<Card> iterator() {
