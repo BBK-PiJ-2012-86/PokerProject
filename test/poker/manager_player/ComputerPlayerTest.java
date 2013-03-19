@@ -12,7 +12,7 @@ import poker.hand_card.Card;
 import poker.hand_card.Rank;
 import poker.hand_card.Suit;
 
-public class TestComputerPlayer {
+public class ComputerPlayerTest {
 
 	private ComputerPlayer computerPlayer;
 	private Card card1 = new Card(Rank.Six, Suit.Spades);

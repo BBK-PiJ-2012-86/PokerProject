@@ -29,7 +29,7 @@ import poker.hand_card.Rank;
 import poker.hand_card.Suit;
 import poker.hand_card.TestUtil;
 
-public class TestPlayer {
+public class PlayerTest {
 
 	private Player player1;
 	private Deck deck;
