@@ -16,7 +16,7 @@ import poker.hand_card.DeckFactory;
  * This is the manager class for the poker game
  *
  */
-public class GameManagerImpl {
+public class GameManagerImpl implements GameManager {
 	
 	private CircularArrayList<Player> players = new CircularArrayList<>();
 	private Deck deck = null;
@@ -31,11 +31,19 @@ public class GameManagerImpl {
 		}*/
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#addPlayer(poker.manager_player.Player)
+	 */
+	@Override
 	public void addPlayer(Player player){
 		player.changeGameType(gameType);
 		players.add(player);
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#deal()
+	 */
+	@Override
 	public void deal(){
 		int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
@@ -44,6 +52,10 @@ public class GameManagerImpl {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#playRound()
+	 */
+	@Override
 	public void playRound(){
 		deal();
 		playersChangeCards();
@@ -51,6 +63,10 @@ public class GameManagerImpl {
 		deletePlayerCards();
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#playersChangeCards()
+	 */
+	@Override
 	public void playersChangeCards(){
 		for(Player player: players){
 			int cardsToSwap = player.exchangeCards();
@@ -65,6 +81,10 @@ public class GameManagerImpl {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#evaluateWinner()
+	 */
+	@Override
 	public void evaluateWinner(){
 		List<Player> tempList = new ArrayList<Player>();
 		for(Player player: players){
@@ -76,10 +96,20 @@ public class GameManagerImpl {
 		System.out.println("Their hand was " + tempList.get(0).getHand().toString());
 	}
 	
+	/* (non-Javadoc)
+	 * @see poker.manager_player.GameManager#deletePlayerCards()
+	 */
+	@Override
 	public void deletePlayerCards(){
 		for(Player player: players){
 			player.removeCards();
 		}
+	}
+	
+	public static void main(String [] args){
+		CircularArrayList<Player> list = new CircularArrayList<Player>();
+		GameManager game = new GameManagerImpl(GameType.fiveCardDraw, list);
+		game.launch();
 	}
 	
 }
