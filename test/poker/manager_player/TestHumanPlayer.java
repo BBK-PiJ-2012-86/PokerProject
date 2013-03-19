@@ -17,7 +17,7 @@ public class TestHumanPlayer {
 	@Before
 	public void setUp(){
 		PlayerFactory playerFactory = new PlayerFactoryImpl();
-		player = playerFactory.createHumanPlayer("Ted", GameType.fiveCardDraw);
+		player = playerFactory.createHumanPlayer("Ted", GameType.FIVE_CARD_DRAW);
 		List<Card> cards = new ArrayList<Card>();
 		cards.add(new Card(Rank.Two, Suit.Spades));
 		cards.add(new Card(Rank.Eight, Suit.Spades));

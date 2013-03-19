@@ -18,27 +18,29 @@ import poker.hand_card.DeckFactory;
  */
 public class GameManagerImpl {
 	
-	private CircularArrayList<Player> players;
-	private Deck deck;
-	//private final GameType type;	//TODO: decide where this is used
+	private CircularArrayList<Player> players = new CircularArrayList<>();
+	private Deck deck = null;
+	private GameType gameType;
 	
-	public GameManagerImpl(GameType type, CircularArrayList<Player> players) {
-		//this.type = type;
-		this.deck = null;
+	public GameManagerImpl(GameType gameType/*,CircularArrayList<Player> players*/) {
+		this.gameType = gameType;
+		/*this.deck = null;
 		this.players = players;
 		for(Player player: players){
 			player.changeGameType(type);
-		}
+		}*/
 	}
 	
 	public void addPlayer(Player player){
+		player.changeGameType(gameType);
 		players.add(player);
 	}
 	
 	public void deal(){
+		int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
 		for(Player player: players){
-			player.recieveCards(deck.dealCards(5));
+			player.recieveCards(deck.dealCards(numCards));
 		}
 	}
 	

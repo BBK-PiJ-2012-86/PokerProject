@@ -17,6 +17,6 @@ public class PokerWindowModel {		// need to do GameManagerImpl first
 		HumanPlayer player = new HumanPlayer("User", null);
 		players.add((Player) computer);
 		players.add((Player) player);
-		game = new GameManagerImpl(GameType.fiveCardDraw, players);
+		game = new GameManagerImpl(GameType.FIVE_CARD_DRAW, players);
 	}
 }

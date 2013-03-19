@@ -5,5 +5,19 @@ package poker.manager_player;
  *
  */
 public enum GameType {
-	fiveCardDraw;
+	FIVE_CARD_DRAW (5, 3);
+
+    private final int cardsInHand;
+    private final int maxCardsSwapped;
+    
+    GameType(int cardsInHand , int maxCardsSwapped) {
+        this.cardsInHand = cardsInHand;
+        this.maxCardsSwapped = maxCardsSwapped;
+    }
+    public int numCards() {
+    	return cardsInHand;
+    }
+    public int maxCardsSwapped() {
+    	return maxCardsSwapped;
+    }
 }

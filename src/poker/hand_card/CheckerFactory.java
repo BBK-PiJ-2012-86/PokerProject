@@ -8,18 +8,17 @@ import poker.manager_player.GameType;
  */
 public class CheckerFactory {
 	
-	private static final CheckerFactory instance = new CheckerFactory();	//others depending on game type
+	private static final CheckerFactory instance = new CheckerFactory();
 
 	/**
-	 * @param gameType the type of game to be played
 	 * @return a CheckerFactory
 	 */
-	public static CheckerFactory getInstance(GameType gameType) {	//NB doesn't depend on gameType atm
+	public static CheckerFactory getInstance() {
 		return instance;
 	}
 
-	public Checker getChecker() {
-		return new CheckerImpl();	//consider other checker options?
+	public Checker getChecker(GameType gameType) {
+		return new CheckerImpl();	//have others depending on gameType
 	}
 
 }

@@ -15,28 +15,23 @@ import poker.hand_card.HandImpl;
 
 public abstract class Player {
 	
-	//protected GameType gameType;		not needed?
+	protected GameType gameType;
 	@Getter protected Hand hand;
 	@Getter protected final String username;
 	protected Checker checker;
-	protected int maxCardSwapped;
+	//protected int maxCardSwapped; // mb not needed
 	
 	public Player(String username, GameType gameType) {
-		//this.gameType = gameType;		not needed?
+		this.gameType = gameType;
 		this.username = username;
-		this.checker = CheckerFactory.getInstance(gameType).getChecker();
+		this.checker = CheckerFactory.getInstance().getChecker(gameType);
 		this.hand = new HandImpl();
-		setMaxCardSwapped(gameType);
+		//setMaxCardSwapped(gameType);
 	}
 	
-	public void setMaxCardSwapped(GameType gameType){
-		switch(gameType){
-		case fiveCardDraw: maxCardSwapped = 3;
-		break;
-		default: maxCardSwapped = 3;
-		break;
-		}
-	}
+	/*public void setMaxCardSwapped(GameType gameType){
+		maxCardSwapped = gameType.maxCardsSwapped();
+	}*/
 	
 	public void removeCards(){
 		hand.clearHand();
@@ -53,8 +48,8 @@ public abstract class Player {
 	}
 	
 	public void changeGameType(GameType gameType) {
-		//this.gameType = type;
-		checker = CheckerFactory.getInstance(gameType).getChecker();
+		this.gameType = gameType;
+		checker = CheckerFactory.getInstance().getChecker(gameType);
 	}
 	
 	

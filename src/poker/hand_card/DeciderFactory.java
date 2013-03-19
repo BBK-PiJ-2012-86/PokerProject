@@ -15,7 +15,7 @@ public class DeciderFactory {
 	public Decider getDecider(GameType gameType){
 		Decider result;
 		switch (gameType){
-		case fiveCardDraw:
+		case FIVE_CARD_DRAW:
 			result = new DeciderImpl();
 			break;
 		default: result = new DeciderImpl();

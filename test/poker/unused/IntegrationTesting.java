@@ -35,7 +35,7 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 	
 	public void launch() {
 		
-		GameType type = GameType.fiveCardDraw;
+		GameType type = GameType.FIVE_CARD_DRAW;
 		
 		// get a checker given the GameType
 		Checker checker = CheckerFactory.getInstance(type).getChecker();
