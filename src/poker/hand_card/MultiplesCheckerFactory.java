@@ -22,10 +22,12 @@ public class MultiplesCheckerFactory {
 		//unused
 	}
 	
-	public void setMockChecker(MultiplesChecker mock) {
+	public void setMockChecker() {
 		this.mock = mock;
 	}
-	
+	public void setNotMockChecker() {
+		this.mock = null;
+	}
 	/**
 	 * @return a MultiplesChecker for checking multiples based hand conditions
 	 */
