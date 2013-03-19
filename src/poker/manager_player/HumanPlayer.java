@@ -3,12 +3,9 @@ package poker.manager_player;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Setter;
-
+import java.util.Scanner;
 
 import poker.hand_card.Card;
-import poker.ui.*;
 
 /**
  * A HumanPayer plays poker and needs input to make its card replacement decisions
@@ -16,18 +13,20 @@ import poker.ui.*;
  */
 public class HumanPlayer extends Player {
 	
-	@Setter private UserInput userInput;
+	//@Setter private UserInput userInput;
+	private Scanner scanner = new Scanner(System.in);	//for now - think about closing it etc..
 	
 	public HumanPlayer(String username, GameType gameType){
 		super(username, gameType);
-		userInput = new UserInput();
+		//userInput = new UserInput();
 	}
 	
 	public int exchangeCards(){
 		int maxCardsSwapped = gameType.maxCardsSwapped();
 		displayCards();
 		System.out.println("How many cards would you like to swap (max " + maxCardsSwapped + ")?");
-		int swap = userInput.getInteger();
+		//int swap = userInput.getInteger();
+		int swap = scanner.nextInt();
 		if(swap > maxCardsSwapped){
 			throw new IllegalArgumentException("Maximum number of cards is " + maxCardsSwapped);	//change to just loop and ask again?
 		}
@@ -43,7 +42,8 @@ public class HumanPlayer extends Player {
 	
 	public Card selectCardsToRemove(){
 		System.out.println("Which card would you like to swap (From 1 - 5)?");
-		int swap = userInput.getInteger();
+		//int swap = userInput.getInteger();
+		int swap = scanner.nextInt();
 		if(swap > hand.getCards().size() || swap < 1){
 			throw new IllegalArgumentException("That is not a valid selection");		//change to just loop and ask again?
 		}
