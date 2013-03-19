@@ -107,7 +107,18 @@ public class GameManagerImpl implements GameManager {
 	public static void main(String [] args){
 		CircularArrayList<Player> list = new CircularArrayList<Player>();
 		GameManager game = new GameManagerImpl(GameType.fiveCardDraw, list);
-		game.launch();
+		((GameManagerImpl) game).launch();
+	}
+	
+	private void launch(){
+		PlayerFactory pfactory = new PlayerFactoryImpl();
+		Player p1 = pfactory.createHumanPlayer("Ted", GameType.fiveCardDraw);
+		Player p2 = pfactory.createComputerPlayer(GameType.fiveCardDraw);
+		addPlayer(p1);
+		addPlayer(p2);
+		for(int i = 0; i < 10; i++){
+			playRound();
+		}
 	}
 	
 }
