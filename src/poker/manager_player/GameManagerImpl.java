@@ -108,7 +108,7 @@ public class GameManagerImpl implements GameManager {
 	
 	public static void main(String [] args){
 		CircularArrayList<Player> list = new CircularArrayList<Player>();
-		GameManager game = new GameManagerImpl(GameType.fiveCardDraw, list);
+		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW);
 		game.launch();
 	}
 	
