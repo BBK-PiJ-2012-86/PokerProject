@@ -89,9 +89,9 @@ public class GameManagerImpl implements GameManager {
 		PlayerFactory pfactory = new PlayerFactoryImpl();
 		players.add(pfactory.createHumanPlayer("Ted", GameType.FIVE_CARD_DRAW));
 		players.add(pfactory.createComputerPlayer(GameType.FIVE_CARD_DRAW));
-		for(int i = 0; i < 5; i++){
+		//for(int i = 0; i < 5; i++){
 			playRound();
-		}
+		//}
 	}
 
 }

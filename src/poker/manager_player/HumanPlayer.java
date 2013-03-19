@@ -52,9 +52,7 @@ public class HumanPlayer extends Player {
 
 	public void displayCards(){
 		System.out.println("Your hand is:");
-		for(Card card: hand){
-			System.out.println(card.prettyPrint());
-		}
+		System.out.println(hand);
 	}
 
 }
