@@ -18,7 +18,7 @@ import poker.hand_card.DeckFactory;
  */
 public class GameManagerImpl implements GameManager {
 
-	private CircularArrayList<Player> players = new CircularArrayList<>();
+	private CircularArrayList<Player> players = new CircularArrayList<Player>();
 	private Deck deck = null;
 	private GameType gameType;
 
@@ -109,7 +109,16 @@ public class GameManagerImpl implements GameManager {
 	public static void main(String [] args){
 		CircularArrayList<Player> list = new CircularArrayList<Player>();
 		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW);
-		game.launch();
+		((GameManagerImpl) game).launch();
+	}
+	
+	private void launch(){
+		PlayerFactory pfactory = new PlayerFactoryImpl();
+		players.add(pfactory.createHumanPlayer("Ted", GameType.FIVE_CARD_DRAW));
+		players.add(pfactory.createComputerPlayer(GameType.FIVE_CARD_DRAW));
+		for(int i = 0; i < 5; i++){
+			playRound();
+		}
 	}
 
 }
