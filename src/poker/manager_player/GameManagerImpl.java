@@ -47,6 +47,7 @@ public class GameManagerImpl implements GameManager {
 	public void deal(){
 		int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
+		deck.shuffleDeck();
 		for(Player player: players){
 			player.recieveCards(deck.dealCards(numCards));
 		}
