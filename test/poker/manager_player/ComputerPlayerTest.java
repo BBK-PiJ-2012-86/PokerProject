@@ -44,7 +44,7 @@ public class ComputerPlayerTest {
 		cards.add(card3);
 		cards.add(card4);
 		cards.add(card5);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -57,7 +57,7 @@ public class ComputerPlayerTest {
 		cards.add(card4);
 		cards.add(card5);
 		cards.add(card6);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -70,7 +70,7 @@ public class ComputerPlayerTest {
 		cards.add(card4);
 		cards.add(card5);
 		cards.add(card7);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -83,7 +83,7 @@ public class ComputerPlayerTest {
 		cards.add(card8);
 		cards.add(card5);
 		cards.add(card10);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -96,7 +96,7 @@ public class ComputerPlayerTest {
 		cards.add(card8);
 		cards.add(card9);
 		cards.add(card1);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 0;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -109,7 +109,7 @@ public class ComputerPlayerTest {
 		cards.add(card8);
 		cards.add(card1);
 		cards.add(card6);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 1;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -122,7 +122,7 @@ public class ComputerPlayerTest {
 		cards.add(card8);
 		cards.add(card1);
 		cards.add(card11);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 2;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -135,7 +135,7 @@ public class ComputerPlayerTest {
 		cards.add(card5);
 		cards.add(card10);
 		cards.add(card6);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 1;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -148,7 +148,7 @@ public class ComputerPlayerTest {
 		cards.add(card3);
 		cards.add(card11);
 		cards.add(card6);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 2;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -161,7 +161,7 @@ public class ComputerPlayerTest {
 		cards.add(card3);
 		cards.add(card12);
 		cards.add(card10);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 1;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);
@@ -174,7 +174,7 @@ public class ComputerPlayerTest {
 		cards.add(card10);
 		cards.add(card13);
 		cards.add(card14);
-		computerPlayer.recieveCards(cards);
+		computerPlayer.receiveCards(cards);
 		int expected = 3;
 		int result = computerPlayer.exchangeCards();
 		assertEquals(expected, result);

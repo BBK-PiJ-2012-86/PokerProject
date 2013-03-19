@@ -37,7 +37,7 @@ public class GameManagerImpl implements GameManager {
 		deck = DeckFactory.getDeckFactory().getDeck();
 		deck.shuffleDeck();
 		for(Player player: players){
-			player.recieveCards(deck.dealCards(numCards));
+			player.receiveCards(deck.dealCards(numCards));
 		}
 	}
 
@@ -58,7 +58,7 @@ public class GameManagerImpl implements GameManager {
 					cards.add(deck.getCards().get(0));
 					deck.getCards().remove(0);
 				}
-				player.recieveCards(cards);
+				player.receiveCards(cards);
 			}
 		}
 	}
@@ -70,8 +70,8 @@ public class GameManagerImpl implements GameManager {
 		}
 		Comparator<Player> c = players.getTheDealer().getCheckResultRanking();
 		Collections.sort(tempList, c);
-		System.out.println("The winner is " + tempList.get(0));
-		System.out.println("Their hand was " + tempList.get(0).getHand().toString());
+		System.out.println("The winner is " + tempList.get(1).username);
+		System.out.println("The winning hand is " + tempList.get(1).getHand().toString());
 	}
 
 	private void deletePlayerCards(){

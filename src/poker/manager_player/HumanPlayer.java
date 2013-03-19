@@ -21,9 +21,16 @@ public class HumanPlayer extends Player {
 		//userInput = new UserInput();
 	}
 	
+	public void receiveCards(List<Card> cards){
+		hand.addCards(cards);
+		// print out their new hand
+		System.out.println("Your hand is:");
+		System.out.println(hand);
+	}
+	
 	public int exchangeCards(){
 		int maxCardsSwapped = gameType.maxCardsSwapped();
-		displayCards();
+		//displayCards();
 		System.out.println("How many cards would you like to swap (max " + maxCardsSwapped + ")?");
 		//int swap = userInput.getInteger();
 		int swap = scanner.nextInt();
@@ -37,6 +44,7 @@ public class HumanPlayer extends Player {
 			}
 			removeCardsFromHand(cards);
 		}
+		//displayCards();
 		return swap;
 	}
 	
@@ -50,10 +58,10 @@ public class HumanPlayer extends Player {
 		return hand.getCardAt(swap - 1);
 	}
 
-	public void displayCards(){
+	/*public void displayCards(){
 		System.out.println("Your hand is:");
 		System.out.println(hand);
-	}
+	}*/
 
 }
 

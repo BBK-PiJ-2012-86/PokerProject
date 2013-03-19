@@ -32,9 +32,13 @@ public abstract class Player {
 		hand.clearHand();
 	}
 	
-	public void recieveCards(List<Card> cards){
+	/*public void receiveCards(List<Card> cards){
 		hand.addCards(cards);
-	}
+		// print out their new hand
+		System.out.println("I am receiving cards");	//do differently for the two players
+		System.out.println(hand);
+	}*/
+	public abstract void receiveCards(List<Card> cards);
 	
 	public abstract int exchangeCards();
 	

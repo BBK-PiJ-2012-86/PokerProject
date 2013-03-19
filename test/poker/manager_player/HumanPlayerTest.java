@@ -24,7 +24,7 @@ public class HumanPlayerTest {
 		cards.add(new Card(Rank.JACK, Suit.DIAMONDS));
 		cards.add(new Card(Rank.NINE, Suit.HEARTS));
 		cards.add(new Card(Rank.KING, Suit.SPADES));
-		player.recieveCards(cards);
+		player.receiveCards(cards);
 	}
 	
 	@Test

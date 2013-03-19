@@ -50,7 +50,7 @@ public class PlayerTest {
 	@Test
 	public void testRecieveCards(){
 		List<Card> cards = deck.dealCards(5);
-		player1.recieveCards(cards);
+		player1.receiveCards(cards);
 		int expected = 5;
 		int result = player1.getHand().getCards().size();
 		assertEquals(expected, result);
@@ -59,7 +59,7 @@ public class PlayerTest {
 	@Test
 	public void testRemoveCards(){
 		List<Card> cards = deck.dealCards(5);
-		player1.recieveCards(cards);
+		player1.receiveCards(cards);
 		player1.removeCards();
 		assertTrue(player1.getHand().getCards().size() == 0);
 	}
@@ -73,14 +73,14 @@ public class PlayerTest {
 		cardsForPlayer.add(new Card(Rank.SIX, Suit.SPADES));
 		cardsForPlayer.add(new Card(Rank.SIX, Suit.CLUBS));
 		cardsForPlayer.add(new Card(Rank.JACK, Suit.HEARTS));
-		player1.recieveCards(cardsForPlayer);
+		player1.receiveCards(cardsForPlayer);
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
 		cardsForPlayer2.add(new Card(Rank.ACE, Suit.SPADES));
 		cardsForPlayer2.add(new Card(Rank.ACE, Suit.CLUBS));
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.HEARTS));
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
 		cardsForPlayer2.add(new Card(Rank.JACK, Suit.SPADES));
-		player2.recieveCards(cardsForPlayer2);
+		player2.receiveCards(cardsForPlayer2);
 		//int expected = 0;
 		//int result = comp.compare(player, player2);
 		//assertEquals(expected, result);
@@ -90,9 +90,9 @@ public class PlayerTest {
 	@Test
 	public void testComparatorJacksOverTens(){
 		Card[] player1CardArray = new Card[] {JACK_SPADE, JACK_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
-		player1.recieveCards(TestUtil.toLinkedList(player1CardArray));
+		player1.receiveCards(TestUtil.toLinkedList(player1CardArray));
 		Card[] player2CardArray = new Card[] {TEN_SPADE, TEN_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
-		player2.recieveCards(TestUtil.toLinkedList(player2CardArray));
+		player2.receiveCards(TestUtil.toLinkedList(player2CardArray));
 
 		System.out.println(player1.check());	//wrong - using mock multiples checker???? only wrong when running all tests....
 		
@@ -103,7 +103,7 @@ public class PlayerTest {
 	@Test
 	public void testComparatorLowStraightVersusFullHouse(){
 		Card[] player1CardArray = new Card[] {ACE_SPADE, TWO_CLUB, THREE_CLUB, FOUR_CLUB, FIVE_CLUB};
-		player1.recieveCards(TestUtil.toLinkedList(player1CardArray));
+		player1.receiveCards(TestUtil.toLinkedList(player1CardArray));
 
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
 		cardsForPlayer2.add(new Card(Rank.KING, Suit.SPADES));
@@ -111,7 +111,7 @@ public class PlayerTest {
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.HEARTS));
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.SPADES));
-		player2.recieveCards(cardsForPlayer2);
+		player2.receiveCards(cardsForPlayer2);
 		//int expected = -2;
 		//int result = comp.compare(player, player2);
 		//assertEquals(expected, result);
