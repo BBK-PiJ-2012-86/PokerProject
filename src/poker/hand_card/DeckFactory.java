@@ -7,7 +7,7 @@ package poker.hand_card;
  */
 public class DeckFactory {
 
-	private static DeckFactory instance = new DeckFactory();
+	private static DeckFactory INSTANCE = new DeckFactory();
 	private static final int DEFAULT_SIZE = 1;
 	private final int size;
 	
@@ -15,7 +15,7 @@ public class DeckFactory {
 	 * @return a DeckFactory to enable deck production
 	 */
 	public static DeckFactory getDeckFactory() {
-		return instance;
+		return INSTANCE;
 	}
 	
 	private DeckFactory(){

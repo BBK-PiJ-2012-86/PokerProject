@@ -19,11 +19,11 @@ public class HumanPlayerTest {
 		PlayerFactory playerFactory = new PlayerFactoryImpl();
 		player = playerFactory.createHumanPlayer("Ted", GameType.FIVE_CARD_DRAW);
 		List<Card> cards = new ArrayList<Card>();
-		cards.add(new Card(Rank.Two, Suit.Spades));
-		cards.add(new Card(Rank.Eight, Suit.Spades));
-		cards.add(new Card(Rank.Jack, Suit.Diamonds));
-		cards.add(new Card(Rank.Nine, Suit.Hearts));
-		cards.add(new Card(Rank.King, Suit.Spades));
+		cards.add(new Card(Rank.TWO, Suit.SPADES));
+		cards.add(new Card(Rank.EIGHT, Suit.SPADES));
+		cards.add(new Card(Rank.JACK, Suit.DIAMONDS));
+		cards.add(new Card(Rank.NINE, Suit.HEARTS));
+		cards.add(new Card(Rank.KING, Suit.SPADES));
 		player.recieveCards(cards);
 	}
 	
@@ -32,7 +32,7 @@ public class HumanPlayerTest {
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(3);
 		player.setUserInput(userInput);
-		Card expected = new Card(Rank.Jack, Suit.Diamonds);
+		Card expected = new Card(Rank.JACK, Suit.DIAMONDS);
 		Card result = player.selectCardsToRemove();
 		assertEquals(expected, result);
 	}
@@ -42,7 +42,7 @@ public class HumanPlayerTest {
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(5);
 		player.setUserInput(userInput);
-		Card expected = new Card(Rank.King, Suit.Spades);
+		Card expected = new Card(Rank.KING, Suit.SPADES);
 		Card result = player.selectCardsToRemove();
 		assertEquals(expected, result);
 	}
@@ -52,7 +52,7 @@ public class HumanPlayerTest {
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(1);
 		player.setUserInput(userInput);
-		Card expected = new Card(Rank.Two, Suit.Spades);
+		Card expected = new Card(Rank.TWO, Suit.SPADES);
 		Card result = player.selectCardsToRemove();
 		assertEquals(expected, result);
 	}

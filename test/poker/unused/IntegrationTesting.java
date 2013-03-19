@@ -19,14 +19,14 @@ import poker.manager_player.GameType;
 
 public class IntegrationTesting {		// I will change this to a JUnit test..
 	
-	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	private static final Card TEN_OF_HEARTS = new Card(Rank.Ten, Suit.Hearts);
-	private static final Card SIX_OF_HEARTS = new Card(Rank.Six, Suit.Hearts);
-	private static final Card SIX_OF_DIAMONDS = new Card(Rank.Six, Suit.Diamonds);
+	private static final Card ACE_OF_SPADES = new Card(Rank.ACE, Suit.SPADES);
+	private static final Card KING_OF_SPADES = new Card(Rank.KING, Suit.SPADES);
+	private static final Card QUEEN_OF_SPADES = new Card(Rank.QUEEN, Suit.SPADES);
+	private static final Card JACK_OF_SPADES = new Card(Rank.JACK, Suit.SPADES);
+	private static final Card TEN_OF_SPADES = new Card(Rank.TEN, Suit.SPADES);
+	private static final Card TEN_OF_HEARTS = new Card(Rank.TEN, Suit.HEARTS);
+	private static final Card SIX_OF_HEARTS = new Card(Rank.SIX, Suit.HEARTS);
+	private static final Card SIX_OF_DIAMONDS = new Card(Rank.SIX, Suit.DIAMONDS);
 
 	public static void main (String[] args) {
 		IntegrationTesting joined = new IntegrationTesting();
@@ -99,7 +99,7 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 	CheckResult result1 = checker.check(hand1);
 	System.out.println(result1);
 	
-	Card[] cardArray2 = new Card[] {new Card(Rank.Nine, Suit.Spades), KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
+	Card[] cardArray2 = new Card[] {new Card(Rank.NINE, Suit.SPADES), KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
 	List<Card> cardList2 = new LinkedList<Card>();
 	for (Card card : cardArray2) {
 		cardList2.add(card);

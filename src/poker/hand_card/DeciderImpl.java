@@ -23,27 +23,27 @@ public class DeciderImpl implements Decider {	//a semi reasonable decider (?)
 		Hand hand = checkResult.getOrderedHand();
 		
 		switch(conditionType) {
-			case ThreeOfAKind:
+			case THREE_OF_A_KIND:
 				//return lowest leftover, and highest leftover if < 7
-				if (hand.getCardAt(3).getRank().compareTo(Rank.Seven)<0) {
+				if (hand.getCardAt(3).getRank().compareTo(Rank.SEVEN)<0) {
 					return bottom(2, hand);
 				} else {
 					return bottom(1, hand);
 				}
 				
-			case TwoPair:
+			case TWO_PAIR:
 				//return leftover card
 				return bottom(1, hand);
 				
-			case Pair:
+			case PAIR:
 				//return lowest 2 leftovers, and highest leftover if < 7
-				if (hand.getCardAt(2).getRank().compareTo(Rank.Seven)<0) {
+				if (hand.getCardAt(2).getRank().compareTo(Rank.SEVEN)<0) {
 					return bottom(3, hand);
 				} else {
 					return bottom(2, hand);
 				}
 				
-			case HighCard:
+			case HIGH_CARD:
 				//if 3 or more of same suit, return others, else return bottom 3
 				//this doesn't work if the hand is close to a flush because it removes all the 
 				//cards from the players hand. This method is supposed to return a list of cards 

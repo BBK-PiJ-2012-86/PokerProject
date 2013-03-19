@@ -29,7 +29,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND};
 		Card[] expected = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND, QUEEN_SPADE};
 		
-		testMultiples(ConditionType.FourOfAKind, inHand, expectedStart, expected);
+		testMultiples(ConditionType.FOUR_OF_A_KIND, inHand, expectedStart, expected);
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE};
 		Card[] expected = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, ACE_SPADE, QUEEN_SPADE};
 		
-		testMultiples(ConditionType.ThreeOfAKind, inHand, expectedStart, expected);
+		testMultiples(ConditionType.THREE_OF_A_KIND, inHand, expectedStart, expected);
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB};
 		Card[] expected = new Card[] {TEN_DIAMOND, TEN_SPADE, TEN_CLUB, JACK_CLUB, JACK_SPADE};
 		
-		testMultiples(ConditionType.FullHouse, inHand, expectedStart, expected);		
+		testMultiples(ConditionType.FULL_HOUSE, inHand, expectedStart, expected);		
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {JACK_DIAMOND, JACK_SPADE, TEN_CLUB, TEN_SPADE};
 		Card[] expected = new Card[] {JACK_DIAMOND, JACK_SPADE, TEN_CLUB, TEN_SPADE, KING_SPADE};
 		
-		testMultiples(ConditionType.TwoPair, inHand, expectedStart, expected);		
+		testMultiples(ConditionType.TWO_PAIR, inHand, expectedStart, expected);		
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {TEN_CLUB, TEN_SPADE};
 		Card[] expected = new Card[] {TEN_CLUB, TEN_SPADE, KING_SPADE, QUEEN_SPADE, JACK_DIAMOND };
 		
-		testMultiples(ConditionType.Pair, inHand, expectedStart, expected);		
+		testMultiples(ConditionType.PAIR, inHand, expectedStart, expected);		
 	}
 	
 	@Test
@@ -74,7 +74,7 @@ public class MultiplesCheckerTest {
 		Card[] expectedStart = new Card[] {};
 		Card[] expected = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_DIAMOND, TEN_CLUB };
 		
-		testMultiples(ConditionType.HighCard, inHand, expectedStart, expected);		
+		testMultiples(ConditionType.HIGH_CARD, inHand, expectedStart, expected);		
 	}
 
 	private void testMultiples(ConditionType conditionType, Card[] inHand, Card[] expectedStart, Card[] expected) {

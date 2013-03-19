@@ -15,20 +15,20 @@ import poker.hand_card.Suit;
 public class ComputerPlayerTest {
 
 	private ComputerPlayer computerPlayer;
-	private Card card1 = new Card(Rank.Six, Suit.Spades);
-	private Card card2 = new Card(Rank.Seven, Suit.Diamonds);
-	private Card card3 = new Card(Rank.Eight, Suit.Spades);
-	private Card card4 = new Card(Rank.Nine, Suit.Spades);
-	private Card card5 = new Card(Rank.Ten, Suit.Spades);
-	private Card card6 = new Card(Rank.Queen, Suit.Spades);
-	private Card card7 = new Card(Rank.Seven, Suit.Spades);
-	private Card card8 = new Card(Rank.Seven, Suit.Clubs);
-	private Card card9 = new Card(Rank.Seven, Suit.Hearts);
-	private Card card10 = new Card(Rank.Ten, Suit.Diamonds);
-	private Card card11 = new Card(Rank.Five, Suit.Clubs);
-	private Card card12 = new Card(Rank.Two, Suit.Spades);
-	private Card card13 = new Card(Rank.Four, Suit.Hearts);
-	private Card card14 = new Card(Rank.Ace, Suit.Clubs);
+	private Card card1 = new Card(Rank.SIX, Suit.SPADES);
+	private Card card2 = new Card(Rank.SEVEN, Suit.DIAMONDS);
+	private Card card3 = new Card(Rank.EIGHT, Suit.SPADES);
+	private Card card4 = new Card(Rank.NINE, Suit.SPADES);
+	private Card card5 = new Card(Rank.TEN, Suit.SPADES);
+	private Card card6 = new Card(Rank.QUEEN, Suit.SPADES);
+	private Card card7 = new Card(Rank.SEVEN, Suit.SPADES);
+	private Card card8 = new Card(Rank.SEVEN, Suit.CLUBS);
+	private Card card9 = new Card(Rank.SEVEN, Suit.HEARTS);
+	private Card card10 = new Card(Rank.TEN, Suit.DIAMONDS);
+	private Card card11 = new Card(Rank.FIVE, Suit.CLUBS);
+	private Card card12 = new Card(Rank.TWO, Suit.SPADES);
+	private Card card13 = new Card(Rank.FOUR, Suit.HEARTS);
+	private Card card14 = new Card(Rank.ACE, Suit.CLUBS);
 	private List<Card> cards;
 	
 	@Before

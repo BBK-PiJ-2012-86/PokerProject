@@ -68,18 +68,18 @@ public class PlayerTest {
 	public void testComparatorSameHand(){
 		Comparator<Player> comp = player1.getCheckResultRanking();
 		List<Card> cardsForPlayer = new ArrayList<Card>();
-		cardsForPlayer.add(new Card(Rank.Ace, Suit.Hearts));
-		cardsForPlayer.add(new Card(Rank.Ace, Suit.Diamonds));
-		cardsForPlayer.add(new Card(Rank.Six, Suit.Spades));
-		cardsForPlayer.add(new Card(Rank.Six, Suit.Clubs));
-		cardsForPlayer.add(new Card(Rank.Jack, Suit.Hearts));
+		cardsForPlayer.add(new Card(Rank.ACE, Suit.HEARTS));
+		cardsForPlayer.add(new Card(Rank.ACE, Suit.DIAMONDS));
+		cardsForPlayer.add(new Card(Rank.SIX, Suit.SPADES));
+		cardsForPlayer.add(new Card(Rank.SIX, Suit.CLUBS));
+		cardsForPlayer.add(new Card(Rank.JACK, Suit.HEARTS));
 		player1.recieveCards(cardsForPlayer);
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
-		cardsForPlayer2.add(new Card(Rank.Ace, Suit.Spades));
-		cardsForPlayer2.add(new Card(Rank.Ace, Suit.Clubs));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Hearts));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Diamonds));
-		cardsForPlayer2.add(new Card(Rank.Jack, Suit.Spades));
+		cardsForPlayer2.add(new Card(Rank.ACE, Suit.SPADES));
+		cardsForPlayer2.add(new Card(Rank.ACE, Suit.CLUBS));
+		cardsForPlayer2.add(new Card(Rank.SIX, Suit.HEARTS));
+		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
+		cardsForPlayer2.add(new Card(Rank.JACK, Suit.SPADES));
 		player2.recieveCards(cardsForPlayer2);
 		//int expected = 0;
 		//int result = comp.compare(player, player2);
@@ -106,11 +106,11 @@ public class PlayerTest {
 		player1.recieveCards(TestUtil.toLinkedList(player1CardArray));
 
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
-		cardsForPlayer2.add(new Card(Rank.King, Suit.Spades));
-		cardsForPlayer2.add(new Card(Rank.King, Suit.Clubs));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Hearts));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Diamonds));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Spades));
+		cardsForPlayer2.add(new Card(Rank.KING, Suit.SPADES));
+		cardsForPlayer2.add(new Card(Rank.KING, Suit.CLUBS));
+		cardsForPlayer2.add(new Card(Rank.SIX, Suit.HEARTS));
+		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
+		cardsForPlayer2.add(new Card(Rank.SIX, Suit.SPADES));
 		player2.recieveCards(cardsForPlayer2);
 		//int expected = -2;
 		//int result = comp.compare(player, player2);

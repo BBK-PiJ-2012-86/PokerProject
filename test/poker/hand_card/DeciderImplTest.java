@@ -25,7 +25,7 @@ public class DeciderImplTest {
 	public void testStraightFlush() {	// TODO: do properly with mocks etc
 		Card [] cardArray = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
 		Card [] expectedCards = new Card[] {};
-		CheckResult checkResult = makeCheckResult(ConditionType.StraightFlush, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.STRAIGHT_FLUSH, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -33,7 +33,7 @@ public class DeciderImplTest {
 	public void testThreeOfAKindReturnOne() {
 		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, JACK_HEART, KING_SPADE, QUEEN_SPADE,};
 		Card [] expectedCards = new Card[] {QUEEN_SPADE};
-		CheckResult checkResult = makeCheckResult(ConditionType.ThreeOfAKind, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.THREE_OF_A_KIND, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -41,7 +41,7 @@ public class DeciderImplTest {
 	public void testThreeOfAKindReturnTwo() {
 		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, JACK_HEART, SIX_CLUB, FIVE_CLUB};
 		Card [] expectedCards = new Card[] {SIX_CLUB, FIVE_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.ThreeOfAKind, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.THREE_OF_A_KIND, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -49,7 +49,7 @@ public class DeciderImplTest {
 	public void testTwoPair() {
 		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, TEN_SPADE, TEN_CLUB, FIVE_CLUB};
 		Card [] expectedCards = new Card[] {FIVE_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.TwoPair, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.TWO_PAIR, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -57,7 +57,7 @@ public class DeciderImplTest {
 	public void testPairReturnTwo() {
 		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, QUEEN_SPADE, TEN_CLUB, FIVE_CLUB};
 		Card [] expectedCards = new Card[] {TEN_CLUB, FIVE_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.Pair, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.PAIR, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -65,7 +65,7 @@ public class DeciderImplTest {
 	public void testPairReturnThree() {
 		Card [] cardArray = new Card[] {JACK_DIAMOND, JACK_SPADE, SIX_CLUB, FIVE_CLUB, FOUR_CLUB};
 		Card [] expectedCards = new Card[] {SIX_CLUB, FIVE_CLUB, FOUR_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.Pair, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.PAIR, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -73,7 +73,7 @@ public class DeciderImplTest {
 	public void testHighCardCloseToFlush() {
 		Card [] cardArray = new Card[] {ACE_SPADE, QUEEN_SPADE, JACK_SPADE, SIX_CLUB, FIVE_CLUB};
 		Card [] expectedCards = new Card[] {SIX_CLUB, FIVE_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.HighCard, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.HIGH_CARD, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	
@@ -81,7 +81,7 @@ public class DeciderImplTest {
 	public void testHighCardFarFromFlush() {
 		Card [] cardArray = new Card[] {ACE_SPADE, QUEEN_SPADE, JACK_DIAMOND, SIX_CLUB, FIVE_CLUB};
 		Card [] expectedCards = new Card[] {JACK_DIAMOND, SIX_CLUB, FIVE_CLUB};
-		CheckResult checkResult = makeCheckResult(ConditionType.HighCard, cardArray);
+		CheckResult checkResult = makeCheckResult(ConditionType.HIGH_CARD, cardArray);
 		testDecider(checkResult, expectedCards);
 	}
 	

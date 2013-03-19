@@ -14,7 +14,7 @@ import lombok.Data;
 	private final Rank rank;
 	private final Suit suit;
 	
-	private static final Comparator<Card> cardRankComparator = new Comparator<Card>() {
+	private static final Comparator<Card> CARD_RANK_COMPARATOR = new Comparator<Card>() {
 
 		@Override
 		public int compare(Card card1, Card card2) {
@@ -26,10 +26,11 @@ import lombok.Data;
 	 * @return a Comparator to compare cards by rank
 	 */
 	public static Comparator<Card> getCardRankComparator() {
-		return cardRankComparator;
+		return CARD_RANK_COMPARATOR;
 	}
 
 	public String prettyPrint() {
-		return rank.toString() + " of " + suit.toString();
+		String result = rank + " of " + suit;
+		return result.toLowerCase();
 	}
 }
