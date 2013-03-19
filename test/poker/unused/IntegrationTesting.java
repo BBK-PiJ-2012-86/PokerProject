@@ -38,7 +38,7 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		GameType type = GameType.FIVE_CARD_DRAW;
 		
 		// get a checker given the GameType
-		Checker checker = CheckerFactory.getInstance(type).getChecker();
+		Checker checker = CheckerFactory.getInstance().getChecker(type);
 		
 		//*** try it for a straight flush
 		// make a list of relevant cards
