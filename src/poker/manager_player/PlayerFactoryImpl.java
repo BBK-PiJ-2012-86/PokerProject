@@ -7,7 +7,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
 
 	
 	public HumanPlayer createHumanPlayer(String username, GameType gameType){
-		Player humanPlayer = new HumanPlayer(username, gameType);
+		Player humanPlayer = new HumanPlayer(username, gameType, new HumanPlayerConsoleInterface());
 		return (HumanPlayer) humanPlayer;
 	}
 	

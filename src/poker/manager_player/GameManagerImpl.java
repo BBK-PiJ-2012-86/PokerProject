@@ -17,13 +17,14 @@ import poker.hand_card.DeckFactory;
  *
  */
 public class GameManagerImpl implements GameManager {
-
 	private CircularArrayList<Player> players = new CircularArrayList<Player>();
 	private Deck deck = null;
 	private GameType gameType;
+	private GameListener listener;
 
-	public GameManagerImpl(GameType gameType) {
+	public GameManagerImpl(GameType gameType, GameListener listener) {
 		this.gameType = gameType;
+		this.listener = listener;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class GameManagerImpl implements GameManager {
 	public void playRound(){
 		deal();
 		playersChangeCards();
-		announceWinner(evaluateWinner());	//odd
+		listener.announceWinner(evaluateWinner());	//odd
 		deletePlayerCards();
 	}
 
@@ -79,15 +80,6 @@ public class GameManagerImpl implements GameManager {
 		}
 		return result;
 	}
-	
-	public void announceWinner(List<Player> winners){
-		System.out.println("The winner(s):");
-		for(Player player: winners){
-			System.out.println(player.getUsername());
-			System.out.println("Their hand(s):");
-			System.out.println(player.getHand());
-		}
-	}
 
 	private void deletePlayerCards(){
 		for(Player player: players){
@@ -96,7 +88,7 @@ public class GameManagerImpl implements GameManager {
 	}
 
 	public static void main(String [] args){
-		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW);
+		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW, new GameConsoleListener());
 		((GameManagerImpl) game).launch();
 	}
 

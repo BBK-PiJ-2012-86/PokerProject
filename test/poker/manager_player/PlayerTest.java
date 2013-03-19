@@ -37,8 +37,8 @@ public class PlayerTest {
 	
 	@Before
 	public void setUp(){
-		player1 = new HumanPlayer("Ted", GameType.FIVE_CARD_DRAW);
-		player2 = new HumanPlayer("Ruth", GameType.FIVE_CARD_DRAW);
+		player1 = new HumanPlayerConsoleInterface("Ted", GameType.FIVE_CARD_DRAW);
+		player2 = new HumanPlayerConsoleInterface("Ruth", GameType.FIVE_CARD_DRAW);
 		deck = DeckFactory.getDeckFactory().getDeck();
 	}
 	

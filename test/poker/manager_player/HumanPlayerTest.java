@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 
 public class HumanPlayerTest {
 
-	private HumanPlayer player;
+	private HumanPlayerConsoleInterface player;
 	
 	@Before
 	public void setUp(){
