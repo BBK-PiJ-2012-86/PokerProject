@@ -17,11 +17,11 @@ import poker.hand_card.DeckFactory;
  *
  */
 public class GameManagerImpl implements GameManager {
-	
+
 	private CircularArrayList<Player> players = new CircularArrayList<>();
 	private Deck deck = null;
 	private GameType gameType;
-	
+
 	public GameManagerImpl(GameType gameType/*,CircularArrayList<Player> players*/) {
 		this.gameType = gameType;
 		/*this.deck = null;
@@ -30,7 +30,7 @@ public class GameManagerImpl implements GameManager {
 			player.changeGameType(type);
 		}*/
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#addPlayer(poker.manager_player.Player)
 	 */
@@ -39,7 +39,7 @@ public class GameManagerImpl implements GameManager {
 		player.changeGameType(gameType);
 		players.add(player);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#deal()
 	 */
@@ -51,7 +51,7 @@ public class GameManagerImpl implements GameManager {
 			player.recieveCards(deck.dealCards(numCards));
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#playRound()
 	 */
@@ -62,7 +62,7 @@ public class GameManagerImpl implements GameManager {
 		evaluateWinner();
 		deletePlayerCards();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#playersChangeCards()
 	 */
@@ -80,7 +80,7 @@ public class GameManagerImpl implements GameManager {
 			}
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#evaluateWinner()
 	 */
@@ -95,7 +95,7 @@ public class GameManagerImpl implements GameManager {
 		System.out.println("The winner is " + tempList.get(0));
 		System.out.println("Their hand was " + tempList.get(0).getHand().toString());
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see poker.manager_player.GameManager#deletePlayerCards()
 	 */
@@ -105,11 +105,11 @@ public class GameManagerImpl implements GameManager {
 			player.removeCards();
 		}
 	}
-	
+
 	public static void main(String [] args){
 		CircularArrayList<Player> list = new CircularArrayList<Player>();
 		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW);
 		game.launch();
 	}
-	
+
 }

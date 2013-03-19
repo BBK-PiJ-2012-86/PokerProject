@@ -25,6 +25,7 @@ public class HumanPlayer extends Player {
 	
 	public int exchangeCards(){
 		int maxCardsSwapped = gameType.maxCardsSwapped();
+		displayCards();
 		System.out.println("How many cards would you like to swap (max " + maxCardsSwapped + ")?");
 		int swap = userInput.getInteger();
 		if(swap > maxCardsSwapped){
