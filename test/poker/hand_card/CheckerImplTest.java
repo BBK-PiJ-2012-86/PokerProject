@@ -36,10 +36,10 @@ import org.junit.Test;
 public class CheckerImplTest {
 	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
 	
-	@BeforeClass
+	/*@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		MultiplesCheckerFactory.getInstance().setMockChecker();
-	}
+	}*/
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
@@ -120,7 +120,7 @@ public class CheckerImplTest {
 		
 		MultiplesChecker mockMultiplesChecker = mock(MultiplesChecker.class);
 		
-		//MultiplesCheckerFactory.getInstance().setMockChecker(mockMultiplesChecker);
+		MultiplesCheckerFactory.getInstance().setMockChecker(mockMultiplesChecker);
 		
 		setFakeCheckMultiples(conditionType, multiplesExpectedList, mockMultiplesChecker);
 		
