@@ -24,6 +24,8 @@ import static poker.hand_card.TestCards.TWO_CLUB;
 
 import java.util.List;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -33,6 +35,16 @@ import org.junit.Test;
  */
 public class CheckerImplTest {
 	// pre-made cards like TEN_SPADE imported from TestCards to avoid repetition in tests
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		MultiplesCheckerFactory.getInstance().setMockChecker();
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		MultiplesCheckerFactory.getInstance().setNotMockChecker();
+	}
 	
 	@Test
 	public void testCheckStraightFlush() {
@@ -108,7 +120,7 @@ public class CheckerImplTest {
 		
 		MultiplesChecker mockMultiplesChecker = mock(MultiplesChecker.class);
 		
-		MultiplesCheckerFactory.getInstance().setMockChecker(mockMultiplesChecker);
+		//MultiplesCheckerFactory.getInstance().setMockChecker(mockMultiplesChecker);
 		
 		setFakeCheckMultiples(conditionType, multiplesExpectedList, mockMultiplesChecker);
 		

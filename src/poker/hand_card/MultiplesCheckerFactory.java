@@ -25,7 +25,9 @@ public class MultiplesCheckerFactory {
 	public void setMockChecker(MultiplesChecker mock) {
 		this.mock = mock;
 	}
-	
+	public void setNotMockChecker() {
+		this.mock = null;
+	}
 	/**
 	 * @return a MultiplesChecker for checking multiples based hand conditions
 	 */
