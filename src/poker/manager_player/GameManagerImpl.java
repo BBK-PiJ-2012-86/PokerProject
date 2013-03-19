@@ -63,16 +63,30 @@ public class GameManagerImpl implements GameManager {
 		}
 	}
 
-	private void evaluateWinner(){
+	private List<Player> evaluateWinner(){
 		List<Player> tempList = new ArrayList<Player>();
 		for(Player player: players){
 			tempList.add(player);
 		}
 		Comparator<Player> c = players.getTheDealer().getCheckResultRanking();
 		Collections.sort(tempList, c);
-		System.out.println("The winner is " + tempList.get(1).username);
-		System.out.println("The winning hand is " + tempList.get(1).getHand().toString());
+		List<Player> result = new ArrayList<Player>();
+		result.add(tempList.get(tempList.size() - 1));
+		for(int i = tempList.size() - 2; i >= 0; i--){
+			if(c.compare(tempList.get(tempList.size() - 1), tempList.get(i)) == 0){
+				result.add(tempList.get(i));
+			}
+		}
+		return result;
 	}
+	
+	public void announceWinner(List<Player> winners){
+		System.out.println("The winner(s) are:");
+		for(Player player: winners){
+			System.out.println(player.toString());
+			System.out.println("Their hand was:");
+			System.out.println(player.handToString());
+		}
 
 	private void deletePlayerCards(){
 		for(Player player: players){
