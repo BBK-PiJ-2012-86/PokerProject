@@ -71,11 +71,12 @@ public abstract class Player {
 		return HAND_RANKING; 
 	}
 
-	public String handToString() {
+	//this should sit in hand
+	/*public String handToString() {
 		StringBuffer buffer = new StringBuffer();
 		for(Card card: hand.getCards()){
 			buffer.append(card.prettyPrint() + ", ");
 		}
 		return buffer.toString();
-	}
+	}*/
 }

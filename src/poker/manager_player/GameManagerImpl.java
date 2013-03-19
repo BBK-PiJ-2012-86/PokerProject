@@ -45,7 +45,7 @@ public class GameManagerImpl implements GameManager {
 	public void playRound(){
 		deal();
 		playersChangeCards();
-		evaluateWinner();
+		announceWinner(evaluateWinner());	//odd
 		deletePlayerCards();
 	}
 
@@ -81,12 +81,13 @@ public class GameManagerImpl implements GameManager {
 	}
 	
 	public void announceWinner(List<Player> winners){
-		System.out.println("The winner(s) are:");
+		System.out.println("The winner(s):");
 		for(Player player: winners){
-			System.out.println(player.toString());
-			System.out.println("Their hand was:");
-			System.out.println(player.handToString());
+			System.out.println(player.getUsername());
+			System.out.println("Their hand(s):");
+			System.out.println(player.getHand());
 		}
+	}
 
 	private void deletePlayerCards(){
 		for(Player player: players){
