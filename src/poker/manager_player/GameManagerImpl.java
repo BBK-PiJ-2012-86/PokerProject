@@ -22,29 +22,17 @@ public class GameManagerImpl implements GameManager {
 	private Deck deck = null;
 	private GameType gameType;
 
-	public GameManagerImpl(GameType gameType/*,CircularArrayList<Player> players*/) {
+	public GameManagerImpl(GameType gameType) {
 		this.gameType = gameType;
-		/*this.deck = null;
-		this.players = players;
-		for(Player player: players){
-			player.changeGameType(type);
-		}*/
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#addPlayer(poker.manager_player.Player)
-	 */
 	@Override
 	public void addPlayer(Player player){
 		player.changeGameType(gameType);
 		players.add(player);
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#deal()
-	 */
-	@Override
-	public void deal(){
+	private void deal(){
 		int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
 		deck.shuffleDeck();
@@ -53,9 +41,6 @@ public class GameManagerImpl implements GameManager {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#playRound()
-	 */
 	@Override
 	public void playRound(){
 		deal();
@@ -64,10 +49,6 @@ public class GameManagerImpl implements GameManager {
 		deletePlayerCards();
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#playersChangeCards()
-	 */
-	@Override
 	public void playersChangeCards(){
 		for(Player player: players){
 			int cardsToSwap = player.exchangeCards();
@@ -82,11 +63,7 @@ public class GameManagerImpl implements GameManager {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#evaluateWinner()
-	 */
-	@Override
-	public void evaluateWinner(){
+	private void evaluateWinner(){
 		List<Player> tempList = new ArrayList<Player>();
 		for(Player player: players){
 			tempList.add(player);
@@ -97,18 +74,13 @@ public class GameManagerImpl implements GameManager {
 		System.out.println("Their hand was " + tempList.get(0).getHand().toString());
 	}
 
-	/* (non-Javadoc)
-	 * @see poker.manager_player.GameManager#deletePlayerCards()
-	 */
-	@Override
-	public void deletePlayerCards(){
+	private void deletePlayerCards(){
 		for(Player player: players){
 			player.removeCards();
 		}
 	}
 
 	public static void main(String [] args){
-		CircularArrayList<Player> list = new CircularArrayList<Player>();
 		GameManager game = new GameManagerImpl(GameType.FIVE_CARD_DRAW);
 		((GameManagerImpl) game).launch();
 	}

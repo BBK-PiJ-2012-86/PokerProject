@@ -2,7 +2,18 @@ package poker.manager_player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static poker.hand_card.TestCards.*;
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.FIVE_CLUB;
+import static poker.hand_card.TestCards.FOUR_CLUB;
+import static poker.hand_card.TestCards.JACK_CLUB;
+import static poker.hand_card.TestCards.JACK_HEART;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.SIX_CLUB;
+import static poker.hand_card.TestCards.SIX_SPADE;
+import static poker.hand_card.TestCards.TEN_CLUB;
+import static poker.hand_card.TestCards.TEN_SPADE;
+import static poker.hand_card.TestCards.THREE_CLUB;
+import static poker.hand_card.TestCards.TWO_CLUB;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,12 +23,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poker.hand_card.Card;
-import poker.hand_card.CheckResult;
 import poker.hand_card.Deck;
 import poker.hand_card.DeckFactory;
 import poker.hand_card.Rank;
 import poker.hand_card.Suit;
-import poker.hand_card.TestCards;
 import poker.hand_card.TestUtil;
 
 public class TestPlayer {

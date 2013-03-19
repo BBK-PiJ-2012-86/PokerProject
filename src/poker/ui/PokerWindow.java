@@ -11,6 +11,7 @@ import javax.swing.JButton;
 public class PokerWindow {
 
 	private JFrame frmPlayPoker;
+	@SuppressWarnings("unused")	//not done yet..
 	private PokerWindowModel model = new PokerWindowModel();
 
 	/**

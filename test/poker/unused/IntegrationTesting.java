@@ -30,10 +30,11 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 
 	public static void main (String[] args) {
 		IntegrationTesting joined = new IntegrationTesting();
-		joined.launch();
+		joined.launch1();
+		joined.launch2();
 	}
 	
-	/*public void launch() {
+	public void launch1() {
 		
 		GameType type = GameType.FIVE_CARD_DRAW;
 		
@@ -82,9 +83,9 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		//print out the result
 		System.out.println(result);
 
-	}*/
+	}
 	
-	public void launch() {
+	public void launch2() {
 	
 	GameType type = GameType.FIVE_CARD_DRAW;
 	Checker checker = CheckerFactory.getInstance().getChecker(type);
