@@ -22,7 +22,7 @@ public class MultiplesCheckerFactory {
 		//unused
 	}
 	
-	public void setMockChecker() {
+	public void setMockChecker(MultiplesChecker mock) {
 		this.mock = mock;
 	}
 	public void setNotMockChecker() {
