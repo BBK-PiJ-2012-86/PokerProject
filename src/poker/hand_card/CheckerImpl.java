@@ -34,7 +34,7 @@ public class CheckerImpl implements Checker {
 	
 	private CheckResult itsStraightFlush(Hand hand) {
 		hand = hand.sortByRank();
-		return new CheckResult(ConditionType.StraightFlush, hand);
+		return new CheckResult(ConditionType.STRAIGHT_FLUSH, hand);
 	}
 
 	private boolean checkStraight(Hand hand) {
@@ -58,7 +58,7 @@ public class CheckerImpl implements Checker {
 			}
 			curr = next;
 		}
-		results.add( new CheckResult(ConditionType.Straight,hand));
+		results.add( new CheckResult(ConditionType.STRAIGHT,hand));
 		return true;
 	}
 	
@@ -67,17 +67,17 @@ public class CheckerImpl implements Checker {
 		
 		// catch hand of form 5432A
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
-			if ((entry.getKey()==Rank.Ace)||(entry.getKey().compareTo(Rank.Six)<0)) {
+			if ((entry.getKey()==Rank.ACE)||(entry.getKey().compareTo(Rank.SIX)<0)) {
 				if (entry.getValue().size()<1) {return false;}
 			}
 		}
 		
 		List<Card> list = hand.getCards();
-		Card cardToMove = rankMap.get(Rank.Ace).get(0);		// to sort better ..?
+		Card cardToMove = rankMap.get(Rank.ACE).get(0);		// to sort better ..?
 		list.remove(cardToMove);
 		list.add(cardToMove);
 		
-		results.add( new CheckResult(ConditionType.Straight, hand));
+		results.add( new CheckResult(ConditionType.STRAIGHT, hand));
 		return true;
 	}
 
@@ -87,7 +87,7 @@ public class CheckerImpl implements Checker {
 		for (List<Card> list : suitMap.values()) {
 			if (list.size()==FLUSH_SIZE) {
 				hand = hand.sortByRank();
-				results.add( new CheckResult(ConditionType.Flush, hand));
+				results.add( new CheckResult(ConditionType.FLUSH, hand));
 				return true;
 			}
 		}

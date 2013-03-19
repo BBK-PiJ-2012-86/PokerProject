@@ -1,7 +1,7 @@
 package poker.singleton;
 
 public class ComputerIDs {
-	private static ComputerIDs instance = null; 
+	private static ComputerIDs INSTANCE = null; 
 	private int counter = 1; 
 	
 	protected ComputerIDs(){
@@ -14,9 +14,9 @@ public class ComputerIDs {
 	}
 	
 	public static ComputerIDs getInstance(){
-		if(instance == null){
-			instance = new ComputerIDs();
+		if(INSTANCE == null){
+			INSTANCE = new ComputerIDs();
 		}
-		return instance;
+		return INSTANCE;
 	}
 }

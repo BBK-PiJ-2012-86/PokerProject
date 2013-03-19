@@ -8,13 +8,13 @@ import poker.manager_player.GameType;
  */
 public class CheckerFactory {
 	
-	private static final CheckerFactory instance = new CheckerFactory();
+	private static final CheckerFactory INSTANCE = new CheckerFactory();
 
 	/**
 	 * @return a CheckerFactory
 	 */
 	public static CheckerFactory getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	public Checker getChecker(GameType gameType) {

@@ -29,4 +29,8 @@ public class ComputerPlayer extends Player {
 		return cards.size();
 	}
 	
+	public void receiveCards(List<Card> cards){
+		hand.addCards(cards);	// don't bother printing out for computer players
+	}
+	
 }

@@ -26,7 +26,7 @@ public class MultiplesChecker {
 		for (Entry<Rank,List<Card>> entry : rankMap.entrySet()) {
 			switch (entry.getValue().size()) {
 			case 4:
-				return makeFromRank(ConditionType.FourOfAKind, entry.getKey(), rankMap, hand);
+				return makeFromRank(ConditionType.FOUR_OF_A_KIND, entry.getKey(), rankMap, hand);
 			case 3:
 				tripleRank = entry.getKey();
 				break;
@@ -48,16 +48,16 @@ public class MultiplesChecker {
 	private CheckResult checkTupleConditions(Map<Rank, List<Card>> rankMap,
 			Rank tripleRank, Rank pairRank1, Rank pairRank2, Hand hand) {
 		if ((tripleRank!=null) && (pairRank1!=null)) {
-			return makeFromRank(ConditionType.FullHouse, tripleRank, rankMap, hand);
+			return makeFromRank(ConditionType.FULL_HOUSE, tripleRank, rankMap, hand);
 		}
 		if ((tripleRank!=null) && (pairRank1==null)) {
-			return makeFromRank(ConditionType.ThreeOfAKind, tripleRank, rankMap, hand);
+			return makeFromRank(ConditionType.THREE_OF_A_KIND, tripleRank, rankMap, hand);
 		}
 		if (pairRank2!=null) {
 			return makeFromPairs(rankMap, pairRank1, pairRank2, hand);
 		}
 		if (pairRank1!=null) {
-			return makeFromRank(ConditionType.Pair, pairRank1, rankMap, hand);
+			return makeFromRank(ConditionType.PAIR, pairRank1, rankMap, hand);
 		} else {
 			return makeFromHighCard(rankMap, hand);
 		}
@@ -82,13 +82,13 @@ public class MultiplesChecker {
 		List<Card> tupleList = rankMap.get(higher);
 		tupleList.addAll(rankMap.get(lower));
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.TwoPair, hand));
+		return( new CheckResult(ConditionType.TWO_PAIR, hand));
 	}
 	
 	private CheckResult makeFromHighCard(Map<Rank, List<Card>> rankMap, Hand hand) {
 		List<Card> tupleList = new LinkedList<Card>();
 		hand = hand.moveCardsToStartOthersRankOrder(tupleList);
-		return( new CheckResult(ConditionType.HighCard, hand));
+		return( new CheckResult(ConditionType.HIGH_CARD, hand));
 	}
 
 }

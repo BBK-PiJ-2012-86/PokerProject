@@ -7,13 +7,13 @@ package poker.hand_card;
  */
 public class MultiplesCheckerFactory {
 	
-	private static final MultiplesCheckerFactory instance = new MultiplesCheckerFactory();
+	private static final MultiplesCheckerFactory INSTANCE = new MultiplesCheckerFactory();
 	
 	/**
 	 * @return a MultiplesCheckerFactory
 	 */
 	public static MultiplesCheckerFactory getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 	
 	private MultiplesChecker mock = null;

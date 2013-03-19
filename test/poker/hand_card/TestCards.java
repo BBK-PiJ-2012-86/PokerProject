@@ -8,26 +8,26 @@ package poker.hand_card;
 
 public class TestCards {
 	
-	public static final Card ACE_SPADE = new Card(Rank.Ace, Suit.Spades);
-	public static final Card KING_SPADE = new Card(Rank.King, Suit.Spades);
-	public static final Card QUEEN_SPADE = new Card(Rank.Queen, Suit.Spades);
-	public static final Card JACK_SPADE = new Card(Rank.Jack, Suit.Spades);
-	public static final Card TEN_SPADE = new Card(Rank.Ten, Suit.Spades);
-	public static final Card NINE_SPADE = new Card(Rank.Nine, Suit.Spades);
+	public static final Card ACE_SPADE = new Card(Rank.ACE, Suit.SPADES);
+	public static final Card KING_SPADE = new Card(Rank.KING, Suit.SPADES);
+	public static final Card QUEEN_SPADE = new Card(Rank.QUEEN, Suit.SPADES);
+	public static final Card JACK_SPADE = new Card(Rank.JACK, Suit.SPADES);
+	public static final Card TEN_SPADE = new Card(Rank.TEN, Suit.SPADES);
+	public static final Card NINE_SPADE = new Card(Rank.NINE, Suit.SPADES);
 	
-	public static final Card JACK_HEART = new Card(Rank.Jack, Suit.Hearts);
-	public static final Card JACK_CLUB = new Card(Rank.Jack, Suit.Clubs);
-	public static final Card JACK_DIAMOND = new Card(Rank.Jack, Suit.Diamonds);
+	public static final Card JACK_HEART = new Card(Rank.JACK, Suit.HEARTS);
+	public static final Card JACK_CLUB = new Card(Rank.JACK, Suit.CLUBS);
+	public static final Card JACK_DIAMOND = new Card(Rank.JACK, Suit.DIAMONDS);
 	
-	public static final Card TEN_CLUB = new Card(Rank.Ten, Suit.Clubs);
-	public static final Card TEN_DIAMOND = new Card(Rank.Ten, Suit.Diamonds);
+	public static final Card TEN_CLUB = new Card(Rank.TEN, Suit.CLUBS);
+	public static final Card TEN_DIAMOND = new Card(Rank.TEN, Suit.DIAMONDS);
 	
-	public static final Card SIX_CLUB = new Card(Rank.Six, Suit.Clubs);
-	public static final Card SIX_SPADE = new Card(Rank.Six, Suit.Spades);
+	public static final Card SIX_CLUB = new Card(Rank.SIX, Suit.CLUBS);
+	public static final Card SIX_SPADE = new Card(Rank.SIX, Suit.SPADES);
 	
-	public static final Card FIVE_CLUB = new Card(Rank.Five, Suit.Clubs);
-	public static final Card FOUR_CLUB = new Card(Rank.Four, Suit.Clubs);
-	public static final Card THREE_CLUB = new Card(Rank.Three, Suit.Clubs);
-	public static final Card TWO_CLUB = new Card(Rank.Two, Suit.Clubs);
+	public static final Card FIVE_CLUB = new Card(Rank.FIVE, Suit.CLUBS);
+	public static final Card FOUR_CLUB = new Card(Rank.FOUR, Suit.CLUBS);
+	public static final Card THREE_CLUB = new Card(Rank.THREE, Suit.CLUBS);
+	public static final Card TWO_CLUB = new Card(Rank.TWO, Suit.CLUBS);
 
 }

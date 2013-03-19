@@ -11,13 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import lombok.Getter;
-import lombok.ToString;
 
 /**
  * 
  *
  */
-@ToString
+//@ToString use a better one
 public class HandImpl implements Hand{
 	@Getter private final List<Card> cards = new LinkedList<Card>();
 	
@@ -82,5 +81,15 @@ public class HandImpl implements Hand{
 		this.addCards(cardsToMove);
 		this.addCards(others);
 		return this;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		for (Card card : cards) {
+			result+=card.prettyPrint()+", ";	//make nicer
+		}
+		return "["+result+"]";	//change to use a string builder
+		
 	}
 }

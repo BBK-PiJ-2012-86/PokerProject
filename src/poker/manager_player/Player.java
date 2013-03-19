@@ -19,27 +19,26 @@ public abstract class Player {
 	@Getter protected Hand hand;
 	@Getter protected final String username;
 	protected Checker checker;
-	//protected int maxCardSwapped; // mb not needed
 	
 	public Player(String username, GameType gameType) {
 		this.gameType = gameType;
 		this.username = username;
 		this.checker = CheckerFactory.getInstance().getChecker(gameType);
 		this.hand = new HandImpl();
-		//setMaxCardSwapped(gameType);
 	}
-	
-	/*public void setMaxCardSwapped(GameType gameType){
-		maxCardSwapped = gameType.maxCardsSwapped();
-	}*/
+
 	
 	public void removeCards(){
 		hand.clearHand();
 	}
 	
-	public void recieveCards(List<Card> cards){
+	/*public void receiveCards(List<Card> cards){
 		hand.addCards(cards);
-	}
+		// print out their new hand
+		System.out.println("I am receiving cards");	//do differently for the two players
+		System.out.println(hand);
+	}*/
+	public abstract void receiveCards(List<Card> cards);
 	
 	public abstract int exchangeCards();
 	

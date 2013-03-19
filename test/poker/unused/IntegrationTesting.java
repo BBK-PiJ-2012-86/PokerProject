@@ -19,26 +19,27 @@ import poker.manager_player.GameType;
 
 public class IntegrationTesting {		// I will change this to a JUnit test..
 	
-	private static final Card ACE_OF_SPADES = new Card(Rank.Ace, Suit.Spades);
-	private static final Card KING_OF_SPADES = new Card(Rank.King, Suit.Spades);
-	private static final Card QUEEN_OF_SPADES = new Card(Rank.Queen, Suit.Spades);
-	private static final Card JACK_OF_SPADES = new Card(Rank.Jack, Suit.Spades);
-	private static final Card TEN_OF_SPADES = new Card(Rank.Ten, Suit.Spades);
-	private static final Card TEN_OF_HEARTS = new Card(Rank.Ten, Suit.Hearts);
-	private static final Card SIX_OF_HEARTS = new Card(Rank.Six, Suit.Hearts);
-	private static final Card SIX_OF_DIAMONDS = new Card(Rank.Six, Suit.Diamonds);
+	private static final Card ACE_OF_SPADES = new Card(Rank.ACE, Suit.SPADES);
+	private static final Card KING_OF_SPADES = new Card(Rank.KING, Suit.SPADES);
+	private static final Card QUEEN_OF_SPADES = new Card(Rank.QUEEN, Suit.SPADES);
+	private static final Card JACK_OF_SPADES = new Card(Rank.JACK, Suit.SPADES);
+	private static final Card TEN_OF_SPADES = new Card(Rank.TEN, Suit.SPADES);
+	private static final Card TEN_OF_HEARTS = new Card(Rank.TEN, Suit.HEARTS);
+	private static final Card SIX_OF_HEARTS = new Card(Rank.SIX, Suit.HEARTS);
+	private static final Card SIX_OF_DIAMONDS = new Card(Rank.SIX, Suit.DIAMONDS);
 
 	public static void main (String[] args) {
 		IntegrationTesting joined = new IntegrationTesting();
-		joined.launch();
+		joined.launch1();
+		joined.launch2();
 	}
 	
-	public void launch() {
+	public void launch1() {
 		
 		GameType type = GameType.FIVE_CARD_DRAW;
 		
 		// get a checker given the GameType
-		Checker checker = CheckerFactory.getInstance(type).getChecker();
+		Checker checker = CheckerFactory.getInstance().getChecker(type);
 		
 		//*** try it for a straight flush
 		// make a list of relevant cards
@@ -83,5 +84,32 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		System.out.println(result);
 
 	}
+	
+	public void launch2() {
+	
+	GameType type = GameType.FIVE_CARD_DRAW;
+	Checker checker = CheckerFactory.getInstance().getChecker(type);
+	
+	Card[] cardArray1 = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
+	List<Card> cardList1 = new LinkedList<Card>();
+	for (Card card : cardArray1) {
+		cardList1.add(card);
+	}
+	Hand hand1 = new HandImpl(cardList1);
+	CheckResult result1 = checker.check(hand1);
+	System.out.println(result1);
+	
+	Card[] cardArray2 = new Card[] {new Card(Rank.NINE, Suit.SPADES), KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
+	List<Card> cardList2 = new LinkedList<Card>();
+	for (Card card : cardArray2) {
+		cardList2.add(card);
+	}
+	Hand hand2 = new HandImpl(cardList2);
+	CheckResult result2 = checker.check(hand2);
+	System.out.println(result2);
+	
+	System.out.println(CheckResult.getComparator().compare(result1, result2));
+	System.out.println(CheckResult.getComparator().compare(result2, result1));
+}
 		
 }

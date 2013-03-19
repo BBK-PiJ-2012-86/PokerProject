@@ -25,10 +25,10 @@ import lombok.Data;
 	 * @return a Comparator to order CheckResults by usual poker rules
 	 */
 	public static Comparator<CheckResult> getComparator() {
-		return comparator;
+		return CR_COMPARATOR;
 	}
 	
-	private static final Comparator<CheckResult> comparator = new Comparator<CheckResult>() {
+	private static final Comparator<CheckResult> CR_COMPARATOR = new Comparator<CheckResult>() {
 
 		@Override
 		public int compare(CheckResult cr1, CheckResult cr2) {

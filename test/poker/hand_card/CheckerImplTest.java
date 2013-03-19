@@ -25,7 +25,6 @@ import static poker.hand_card.TestCards.TWO_CLUB;
 import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -53,7 +52,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
 		Card[] expectedCards = rankSortedCards;
 		
-		testChecker(ConditionType.StraightFlush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.STRAIGHT_FLUSH, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -63,7 +62,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, NINE_SPADE};
 		Card[] expectedCards = rankSortedCards;
 		
-		testChecker(ConditionType.Flush, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.FLUSH, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -73,7 +72,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_CLUB};
 		Card[] expectedCards = rankSortedCards;
 		
-		testChecker(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.STRAIGHT, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -83,7 +82,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {ACE_SPADE, FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB};
 		Card[] expectedCards = new Card[] {FIVE_CLUB, FOUR_CLUB, THREE_CLUB, TWO_CLUB, ACE_SPADE};
 		
-		testChecker(ConditionType.Straight, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.STRAIGHT, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -93,7 +92,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = new Card[] {QUEEN_SPADE, JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND};
 		Card[] expectedCards = new Card[] {JACK_HEART, JACK_CLUB, JACK_SPADE, JACK_DIAMOND, QUEEN_SPADE};
 		
-		testChecker(ConditionType.FourOfAKind, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.FOUR_OF_A_KIND, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 	
 	@Test
@@ -103,7 +102,7 @@ public class CheckerImplTest {
 		Card[] rankSortedCards = multiplesExpected;
 		Card[] expectedCards = multiplesExpected;
 		
-		testChecker(ConditionType.FullHouse, inputCards, rankSortedCards, multiplesExpected, expectedCards);
+		testChecker(ConditionType.FULL_HOUSE, inputCards, rankSortedCards, multiplesExpected, expectedCards);
 	}
 
 	private void testChecker(ConditionType conditionType, Card[] inputCards, Card[] rankSortedCards, Card[] multiplesExpected, Card[] expectedCards) {
@@ -141,8 +140,8 @@ public class CheckerImplTest {
 	private void setFakeCheckMultiples(ConditionType conditionType, List<Card> multiplesExpectedList,
 			MultiplesChecker mockMultiplesChecker) {
 		CheckResult fakeResult;
-		if (conditionType.equals(ConditionType.StraightFlush)||conditionType.equals(ConditionType.Straight)||conditionType.equals(ConditionType.Flush)) {
-			fakeResult = new CheckResult(ConditionType.HighCard, new HandImpl(multiplesExpectedList));
+		if (conditionType.equals(ConditionType.STRAIGHT_FLUSH)||conditionType.equals(ConditionType.STRAIGHT)||conditionType.equals(ConditionType.FLUSH)) {
+			fakeResult = new CheckResult(ConditionType.HIGH_CARD, new HandImpl(multiplesExpectedList));
 		} else {
 			fakeResult = new CheckResult(conditionType, new HandImpl(multiplesExpectedList));
 		}

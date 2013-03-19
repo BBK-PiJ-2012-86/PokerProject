@@ -17,16 +17,16 @@ public class CardTest {
 	
 	@Before
 	public void setUp(){
-		card1 = new Card(Rank.Ace, Suit.Spades);
-		card2 = new Card(Rank.Two, Suit.Diamonds);
-		card3 = new Card(Rank.Ten, Suit.Clubs);
+		card1 = new Card(Rank.ACE, Suit.SPADES);
+		card2 = new Card(Rank.TWO, Suit.DIAMONDS);
+		card3 = new Card(Rank.TEN, Suit.CLUBS);
 		comp = Card.getCardRankComparator();
 	}
 	
 	@Test
 	public void testToString1() {
 		
-		String expected = "Ace of Spades";
+		String expected = "ace of spades";
 		String result = card1.prettyPrint();
 		assertEquals(expected, result);
 	}
@@ -34,14 +34,14 @@ public class CardTest {
 	@Test
 	public void testToString2(){
 		
-		String expected = "Two of Diamonds";
+		String expected = "two of diamonds";
 		String result = card2.prettyPrint();
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testToString3(){
-		String expected = "Ten of Clubs";
+		String expected = "ten of clubs";
 		String result = card3.prettyPrint();
 		assertEquals(expected, result);
 	}
@@ -69,7 +69,7 @@ public class CardTest {
 	
 	@Test
 	public void comparatorTest4(){
-		Card card4 = new Card(Rank.Ace, Suit.Diamonds);
+		Card card4 = new Card(Rank.ACE, Suit.DIAMONDS);
 		assertTrue(comp.compare(card1, card4) == 0);
 	}
 }
