@@ -24,10 +24,11 @@ public class HumanPlayer extends Player {
 	}
 	
 	public int exchangeCards(){
-		System.out.println("How many cards would you like to swap (max " + maxCardSwapped + ")?");
+		int maxCardsSwapped = gameType.maxCardsSwapped();
+		System.out.println("How many cards would you like to swap (max " + maxCardsSwapped + ")?");
 		int swap = userInput.getInteger();
-		if(swap > maxCardSwapped){
-			throw new IllegalArgumentException("Maximum number of cards is " + maxCardSwapped);
+		if(swap > maxCardsSwapped){
+			throw new IllegalArgumentException("Maximum number of cards is " + maxCardsSwapped);	//change to just loop and ask again?
 		}
 		if(swap > 0){
 			List<Card> cards = new ArrayList<Card>();
@@ -43,7 +44,7 @@ public class HumanPlayer extends Player {
 		System.out.println("Which card would you like to swap (From 1 - 5)?");
 		int swap = userInput.getInteger();
 		if(swap > hand.getCards().size() || swap < 1){
-			throw new IllegalArgumentException("That is not a valid selection");
+			throw new IllegalArgumentException("That is not a valid selection");		//change to just loop and ask again?
 		}
 		return hand.getCardAt(swap - 1);
 	}

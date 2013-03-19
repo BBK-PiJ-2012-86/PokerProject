@@ -4,7 +4,7 @@
 package poker.hand_card;
 
 
- //Some re-usable pre-made cards to use in testing.	!!Think about mocks for these too..
+ //Some re-usable pre-made cards to use in testing.	!!Think about mocks for these too.. ??
 
 public class TestCards {
 	
@@ -23,6 +23,8 @@ public class TestCards {
 	public static final Card TEN_DIAMOND = new Card(Rank.Ten, Suit.Diamonds);
 	
 	public static final Card SIX_CLUB = new Card(Rank.Six, Suit.Clubs);
+	public static final Card SIX_SPADE = new Card(Rank.Six, Suit.Spades);
+	
 	public static final Card FIVE_CLUB = new Card(Rank.Five, Suit.Clubs);
 	public static final Card FOUR_CLUB = new Card(Rank.Four, Suit.Clubs);
 	public static final Card THREE_CLUB = new Card(Rank.Three, Suit.Clubs);

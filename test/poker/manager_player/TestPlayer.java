@@ -2,6 +2,7 @@ package poker.manager_player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static poker.hand_card.TestCards.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,56 +12,59 @@ import org.junit.Before;
 import org.junit.Test;
 
 import poker.hand_card.Card;
+import poker.hand_card.CheckResult;
 import poker.hand_card.Deck;
 import poker.hand_card.DeckFactory;
 import poker.hand_card.Rank;
 import poker.hand_card.Suit;
+import poker.hand_card.TestCards;
+import poker.hand_card.TestUtil;
 
 public class TestPlayer {
 
-	private Player player;
+	private Player player1;
 	private Deck deck;
 	private Player player2;
 	
 	@Before
 	public void setUp(){
-		player = new HumanPlayer("Ted", GameType.fiveCardDraw);
-		player2 = new HumanPlayer("Ruth", GameType.fiveCardDraw);
+		player1 = new HumanPlayer("Ted", GameType.FIVE_CARD_DRAW);
+		player2 = new HumanPlayer("Ruth", GameType.FIVE_CARD_DRAW);
 		deck = DeckFactory.getDeckFactory().getDeck();
 	}
 	
 	@Test
 	public void testGetUsername() {
-		assertEquals("Ted", player.getUsername());
+		assertEquals("Ted", player1.getUsername());
 	}
 	
 	@Test
 	public void testRecieveCards(){
 		List<Card> cards = deck.dealCards(5);
-		player.recieveCards(cards);
+		player1.recieveCards(cards);
 		int expected = 5;
-		int result = player.getHand().getCards().size();
+		int result = player1.getHand().getCards().size();
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testRemoveCards(){
 		List<Card> cards = deck.dealCards(5);
-		player.recieveCards(cards);
-		player.removeCards();
-		assertTrue(player.getHand().getCards().size() == 0);
+		player1.recieveCards(cards);
+		player1.removeCards();
+		assertTrue(player1.getHand().getCards().size() == 0);
 	}
 	
 	@Test
 	public void testComparatorSameHand(){
-		Comparator<Player> comp = player.getCheckResultRanking();
+		Comparator<Player> comp = player1.getCheckResultRanking();
 		List<Card> cardsForPlayer = new ArrayList<Card>();
 		cardsForPlayer.add(new Card(Rank.Ace, Suit.Hearts));
 		cardsForPlayer.add(new Card(Rank.Ace, Suit.Diamonds));
 		cardsForPlayer.add(new Card(Rank.Six, Suit.Spades));
 		cardsForPlayer.add(new Card(Rank.Six, Suit.Clubs));
 		cardsForPlayer.add(new Card(Rank.Jack, Suit.Hearts));
-		player.recieveCards(cardsForPlayer);
+		player1.recieveCards(cardsForPlayer);
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
 		cardsForPlayer2.add(new Card(Rank.Ace, Suit.Spades));
 		cardsForPlayer2.add(new Card(Rank.Ace, Suit.Clubs));
@@ -68,43 +72,30 @@ public class TestPlayer {
 		cardsForPlayer2.add(new Card(Rank.Six, Suit.Diamonds));
 		cardsForPlayer2.add(new Card(Rank.Jack, Suit.Spades));
 		player2.recieveCards(cardsForPlayer2);
-		int expected = 0;
-		int result = comp.compare(player, player2);
-		assertEquals(expected, result);
+		//int expected = 0;
+		//int result = comp.compare(player, player2);
+		//assertEquals(expected, result);
+		assertTrue(comp.compare(player1, player2)==0);
 	}
 	
 	@Test
-	public void testComparatorAcesOverKings(){
-		Comparator<Player> comp = player.getCheckResultRanking();
-		List<Card> cardsForPlayer = new ArrayList<Card>();
-		cardsForPlayer.add(new Card(Rank.Ace, Suit.Hearts));
-		cardsForPlayer.add(new Card(Rank.Ace, Suit.Diamonds));
-		cardsForPlayer.add(new Card(Rank.Six, Suit.Spades));
-		cardsForPlayer.add(new Card(Rank.Six, Suit.Clubs));
-		cardsForPlayer.add(new Card(Rank.Jack, Suit.Hearts));
-		player.recieveCards(cardsForPlayer);
-		List<Card> cardsForPlayer2 = new ArrayList<Card>();
-		cardsForPlayer2.add(new Card(Rank.King, Suit.Spades));
-		cardsForPlayer2.add(new Card(Rank.King, Suit.Clubs));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Hearts));
-		cardsForPlayer2.add(new Card(Rank.Six, Suit.Diamonds));
-		cardsForPlayer2.add(new Card(Rank.Jack, Suit.Spades));
-		player2.recieveCards(cardsForPlayer2);
-		int expected = 1;
-		int result = comp.compare(player, player2);
-		assertEquals(expected, result);
+	public void testComparatorJacksOverTens(){
+		Card[] player1CardArray = new Card[] {JACK_SPADE, JACK_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
+		player1.recieveCards(TestUtil.toLinkedList(player1CardArray));
+		Card[] player2CardArray = new Card[] {TEN_SPADE, TEN_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
+		player2.recieveCards(TestUtil.toLinkedList(player2CardArray));
+
+		System.out.println(player1.check());	//wrong - using mock multiples checker???? only wrong when running all tests....
+		
+		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
+		assertTrue(comp.compare(player1, player2)>0);
 	}
 	
 	@Test
 	public void testComparatorLowStraightVersusFullHouse(){
-		Comparator<Player> comp = player.getCheckResultRanking();
-		List<Card> cardsForPlayer = new ArrayList<Card>();
-		cardsForPlayer.add(new Card(Rank.Ace, Suit.Hearts));
-		cardsForPlayer.add(new Card(Rank.Two, Suit.Diamonds));
-		cardsForPlayer.add(new Card(Rank.Three, Suit.Spades));
-		cardsForPlayer.add(new Card(Rank.Four, Suit.Clubs));
-		cardsForPlayer.add(new Card(Rank.Five, Suit.Hearts));
-		player.recieveCards(cardsForPlayer);
+		Card[] player1CardArray = new Card[] {ACE_SPADE, TWO_CLUB, THREE_CLUB, FOUR_CLUB, FIVE_CLUB};
+		player1.recieveCards(TestUtil.toLinkedList(player1CardArray));
+
 		List<Card> cardsForPlayer2 = new ArrayList<Card>();
 		cardsForPlayer2.add(new Card(Rank.King, Suit.Spades));
 		cardsForPlayer2.add(new Card(Rank.King, Suit.Clubs));
@@ -112,8 +103,10 @@ public class TestPlayer {
 		cardsForPlayer2.add(new Card(Rank.Six, Suit.Diamonds));
 		cardsForPlayer2.add(new Card(Rank.Six, Suit.Spades));
 		player2.recieveCards(cardsForPlayer2);
-		int expected = -2;
-		int result = comp.compare(player, player2);
-		assertEquals(expected, result);
+		//int expected = -2;
+		//int result = comp.compare(player, player2);
+		//assertEquals(expected, result);
+		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
+		assertTrue(comp.compare(player1, player2)<0);
 	}
 }
