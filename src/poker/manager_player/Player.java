@@ -71,4 +71,12 @@ public abstract class Player {
 	public Comparator<Player> getCheckResultRanking(){
 		return HAND_RANKING; 
 	}
+
+	public String handToString() {
+		StringBuffer buffer = new StringBuffer();
+		for(Card card: hand.getCards()){
+			buffer.append(card.prettyPrint() + ", ");
+		}
+		return buffer.toString();
+	}
 }

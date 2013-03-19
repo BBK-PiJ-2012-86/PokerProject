@@ -1,5 +1,7 @@
 package poker.manager_player;
 
+import java.util.List;
+
 public interface GameManager {
 
 	public abstract void addPlayer(Player player);
@@ -10,7 +12,7 @@ public interface GameManager {
 
 	public abstract void playersChangeCards();
 
-	public abstract void evaluateWinner();
+	public abstract List<Player> evaluateWinner();
 
 	public abstract void deletePlayerCards();
 
