@@ -33,7 +33,7 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		joined.launch();
 	}
 	
-	public void launch() {
+	/*public void launch() {
 		
 		GameType type = GameType.FIVE_CARD_DRAW;
 		
@@ -82,6 +82,33 @@ public class IntegrationTesting {		// I will change this to a JUnit test..
 		//print out the result
 		System.out.println(result);
 
+	}*/
+	
+	public void launch() {
+	
+	GameType type = GameType.FIVE_CARD_DRAW;
+	Checker checker = CheckerFactory.getInstance().getChecker(type);
+	
+	Card[] cardArray1 = new Card[] {ACE_OF_SPADES, KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
+	List<Card> cardList1 = new LinkedList<Card>();
+	for (Card card : cardArray1) {
+		cardList1.add(card);
 	}
+	Hand hand1 = new HandImpl(cardList1);
+	CheckResult result1 = checker.check(hand1);
+	System.out.println(result1);
+	
+	Card[] cardArray2 = new Card[] {new Card(Rank.Nine, Suit.Spades), KING_OF_SPADES, JACK_OF_SPADES, TEN_OF_SPADES, QUEEN_OF_SPADES};
+	List<Card> cardList2 = new LinkedList<Card>();
+	for (Card card : cardArray2) {
+		cardList2.add(card);
+	}
+	Hand hand2 = new HandImpl(cardList2);
+	CheckResult result2 = checker.check(hand2);
+	System.out.println(result2);
+	
+	System.out.println(CheckResult.getComparator().compare(result1, result2));
+	System.out.println(CheckResult.getComparator().compare(result2, result1));
+}
 		
 }
