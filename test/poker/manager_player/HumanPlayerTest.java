@@ -38,7 +38,7 @@ public class HumanPlayerTest {
 	}
 	
 	@Test
-	public void removeFirstCard(){
+	public void testRemoveFirstCard1(){
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(5);
 		player.setUserInput(userInput);
@@ -48,7 +48,7 @@ public class HumanPlayerTest {
 	}
 	
 	@Test
-	public void RemoveLastCard(){
+	public void testRemoveLastCard2(){
 		UserInput userInput = mock(UserInput.class);
 		when(userInput.getInteger()).thenReturn(1);
 		player.setUserInput(userInput);
