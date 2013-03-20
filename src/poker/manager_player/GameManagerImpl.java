@@ -95,8 +95,8 @@ public class GameManagerImpl implements GameManager {
 	private void launch(){
 		PlayerFactory pfactory = new PlayerFactoryImpl();
 		players.add(pfactory.createHumanPlayer("Ted", GameType.FIVE_CARD_DRAW));
-		players.add(pfactory.createComputerPlayer(GameType.FIVE_CARD_DRAW));
-		for(int i = 0; i < 5; i++){
+		players.add(pfactory.createComputerPlayer(GameType.FIVE_CARD_DRAW, AiType.NORMAL));
+		for(int i = 0; i < 2; i++){
 			System.out.println("NEW GAME! Have fun :)");
 			playRound();
 			System.out.println();

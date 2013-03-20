@@ -14,12 +14,14 @@ import poker.hand_card.DeciderFactory;
  */
 public class ComputerPlayer extends Player {
 	
+	private AiType aiType;
 	private Decider computerAI;
 
-	public ComputerPlayer(String username, GameType gameType){
+	public ComputerPlayer(String username, GameType gameType, AiType aiType){
 		super(username, gameType);
-		DeciderFactory d = new DeciderFactory();
-		computerAI = d.getDecider(gameType);
+		this.aiType = aiType;
+		DeciderFactory d = DeciderFactory.getInstance();
+		computerAI = d.getDecider(gameType, aiType);
 	}
 	
 	@Override
@@ -36,8 +38,8 @@ public class ComputerPlayer extends Player {
 	@Override
 	public synchronized void changeGameType(GameType gameType) {
 		super.changeGameType(gameType);
-		DeciderFactory d = new DeciderFactory();
-		computerAI = d.getDecider(gameType); 
+		DeciderFactory d = DeciderFactory.getInstance();
+		computerAI = d.getDecider(gameType, aiType);
 	}
 	
 }

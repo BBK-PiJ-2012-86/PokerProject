@@ -1,5 +1,6 @@
 package poker.hand_card;
 
+import poker.manager_player.AiType;
 import poker.manager_player.GameType;
 
 /**
@@ -8,19 +9,18 @@ import poker.manager_player.GameType;
  */
 public class DeciderFactory {
 	
+	private static final DeciderFactory INSTANCE = new DeciderFactory();
+
 	/**
-	 * @param gameType the type of poker to be played
-	 * @return a Decider to enable swap choosing
+	 * @return a DeciderFactory
 	 */
-	public Decider getDecider(GameType gameType){
-		Decider result;
-		switch (gameType){
-		case FIVE_CARD_DRAW:
-			result = new DeciderImpl();
-			break;
-		default: result = new DeciderImpl();
-			break;
-		}
-		return result;
+	public static DeciderFactory getInstance() {
+		return INSTANCE;
 	}
+
+	public Decider getDecider(GameType gameType, AiType aiType) {
+		return new DeciderImpl();	//set up to have others depending on gameType / aiType
+	}
+	
+
 }

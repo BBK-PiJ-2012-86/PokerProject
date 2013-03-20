@@ -18,7 +18,8 @@ public interface PlayerFactory {
 	/**
 	 * Creates a computer poker player
 	 * @param gameType the type of poker the player is going to play
+	 * @param aiType the type of AI used to decide card swaps
 	 * @return the computer player
 	 */
-	public ComputerPlayer createComputerPlayer(GameType gameType);
+	public ComputerPlayer createComputerPlayer(GameType gameType, AiType aiType);
 }
