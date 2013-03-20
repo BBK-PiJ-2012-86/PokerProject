@@ -3,14 +3,18 @@ package poker.manager_player;
 public interface GameManager {
 
 	/**
-	 * Adds a player to the game
-	 * @param player the player to be added to the game
-	 */
-	public abstract void addPlayer(Player player);
-
-	/**
 	 * Play a round of poker
 	 */
 	public abstract void playRound();
+
+	/**
+	 * @param username the name of the human player to be added
+	 */
+	void addHumanPlayer(String username);
+
+	/**
+	 * @param aiType the AI this player will use to decide card swaps
+	 */
+	void addComputerPlayer(AiType aiType);
 
 }
