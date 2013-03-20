@@ -18,7 +18,7 @@ public abstract class Player {
 	protected GameType gameType;
 	@Getter protected Hand hand;
 	@Getter protected final String username;
-	protected Checker checker;
+	protected Checker checker;		//Problem: IS2_INCONSISTENT_SYNC ... ?? not sure
 	
 	public Player(String username, GameType gameType) {
 		this.gameType = gameType;
@@ -65,12 +65,4 @@ public abstract class Player {
 		return HAND_RANKING; 
 	}
 
-	//this should sit in hand
-	/*public String handToString() {
-		StringBuffer buffer = new StringBuffer();
-		for(Card card: hand.getCards()){
-			buffer.append(card.prettyPrint() + ", ");
-		}
-		return buffer.toString();
-	}*/
 }
