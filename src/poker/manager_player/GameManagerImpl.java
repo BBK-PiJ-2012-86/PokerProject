@@ -86,7 +86,4 @@ public class GameManagerImpl implements GameManager {
 			player.removeCards();
 		}
 	}
-
-	
-
 }

@@ -1,6 +1,7 @@
 package poker.manager_player;
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import poker.hand_card.Card;
@@ -37,7 +38,7 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 				swap = scanner.nextInt();
 			}
 			return swap;
-		}catch (NumberFormatException e){
+		}catch (InputMismatchException e){
 			getCountOfCardsToSwap(max);
 		}
 		return (Integer) null;
@@ -53,7 +54,7 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 				swap = scanner.nextInt();
 			}
 			return hand.getCardAt(swap - 1);
-		} catch (NumberFormatException e){
+		} catch (InputMismatchException e){
 			selectCardsToRemove();
 		}
 		return null;
