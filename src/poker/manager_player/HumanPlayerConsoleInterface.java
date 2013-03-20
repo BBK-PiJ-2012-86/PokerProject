@@ -29,18 +29,25 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 	
 	public int getCountOfCardsToSwap(int max) {
 		System.out.println("How many cards would you like to swap (max " + max + ")?");
-		try{
-			Integer swap = scanner.nextInt();
-			while(swap > max || swap < 0){
-				System.out.println("That is not a valid selection, you cannot swap more than " + max + " cards");
-				System.out.println("How many cards would you like to swap (max " + max + ")?");
-				swap = scanner.nextInt();
+		int swap = 0;
+		boolean needInt = true;
+		while (needInt) {
+			String s = scanner.nextLine();
+			try{
+			    swap = Integer.parseInt(s);
+			    needInt = false;
 			}
-			return swap;
-		}catch (NumberFormatException e){
-			getCountOfCardsToSwap(max);
+			catch(NumberFormatException ex){
+			    System.out.println("Please enter a single numerical digit e.g. 1");
+			}
 		}
-		return (Integer) null;
+					
+		while(swap > max || swap < 0){
+			System.out.println("That is not a valid selection, you cannot swap more than " + max + " cards");
+			System.out.println("How many cards would you like to swap (max " + max + ")?");
+			swap = scanner.nextInt();
+		}
+		return swap;
 	}
 	
 	public Card selectCardsToRemove() {

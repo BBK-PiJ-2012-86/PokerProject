@@ -18,7 +18,7 @@ public abstract class Player {
 	protected GameType gameType /**/ = null;
 	@Getter protected Hand hand;
 	@Getter protected final String username;
-	protected Checker checker;		//Problem: IS2_INCONSISTENT_SYNC ... ?? not sure
+	protected Checker checker;
 	
 	public Player(String username/*, GameType gameType*/) {
 		//this.gameType = gameType;
@@ -28,7 +28,7 @@ public abstract class Player {
 	}
 
 	
-	public synchronized void removeCards(){
+	public void removeCards(){
 		hand.clearHand();
 	}
 	
@@ -40,13 +40,13 @@ public abstract class Player {
 		return checker.check(hand);
 	}
 	
-	public synchronized void changeGameType(GameType gameType) {
+	public void changeGameType(GameType gameType) {
 		this.gameType = gameType;
 		checker = CheckerFactory.getInstance().getChecker(gameType);
 	}
 	
 	
-	public synchronized void removeCardsFromHand(List<Card> cards){
+	public void removeCardsFromHand(List<Card> cards){
 		hand.removeCards(cards);
 	}
 
