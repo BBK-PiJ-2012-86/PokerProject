@@ -32,7 +32,7 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PlayerTest {
+public class PlayerTest {//Don't bother testing seperately?
 
 	private Player player1;
 	private Player player2;
@@ -44,8 +44,8 @@ public class PlayerTest {
 		HumanPlayerListener listener = mock(HumanPlayerListener.class);
 		when(listener.getCountOfCardsToSwap(anyInt())).thenReturn(1); //TODO: change in relevant tests - need local field listener
 		when(listener.selectCardsToRemove(anyInt())).thenReturn(null); //TODO
-		player1 = new HumanPlayer("Ted", /*GameType.FIVE_CARD_DRAW,*/ listener);
-		player2 = new HumanPlayer("Ruth", /*GameType.FIVE_CARD_DRAW,*/ listener);
+		player1 = new HumanPlayer("Ted", listener);
+		player2 = new HumanPlayer("Ruth", listener);
 		deck = DeckFactory.getDeckFactory().getDeck();
 	}
 	
