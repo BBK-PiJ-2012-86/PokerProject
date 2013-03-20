@@ -9,22 +9,21 @@ import poker.hand_card.CheckResult;
 import poker.hand_card.Checker;
 import poker.hand_card.CheckerFactory;
 import poker.hand_card.Hand;
-import poker.hand_card.HandImpl;
 
 
 
 public abstract class Player {
 	
-	protected GameType gameType;
+	protected GameType gameType /**/ = null;
 	@Getter protected Hand hand;
 	@Getter protected final String username;
 	protected Checker checker;		//Problem: IS2_INCONSISTENT_SYNC ... ?? not sure
 	
-	public Player(String username, GameType gameType) {
-		this.gameType = gameType;
+	public Player(String username/*, GameType gameType*/) {
+		//this.gameType = gameType;
 		this.username = username;
-		this.checker = CheckerFactory.getInstance().getChecker(gameType);
-		this.hand = new HandImpl();
+		//this.checker = CheckerFactory.getInstance().getChecker(gameType);
+		//this.hand = new HandImpl();
 	}
 
 	
@@ -41,7 +40,7 @@ public abstract class Player {
 	}
 	
 	public synchronized void changeGameType(GameType gameType) {
-		this.gameType = gameType;
+		//this.gameType = gameType;
 		checker = CheckerFactory.getInstance().getChecker(gameType);
 	}
 	

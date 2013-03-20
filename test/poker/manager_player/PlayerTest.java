@@ -44,8 +44,8 @@ public class PlayerTest {
 		HumanPlayerListener listener = mock(HumanPlayerListener.class);
 		when(listener.getCountOfCardsToSwap(anyInt())).thenReturn(1); //TODO: change in relevant tests - need local field listener
 		when(listener.selectCardsToRemove()).thenReturn(TWO_CLUB); //TODO
-		player1 = new HumanPlayer("Ted", GameType.FIVE_CARD_DRAW, listener);
-		player2 = new HumanPlayer("Ruth", GameType.FIVE_CARD_DRAW, listener);
+		player1 = new HumanPlayer("Ted", /*GameType.FIVE_CARD_DRAW,*/ listener);
+		player2 = new HumanPlayer("Ruth", /*GameType.FIVE_CARD_DRAW,*/ listener);
 		deck = DeckFactory.getDeckFactory().getDeck();
 	}
 	

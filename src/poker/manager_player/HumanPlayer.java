@@ -8,8 +8,8 @@ import poker.hand_card.Card;
 public class HumanPlayer extends Player{
 	private final HumanPlayerListener listener;
 
-	public HumanPlayer(String username, GameType gameType, HumanPlayerListener listener) {
-		super(username, gameType);
+	public HumanPlayer(String username/*, GameType gameType*/, HumanPlayerListener listener) {
+		super(username/*, gameType*/);
 		this.listener = listener;
 	}
 
