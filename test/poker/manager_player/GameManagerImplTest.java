@@ -2,12 +2,24 @@ package poker.manager_player;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import poker.manager_player.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.FIVE_CLUB;
+import static poker.hand_card.TestCards.FOUR_CLUB;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.KING_SPADE;
+import static poker.hand_card.TestCards.QUEEN_SPADE;
+import static poker.hand_card.TestCards.TEN_SPADE;
+import static poker.hand_card.TestCards.THREE_CLUB;
+import static poker.hand_card.TestCards.TWO_CLUB;
+import poker.hand_card.*;
 
 public class GameManagerImplTest {
 
@@ -67,6 +79,38 @@ public class GameManagerImplTest {
 		int expected = 52 - 13;
 		int result = gameManager.getDeck().getCards().size();
 		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testEvaluateWinnerEqualHand(){
+		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		Player computerPlayer1 = playerFactory.createComputerPlayer(AiType.NORMAL);
+		Player humanPlayer1 = playerFactory.createHumanPlayer("Ted");
+		Card[] Cards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
+		List<Card> list = TestUtil.toLinkedList(Cards);
+		computerPlayer1.receiveCards(list);
+		humanPlayer1.receiveCards(list);
+		gameManager.addPlayer(computerPlayer1);
+		gameManager.addPlayer(humanPlayer1);
+		List<Player> result = gameManager.evaluateWinner();
+		assertEquals(2, result.size());
+	}
+	
+	@Test
+	public void testEvaluateWinnerDifferentHand(){
+		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		Player computerPlayer1 = playerFactory.createComputerPlayer(AiType.NORMAL);
+		Player humanPlayer1 = playerFactory.createHumanPlayer("Ted");
+		Card[] Cards = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
+		List<Card> list = TestUtil.toLinkedList(Cards);
+		humanPlayer1.receiveCards(list);
+		Cards = new Card[] {FIVE_CLUB, ACE_SPADE, FOUR_CLUB, THREE_CLUB, TWO_CLUB};
+		list = TestUtil.toLinkedList(Cards);
+		computerPlayer1.receiveCards(list);
+		gameManager.addPlayer(computerPlayer1);
+		gameManager.addPlayer(humanPlayer1);
+		List<Player> result = gameManager.evaluateWinner();
+		assertEquals(humanPlayer1, result.get(0));
 	}
 
 }
