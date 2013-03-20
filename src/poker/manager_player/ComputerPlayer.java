@@ -17,11 +17,11 @@ public class ComputerPlayer extends Player {
 	private AiType aiType;
 	private Decider computerAI;
 
-	public ComputerPlayer(String username, GameType gameType, AiType aiType){
-		super(username, gameType);
+	public ComputerPlayer(String username/*, GameType gameType*/, AiType aiType){
+		super(username/*, gameType*/);
 		this.aiType = aiType;
-		DeciderFactory d = DeciderFactory.getInstance();
-		computerAI = d.getDecider(gameType, aiType);
+		/*DeciderFactory d = DeciderFactory.getInstance();
+		computerAI = d.getDecider(gameType, aiType);*/
 	}
 	
 	@Override
