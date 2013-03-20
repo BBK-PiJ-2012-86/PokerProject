@@ -2,18 +2,8 @@ package poker.manager_player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static poker.hand_card.TestCards.ACE_SPADE;
-import static poker.hand_card.TestCards.FIVE_CLUB;
-import static poker.hand_card.TestCards.FOUR_CLUB;
-import static poker.hand_card.TestCards.JACK_CLUB;
-import static poker.hand_card.TestCards.JACK_HEART;
-import static poker.hand_card.TestCards.JACK_SPADE;
-import static poker.hand_card.TestCards.SIX_CLUB;
-import static poker.hand_card.TestCards.SIX_SPADE;
-import static poker.hand_card.TestCards.TEN_CLUB;
-import static poker.hand_card.TestCards.TEN_SPADE;
-import static poker.hand_card.TestCards.THREE_CLUB;
-import static poker.hand_card.TestCards.TWO_CLUB;
+import static poker.hand_card.TestCards.*;
+
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -70,26 +60,18 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testComparatorSameHand(){
+	public void testComparatorSameHandStrength(){
 		Comparator<Player> comp = Player.getCheckResultRanking();
-		List<Card> cardsForPlayer = new ArrayList<Card>();
-		cardsForPlayer.add(new Card(Rank.ACE, Suit.HEARTS));
-		cardsForPlayer.add(new Card(Rank.ACE, Suit.DIAMONDS));
-		cardsForPlayer.add(new Card(Rank.SIX, Suit.SPADES));
-		cardsForPlayer.add(new Card(Rank.SIX, Suit.CLUBS));
-		cardsForPlayer.add(new Card(Rank.JACK, Suit.HEARTS));
-		player1.receiveCards(cardsForPlayer);
-		List<Card> cardsForPlayer2 = new ArrayList<Card>();
-		cardsForPlayer2.add(new Card(Rank.ACE, Suit.SPADES));
-		cardsForPlayer2.add(new Card(Rank.ACE, Suit.CLUBS));
-		cardsForPlayer2.add(new Card(Rank.SIX, Suit.HEARTS));
-		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
-		cardsForPlayer2.add(new Card(Rank.JACK, Suit.SPADES));
+		Card[] cardsArray1 = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_CLUB, JACK_DIAMOND};
+		List<Card> cardsForPlayer1 = TestUtil.toLinkedList(cardsArray1);
+		player1.receiveCards(cardsForPlayer1);
+		Card[] cardsArray2 = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_CLUB, JACK_HEART};
+		List<Card> cardsForPlayer2 = TestUtil.toLinkedList(cardsArray2);
 		player2.receiveCards(cardsForPlayer2);
 		assertTrue(comp.compare(player1, player2)==0);
 	}
 	
-	@Test
+	/*@Test
 	public void testComparatorJacksOverTens(){
 		Card[] player1CardArray = new Card[] {JACK_SPADE, JACK_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
 		player1.receiveCards(TestUtil.toLinkedList(player1CardArray));
@@ -115,5 +97,5 @@ public class PlayerTest {
 
 		Comparator<Player> comp = Player.getCheckResultRanking();		//should use mock checkers?
 		assertTrue(comp.compare(player1, player2)<0);
-	}
+	}*/
 }
