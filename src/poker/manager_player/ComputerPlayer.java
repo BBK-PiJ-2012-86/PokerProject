@@ -15,7 +15,7 @@ import poker.hand_card.DeciderFactory;
 public class ComputerPlayer extends Player {
 	
 	private AiType aiType;
-	private Decider computerAI;
+	private Decider computerAI = null;
 
 	public ComputerPlayer(String username/*, GameType gameType*/, AiType aiType){
 		super(username/*, gameType*/);

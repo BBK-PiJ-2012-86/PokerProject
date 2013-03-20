@@ -89,7 +89,9 @@ public class HandImpl implements Hand{
 			buf.append(cards.get(i).prettyPrint());
 			buf.append(", ");
 		}
-		buf.append(cards.get(size-1).prettyPrint());	//no ", " after last card
+		if (size!=0) {
+			buf.append(cards.get(size-1).prettyPrint());	//no ", " after last card
+		}
 		String result = buf.toString();
 		return "["+result+"]";
 	}
