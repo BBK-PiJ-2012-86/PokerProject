@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import lombok.Getter;
+
 import poker.hand_card.Card;
 import poker.hand_card.Deck;
 import poker.hand_card.DeckFactory;
@@ -17,7 +19,7 @@ import poker.hand_card.DeckFactory;
  *
  */
 public class GameManagerImpl implements GameManager {
-	private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
+	@Getter private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
 	private Deck deck = null;
 	private GameType gameType;
 	private GameListener listener;
@@ -41,12 +43,12 @@ public class GameManagerImpl implements GameManager {
 		addPlayer(p);
 	}
 	
-	private void addPlayer(Player player){
+	public void addPlayer(Player player){
 		player.changeGameType(gameType);
 		players.add(player);
 	}
 
-	private void deal(){
+	public void deal(){
 		int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
 		deck.shuffleDeck();
@@ -77,7 +79,7 @@ public class GameManagerImpl implements GameManager {
 		}
 	}
 
-	private List<Player> evaluateWinner(){
+	public List<Player> evaluateWinner(){
 		List<Player> tempList = new ArrayList<Player>();
 		for(Player player: players){
 			tempList.add(player);
@@ -94,7 +96,7 @@ public class GameManagerImpl implements GameManager {
 		return result;
 	}
 
-	private void deletePlayerCards(){
+	public void deletePlayerCards(){
 		for(Player player: players){
 			player.removeCards();
 		}
