@@ -24,7 +24,7 @@ public class HandImpl implements Hand{
 		this.cards.addAll(cards);
 	}
 	
-	public HandImpl() {	//poss delete this one   ? Need to look at my Mocks
+	public HandImpl() {
 		this(new LinkedList<Card>());
 	}
 	
@@ -45,7 +45,7 @@ public class HandImpl implements Hand{
 	
 	@Override
 	public Hand sortByRank() {
-		Collections.sort(cards, new Comparator<Card>(){		//change to NOT have side affect?
+		Collections.sort(cards, new Comparator<Card>(){
 
 			@Override
 			public int compare(Card card1, Card card2) {
@@ -56,20 +56,6 @@ public class HandImpl implements Hand{
 		});
 		return this;
 	}
-	
-	//in progress
-	/*public List<Card> getSortedCards() {
-		List<Card> sortedList = new LinkedList<Card>();
-		sortedList.addAll(cards);
-		Collections.sort(sortedList, new Comparator<Card>(){
-			@Override
-			public int compare(Card card1, Card card2) {
-				// reversed order of operands to get high->low ordering
-				return card2.getRank().compareTo(card1.getRank());
-			}
-		});
-		return sortedList;
-	}*/
 
 	@Override
 	public Iterator<Card> iterator() {
@@ -81,7 +67,6 @@ public class HandImpl implements Hand{
 		cards.clear();
 	}
 	
-	// changed to return Hand for mocking (to consider..)
 	@Override
 	public Hand moveCardsToStartOthersRankOrder(List<Card> cardsToMove) {
 		this.sortByRank();
@@ -99,11 +84,14 @@ public class HandImpl implements Hand{
 	
 	@Override
 	public String toString() {
-		String result = "";
-		for (Card card : cards) {
-			result+=card.prettyPrint()+", ";	//make nicer
+		StringBuffer buf = new StringBuffer();
+		int size = cards.size();
+		for (int i = 0; i<size-1; i++) {
+			buf.append(cards.get(i).prettyPrint());
+			buf.append(", ");
 		}
-		return "["+result+"]";	//change to use a string builder
-		
+		buf.append(cards.get(size-1).prettyPrint());	//no ", " after last card
+		String result = buf.toString();
+		return "["+result+"]";
 	}
 }

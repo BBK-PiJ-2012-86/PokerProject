@@ -28,16 +28,10 @@ public abstract class Player {
 	}
 
 	
-	public void removeCards(){
+	public synchronized void removeCards(){
 		hand.clearHand();
 	}
 	
-	/*public void receiveCards(List<Card> cards){
-		hand.addCards(cards);
-		// print out their new hand
-		System.out.println("I am receiving cards");	//do differently for the two players
-		System.out.println(hand);
-	}*/
 	public abstract void receiveCards(List<Card> cards);
 	
 	public abstract int exchangeCards();
@@ -46,13 +40,13 @@ public abstract class Player {
 		return checker.check(hand);
 	}
 	
-	public void changeGameType(GameType gameType) {
+	public synchronized void changeGameType(GameType gameType) {
 		this.gameType = gameType;
 		checker = CheckerFactory.getInstance().getChecker(gameType);
 	}
 	
 	
-	public void removeCardsFromHand(List<Card> cards){
+	public synchronized void removeCardsFromHand(List<Card> cards){
 		hand.removeCards(cards);
 	}
 

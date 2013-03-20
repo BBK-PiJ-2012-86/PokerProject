@@ -30,7 +30,14 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void receiveCards(List<Card> cards){
-		hand.addCards(cards);	// don't bother printing out for computer players
+		hand.addCards(cards);
+	}
+	
+	@Override
+	public synchronized void changeGameType(GameType gameType) {
+		super.changeGameType(gameType);
+		DeciderFactory d = new DeciderFactory();
+		computerAI = d.getDecider(gameType); 
 	}
 	
 }

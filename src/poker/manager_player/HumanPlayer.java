@@ -14,13 +14,13 @@ public class HumanPlayer extends Player{
 	}
 
 	@Override
-	public void receiveCards(List<Card> cards) {
+	public synchronized void receiveCards(List<Card> cards) {
 		hand.addCards(cards);
 		listener.onReceiveCards(hand);
 	}
 
 	@Override
-	public int exchangeCards() {
+	public synchronized int exchangeCards() {
 		int maxCardsSwapped = gameType.maxCardsSwapped();
 		
 		int swap = listener.getCountOfCardsToSwap(maxCardsSwapped);
@@ -36,5 +36,5 @@ public class HumanPlayer extends Player{
 		}
 		return swap;
 	}
-
+	
 }
