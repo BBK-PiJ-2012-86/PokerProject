@@ -29,25 +29,34 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 	
 	public int getCountOfCardsToSwap(int max) {
 		System.out.println("How many cards would you like to swap (max " + max + ")?");
-		int swap = scanner.nextInt();
-		while(swap > max || swap < 0){
-			System.out.println("That is not a valid selection, you cannot swap more than " + max + " cards");
-			System.out.println("How many cards would you like to swap (max " + max + ")?");
-			swap = scanner.nextInt();
+		try{
+			Integer swap = scanner.nextInt();
+			while(swap > max || swap < 0){
+				System.out.println("That is not a valid selection, you cannot swap more than " + max + " cards");
+				System.out.println("How many cards would you like to swap (max " + max + ")?");
+				swap = scanner.nextInt();
+			}
+			return swap;
+		}catch (NumberFormatException e){
+			getCountOfCardsToSwap(max);
 		}
-		return swap;
+		return (Integer) null;
 	}
 	
 	public Card selectCardsToRemove() {
 		System.out.println("Which card would you like to swap (From 1 - 5)?");
-		int swap = scanner.nextInt();
-		while(swap > hand.getCards().size() || swap < 1){
-			System.out.println("That is not a valid selection, it was not between 1 and 5");
-			System.out.println("Which card would you like to swap (From 1 - 5)?");
-			swap = scanner.nextInt();
+		try{
+			int swap = scanner.nextInt();
+			while(swap > hand.getCards().size() || swap < 1){
+				System.out.println("That is not a valid selection, it was not between 1 and 5");
+				System.out.println("Which card would you like to swap (From 1 - 5)?");
+				swap = scanner.nextInt();
+			}
+			return hand.getCardAt(swap - 1);
+		} catch (NumberFormatException e){
+			selectCardsToRemove();
 		}
-		return hand.getCardAt(swap - 1);
+		return null;
 	}
-
 }
 
