@@ -27,6 +27,18 @@ public class GameManagerImpl implements GameManager {
 		this.listener = listener;
 	}
 
+	public void createComputerPlayer(AiType AI){
+		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		Player p = playerFactory.createComputerPlayer(AI);
+		addPlayer(p);
+	}
+	
+	public void addHumanPlayer(String username){
+		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		Player p = playerFactory.createHumanPlayer(username);
+		addPlayer(p);
+	}
+	
 	@Override
 	public void addPlayer(Player player){
 		player.changeGameType(gameType);
