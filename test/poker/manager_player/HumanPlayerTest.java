@@ -1,18 +1,20 @@
 package poker.manager_player;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import poker.hand_card.*;
-import poker.ui.*;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+
+import poker.hand_card.Card;
+import poker.hand_card.Rank;
+import poker.hand_card.Suit;
 
 public class HumanPlayerTest {
 
-	private HumanPlayerConsoleInterface player;
+	private HumanPlayer player;
 	
 	@Before
 	public void setUp(){
@@ -29,13 +31,13 @@ public class HumanPlayerTest {
 	
 	@Test
 	public void testSelectCardsToRemove() {
-		fail("need to sort out the user input");
-		UserInput userInput = mock(UserInput.class);
-		when(userInput.getInteger()).thenReturn(3);
+		fail("need to sort out the user input");		//needs rewriting - see PlayerTest where I started mocking listener.
+		//UserInput userInput = mock(UserInput.class);
+		//when(userInput.getInteger()).thenReturn(3);
 		//player.setUserInput(userInput);
-		Card expected = new Card(Rank.JACK, Suit.DIAMONDS);
-		Card result = player.selectCardsToRemove();
-		assertEquals(expected, result);
+		//Card expected = new Card(Rank.JACK, Suit.DIAMONDS);
+		//Card result = player.selectCardsToRemove();
+		//assertEquals(expected, result);
 	}
 	
 	/*@Test

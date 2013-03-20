@@ -28,17 +28,24 @@ import poker.hand_card.DeckFactory;
 import poker.hand_card.Rank;
 import poker.hand_card.Suit;
 import poker.hand_card.TestUtil;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PlayerTest {
 
 	private Player player1;
-	private Deck deck;
 	private Player player2;
+	private Deck deck;
+	
 	
 	@Before
 	public void setUp(){
-		player1 = new HumanPlayerConsoleInterface("Ted", GameType.FIVE_CARD_DRAW);
-		player2 = new HumanPlayerConsoleInterface("Ruth", GameType.FIVE_CARD_DRAW);
+		HumanPlayerListener listener = mock(HumanPlayerListener.class);
+		when(listener.getCountOfCardsToSwap(anyInt())).thenReturn(1); //TODO: change in relevant tests - need local field listener
+		when(listener.selectCardsToRemove()).thenReturn(TWO_CLUB); //TODO
+		player1 = new HumanPlayer("Ted", GameType.FIVE_CARD_DRAW, listener);
+		player2 = new HumanPlayer("Ruth", GameType.FIVE_CARD_DRAW, listener);
 		deck = DeckFactory.getDeckFactory().getDeck();
 	}
 	
@@ -48,7 +55,7 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testRecieveCards(){
+	public void testReceiveCards(){
 		List<Card> cards = deck.dealCards(5);
 		player1.receiveCards(cards);
 		int expected = 5;
@@ -81,9 +88,6 @@ public class PlayerTest {
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
 		cardsForPlayer2.add(new Card(Rank.JACK, Suit.SPADES));
 		player2.receiveCards(cardsForPlayer2);
-		//int expected = 0;
-		//int result = comp.compare(player, player2);
-		//assertEquals(expected, result);
 		assertTrue(comp.compare(player1, player2)==0);
 	}
 	
@@ -93,8 +97,6 @@ public class PlayerTest {
 		player1.receiveCards(TestUtil.toLinkedList(player1CardArray));
 		Card[] player2CardArray = new Card[] {TEN_SPADE, TEN_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
 		player2.receiveCards(TestUtil.toLinkedList(player2CardArray));
-
-		System.out.println(player1.check());	//wrong - using mock multiples checker???? only wrong when running all tests....
 		
 		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
 		assertTrue(comp.compare(player1, player2)>0);
@@ -112,9 +114,7 @@ public class PlayerTest {
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.DIAMONDS));
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.SPADES));
 		player2.receiveCards(cardsForPlayer2);
-		//int expected = -2;
-		//int result = comp.compare(player, player2);
-		//assertEquals(expected, result);
+
 		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
 		assertTrue(comp.compare(player1, player2)<0);
 	}

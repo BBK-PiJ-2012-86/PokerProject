@@ -68,7 +68,7 @@ public class DeciderImpl implements Decider {
 		
 		//4 of a straight if: rank range of bottom 4 or top 4 cards is less than 5
 		//ignores low Ace case - but if low cards may be better bet to swap out low cards anyway.
-		hand = hand.sortByRank();																	//!!! this will ruin the rest
+		//NB hand will already be in rank order
 		int bottom4range = hand.getCardAt(0).getRank().ordinal()-hand.getCardAt(3).getRank().ordinal();
 		int top4range = hand.getCardAt(1).getRank().ordinal()-hand.getCardAt(4).getRank().ordinal();
 		if (bottom4range<5) {
