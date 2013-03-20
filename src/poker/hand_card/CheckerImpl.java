@@ -73,7 +73,7 @@ public class CheckerImpl implements Checker {
 		}
 		
 		List<Card> list = hand.getCards();
-		Card cardToMove = rankMap.get(Rank.ACE).get(0);		// to sort better ..?
+		Card cardToMove = rankMap.get(Rank.ACE).get(0);
 		list.remove(cardToMove);
 		list.add(cardToMove);
 		

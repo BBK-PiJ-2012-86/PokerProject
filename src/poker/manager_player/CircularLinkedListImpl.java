@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedList<T>{
+public class CircularLinkedListImpl<T> implements CircularLinkedList<T>{
 
 	private int size = 0;
 	private Node<T> head = null;

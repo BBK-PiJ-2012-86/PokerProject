@@ -18,7 +18,7 @@ public class CheckerFactory {
 	}
 
 	public Checker getChecker(GameType gameType) {
-		return new CheckerImpl();	//have others depending on gameType
+		return new CheckerImpl();	//set up to have others depending on gameType
 	}
 
 }

@@ -16,7 +16,6 @@ import lombok.Getter;
  * 
  *
  */
-//@ToString use a better one
 public class HandImpl implements Hand{
 	@Getter private final List<Card> cards = new LinkedList<Card>();
 	

@@ -5,41 +5,42 @@ import java.util.Iterator;
 /**
  * @param <T>
  */
-public interface CircularLinkedList<T> {
+public interface CircularLinkedList<T> extends Iterable<T> {
 
 	/**
-	 * @return
+	 * @return true if the list has no elements, else false
 	 */
-	public abstract boolean isEmpty();
+	boolean isEmpty();
 
 	/**
-	 * @param t
+	 * @param t the element to be added
 	 */
-	public abstract void add(T t);
+	void add(T t);
 
 	/**
-	 * @param t
-	 * @return
+	 * @param t the element to be removed
+	 * @return true if successful, else false
 	 */
-	public abstract boolean remove(T t);
+	boolean remove(T t);
 
 	/**
-	 * @param n
+	 * Moves the head of the list around
+	 * @param n the number of places around to move the head
 	 */
-	public abstract void moveHead(int n);
+	void moveHead(int n);
 
 	/**
-	 * @return
+	 * @return an iterator for the list
 	 */
-	public abstract Iterator<T> iterator();
+	Iterator<T> iterator();
 
 	/**
-	 * @return
+	 * @return a String representation of the list
 	 */
-	public abstract String toString();
+	String toString();
 
 	/**
-	 * @return
+	 * @return the size of the list
 	 */
 	int size();
 

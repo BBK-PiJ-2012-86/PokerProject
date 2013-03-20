@@ -73,7 +73,7 @@ public class PlayerTest {
 	
 	@Test
 	public void testComparatorSameHand(){
-		Comparator<Player> comp = player1.getCheckResultRanking();
+		Comparator<Player> comp = Player.getCheckResultRanking();
 		List<Card> cardsForPlayer = new ArrayList<Card>();
 		cardsForPlayer.add(new Card(Rank.ACE, Suit.HEARTS));
 		cardsForPlayer.add(new Card(Rank.ACE, Suit.DIAMONDS));
@@ -98,7 +98,7 @@ public class PlayerTest {
 		Card[] player2CardArray = new Card[] {TEN_SPADE, TEN_CLUB, SIX_CLUB, SIX_SPADE, JACK_HEART};
 		player2.receiveCards(TestUtil.toLinkedList(player2CardArray));
 		
-		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
+		Comparator<Player> comp = Player.getCheckResultRanking();		//should use mock checkers?
 		assertTrue(comp.compare(player1, player2)>0);
 	}
 	
@@ -115,7 +115,7 @@ public class PlayerTest {
 		cardsForPlayer2.add(new Card(Rank.SIX, Suit.SPADES));
 		player2.receiveCards(cardsForPlayer2);
 
-		Comparator<Player> comp = player1.getCheckResultRanking();		//should use mock checkers?
+		Comparator<Player> comp = Player.getCheckResultRanking();		//should use mock checkers?
 		assertTrue(comp.compare(player1, player2)<0);
 	}
 }
