@@ -33,7 +33,7 @@ public class ComputerPlayerTest {
 	
 	@Before
 	public void setUp(){
-		computerPlayer = new PlayerFactoryImpl().createComputerPlayer(GameType.FIVE_CARD_DRAW, AiType.NORMAL);
+		computerPlayer = new PlayerFactoryImpl().createComputerPlayer(/*GameType.FIVE_CARD_DRAW,*/ AiType.NORMAL);
 		cards = new ArrayList<Card>();
 	}
 	
