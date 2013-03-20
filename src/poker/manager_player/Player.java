@@ -30,7 +30,9 @@ public abstract class Player {
 		hand.clearHand();
 	}
 	
-	public abstract void receiveCards(List<Card> cards);
+	public void receiveCards(List<Card> cards) {
+		hand.addCards(cards);
+	}
 	
 	public abstract int exchangeCards();
 	
