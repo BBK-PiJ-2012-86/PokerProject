@@ -1,7 +1,7 @@
 /**
  * 
  */
-package poker.unused;
+package poker.manager_player;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,8 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-import poker.unused.CircularLinkedListImpl;
+import poker.manager_player.CircularLinkedList;
+import poker.manager_player.CircularLinkedListImpl;
 
 
 /**

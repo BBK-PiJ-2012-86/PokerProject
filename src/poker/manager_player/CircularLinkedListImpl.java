@@ -1,10 +1,11 @@
 /**
  * 
  */
-package poker.unused;
+package poker.manager_player;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 
 public class CircularLinkedListImpl<T> implements Iterable<T>, CircularLinkedList<T>{
 

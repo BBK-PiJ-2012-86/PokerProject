@@ -17,7 +17,7 @@ import poker.hand_card.DeckFactory;
  *
  */
 public class GameManagerImpl implements GameManager {
-	private CircularArrayList<Player> players = new CircularArrayList<Player>();
+	private CircularLinkedListImpl<Player> players = new CircularLinkedListImpl<Player>();
 	private Deck deck = null;
 	private GameType gameType;
 	private GameListener listener;
@@ -46,7 +46,7 @@ public class GameManagerImpl implements GameManager {
 	public void playRound(){
 		deal();
 		playersChangeCards();
-		listener.announceWinner(evaluateWinner());	//odd
+		listener.announceWinner(evaluateWinner());
 		deletePlayerCards();
 	}
 
@@ -69,7 +69,7 @@ public class GameManagerImpl implements GameManager {
 		for(Player player: players){
 			tempList.add(player);
 		}
-		Comparator<Player> c = players.getTheDealer().getCheckResultRanking();
+		Comparator<Player> c = Player.getCheckResultRanking();
 		Collections.sort(tempList, c);
 		List<Player> result = new ArrayList<Player>();
 		result.add(tempList.get(tempList.size() - 1));

@@ -1,4 +1,4 @@
-package poker.manager_player;
+package poker.unused;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.util.Iterator;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import poker.unused.CircularArrayList;
 
 
 public class CircularArrayListTest {

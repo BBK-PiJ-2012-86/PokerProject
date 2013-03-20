@@ -1,4 +1,4 @@
-package poker.unused;
+package poker.manager_player;
 
 import java.util.Iterator;
 

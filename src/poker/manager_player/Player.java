@@ -61,7 +61,7 @@ public abstract class Player {
 		}
 	};
 	
-	public Comparator<Player> getCheckResultRanking(){
+	public static Comparator<Player> getCheckResultRanking(){
 		return HAND_RANKING; 
 	}
 
