@@ -31,10 +31,7 @@ public class ComputerPlayer extends Player {
 		return cards.size();
 	}
 	
-	public void receiveCards(List<Card> cards){
-		hand.addCards(cards);
-	}
-	
+
 	@Override
 	public synchronized void changeGameType(GameType gameType) {
 		super.changeGameType(gameType);

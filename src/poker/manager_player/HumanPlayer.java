@@ -14,7 +14,7 @@ public class HumanPlayer extends Player{
 
 	@Override
 	public void receiveCards(List<Card> cards) {
-		hand.addCards(cards);
+		super.receiveCards(cards);
 		listener.onReceiveCards(hand);
 	}
 
