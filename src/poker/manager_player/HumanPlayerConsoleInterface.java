@@ -30,7 +30,12 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 	public int getCountOfCardsToSwap(int max) {
 		System.out.println("How many cards would you like to swap (max " + max + ")?");
 		int swap = scanner.nextInt();
-		return 
+		while(swap > max || swap < 0){
+			System.out.println("That is not a valid selection, you cannot swap more than " + max + " cards");
+			System.out.println("How many cards would you like to swap (max " + max + ")?");
+			swap = scanner.nextInt();
+		}
+		return swap;
 	}
 	
 	public Card selectCardsToRemove() {

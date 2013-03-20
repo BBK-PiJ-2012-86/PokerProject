@@ -24,9 +24,6 @@ public class HumanPlayer extends Player{
 		int maxCardsSwapped = gameType.maxCardsSwapped();
 		
 		int swap = listener.getCountOfCardsToSwap(maxCardsSwapped);
-		if(swap > maxCardsSwapped){
-			throw new IllegalArgumentException("Maximum number of cards is " + maxCardsSwapped);	//change to just loop and ask again?
-		}
 		if(swap > 0){
 			List<Card> cards = new ArrayList<Card>();
 			for(int i = 0; i < swap; i++){
