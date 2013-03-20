@@ -14,20 +14,20 @@ public class HumanPlayer extends Player{
 	}
 
 	@Override
-	public synchronized void receiveCards(List<Card> cards) {
+	public void receiveCards(List<Card> cards) {
 		hand.addCards(cards);
 		listener.onReceiveCards(hand);
 	}
 
 	@Override
-	public synchronized int exchangeCards() {
+	public int exchangeCards() {
 		int maxCardsSwapped = gameType.maxCardsSwapped();
 		
 		int swap = listener.getCountOfCardsToSwap(maxCardsSwapped);
 		if(swap > 0){
 			List<Card> cards = new ArrayList<Card>();
 			for(int i = 0; i < swap; i++){
-				cards.add(listener.selectCardsToRemove());
+				cards.add(listener.selectCardsToRemove());	//needs to check it is a different card  ??
 			}
 			removeCardsFromHand(cards);
 		}
