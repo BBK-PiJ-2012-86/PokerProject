@@ -20,7 +20,7 @@ import poker.hand_card.DeckFactory;
  */
 public class GameManagerImpl implements GameManager {
 	@Getter private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
-	private Deck deck = null;
+	@Getter private Deck deck = null;
 	private GameType gameType;
 	private GameListener listener;
 
