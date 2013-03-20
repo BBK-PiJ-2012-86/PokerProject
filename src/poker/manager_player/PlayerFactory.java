@@ -12,12 +12,12 @@ public interface PlayerFactory {
 	 * @param username the username the player will use
 	 * @return the human player
 	 */
-	public HumanPlayer createHumanPlayer(String username/*, GameType gameType*/);
+	public HumanPlayer createHumanPlayer(String username);
 	
 	/**
 	 * Creates a computer poker player
 	 * @param aiType the type of AI used to decide card swaps
 	 * @return the computer player
 	 */
-	public ComputerPlayer createComputerPlayer(/*GameType gameType,*/ AiType aiType);
+	public ComputerPlayer createComputerPlayer(AiType aiType);
 }

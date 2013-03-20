@@ -6,14 +6,14 @@ import poker.singleton.ComputerIDs;
 public class PlayerFactoryImpl implements PlayerFactory {
 
 	
-	public HumanPlayer createHumanPlayer(String username/*, GameType gameType*/){
-		Player humanPlayer = new HumanPlayer(username/*, gameType*/, new HumanPlayerConsoleInterface());
+	public HumanPlayer createHumanPlayer(String username){
+		Player humanPlayer = new HumanPlayer(username, new HumanPlayerConsoleInterface());
 		return (HumanPlayer) humanPlayer;
 	}
 	
-	public ComputerPlayer createComputerPlayer(/*GameType gameType,*/ AiType aiType){
+	public ComputerPlayer createComputerPlayer(AiType aiType){
 		String username  = "Computer " + ComputerIDs.getInstance().getCounter();
-		Player computerPlayer = new ComputerPlayer(username/*, gameType*/, aiType);
+		Player computerPlayer = new ComputerPlayer(username, aiType);
 		return (ComputerPlayer) computerPlayer;
 	}
 	

@@ -1,6 +1,8 @@
 package poker.manager_player;
 
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import poker.hand_card.Card;
@@ -14,7 +16,7 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 	/* Problem (with line above):    ?????
   Dm: Reliance on default encoding (DM_DEFAULT_ENCODING)
   Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume
-  that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms.
+  that the default platform encoding is suitable. This will cause the application behavior to vary between platforms.
   Use an alternative API and specify a charset name or Charset object explicitly
 	 */
 
@@ -31,8 +33,26 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 		System.out.print("How many cards would you like to swap (max " + max + "): ");
 		return getIntInRange(0,max);
 	}
+	
+	public List<Card> selectCardsToRemove(int numberOfCards) {
+		List<Card> cardsToRemove = new LinkedList<Card>();
+		boolean needCard;
+		for (int i = 0; i<numberOfCards; i++) {
+			needCard = true;
+			while(needCard) {
+				Card card = selectACard();
+				if (!cardsToRemove.contains(card)) {
+					needCard = false;
+					cardsToRemove.add(card);
+				} else {
+					System.out.println("You already picked that one. Try again.");
+				}
+			}
+		}
+		return cardsToRemove;
+	}
 
-	public Card selectCardsToRemove() {
+	public Card selectACard() {
 		System.out.println("Which card would you like to swap (From 1 - 5)?");	// 5 to be hand size? plus check there is one in it
 		int cardNo =  getIntInRange(1,5);
 		return hand.getCardAt(cardNo);

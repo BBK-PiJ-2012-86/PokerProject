@@ -1,6 +1,5 @@
 package poker.manager_player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import poker.hand_card.Card;
@@ -8,8 +7,8 @@ import poker.hand_card.Card;
 public class HumanPlayer extends Player{
 	private final HumanPlayerListener listener;
 
-	public HumanPlayer(String username/*, GameType gameType*/, HumanPlayerListener listener) {
-		super(username/*, gameType*/);
+	public HumanPlayer(String username, HumanPlayerListener listener) {
+		super(username);
 		this.listener = listener;
 	}
 
@@ -25,10 +24,7 @@ public class HumanPlayer extends Player{
 		
 		int swap = listener.getCountOfCardsToSwap(maxCardsSwapped);
 		if(swap > 0){
-			List<Card> cards = new ArrayList<Card>();
-			for(int i = 0; i < swap; i++){
-				cards.add(listener.selectCardsToRemove());	//needs to check it is a different card  ??
-			}
+			List<Card> cards = listener.selectCardsToRemove(swap);
 			removeCardsFromHand(cards);
 		}
 		return swap;

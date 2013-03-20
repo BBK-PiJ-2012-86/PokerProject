@@ -15,15 +15,13 @@ import poker.hand_card.HandImpl;
 
 public abstract class Player {
 	
-	protected GameType gameType /**/ = null;
+	protected GameType gameType = null;
 	@Getter protected Hand hand;
 	@Getter protected final String username;
 	protected Checker checker;
 	
-	public Player(String username/*, GameType gameType*/) {
-		//this.gameType = gameType;
+	public Player(String username) {
 		this.username = username;
-		//this.checker = CheckerFactory.getInstance().getChecker(gameType);
 		this.hand = new HandImpl();
 	}
 
