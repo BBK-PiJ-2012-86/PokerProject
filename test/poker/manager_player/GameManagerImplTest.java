@@ -1,13 +1,7 @@
 package poker.manager_player;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import poker.manager_player.*;
-import org.junit.Before;
-import org.junit.Test;
-import static org.mockito.Matchers.anyObject;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static poker.hand_card.TestCards.ACE_SPADE;
@@ -19,7 +13,14 @@ import static poker.hand_card.TestCards.QUEEN_SPADE;
 import static poker.hand_card.TestCards.TEN_SPADE;
 import static poker.hand_card.TestCards.THREE_CLUB;
 import static poker.hand_card.TestCards.TWO_CLUB;
-import poker.hand_card.*;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import poker.hand_card.Card;
+import poker.hand_card.TestUtil;
 
 public class GameManagerImplTest {
 
