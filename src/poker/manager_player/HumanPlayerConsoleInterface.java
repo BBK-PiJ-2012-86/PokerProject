@@ -13,14 +13,8 @@ import poker.hand_card.Hand;
  *
  */
 public class HumanPlayerConsoleInterface implements HumanPlayerListener {
-	/* Problem (with line above):    ?????
-  Dm: Reliance on default encoding (DM_DEFAULT_ENCODING)
-  Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume
-  that the default platform encoding is suitable. This will cause the application behavior to vary between platforms.
-  Use an alternative API and specify a charset name or Charset object explicitly
-	 */
 
-	private Scanner scanner = new Scanner(System.in);  //think about closing it...
+	private Scanner scanner = new Scanner(System.in);
 	private Hand hand = null;
 
 	public void onReceiveCards(Hand hand){
@@ -52,10 +46,11 @@ public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 		return cardsToRemove;
 	}
 
-	public Card selectACard() {
-		System.out.println("Which card would you like to swap (From 1 - 5)?");	// 5 to be hand size? plus check there is one in it
-		int cardNo =  getIntInRange(1,5);
-		return hand.getCardAt(cardNo);
+	private Card selectACard() {
+		int numCards = hand.getCards().size();
+		System.out.print("Which card would you like to swap (From 1 - "+numCards+")?: ");
+		int cardNo =  getIntInRange(1,numCards);
+		return hand.getCardAt(cardNo-1);
 	}
 
 	private int getIntInRange(int min, int max) {

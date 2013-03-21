@@ -12,7 +12,7 @@ public class GameScript {
 		game.addComputerPlayer(AiType.NORMAL);
 		game.addHumanPlayer("Ted");
 		
-		for(int i = 0; i < 2; i++){
+		for(int i = 0; i < 1; i++){
 			System.out.println("NEW GAME! Have fun :)");
 			game.playRound();
 			System.out.println();
