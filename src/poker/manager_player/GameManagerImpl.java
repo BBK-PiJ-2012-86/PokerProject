@@ -4,14 +4,12 @@ package poker.manager_player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
-
-import lombok.Getter;
 
 import poker.hand_card.Card;
 import poker.hand_card.Deck;
 import poker.hand_card.DeckFactory;
-
 
 
 /**
@@ -19,8 +17,8 @@ import poker.hand_card.DeckFactory;
  *
  */
 public class GameManagerImpl implements GameManager {
-	@Getter private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
-	@Getter private Deck deck = null;
+	private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
+	private Deck deck = null;
 	private GameType gameType;
 	private GameListener listener;
 
@@ -31,30 +29,21 @@ public class GameManagerImpl implements GameManager {
 
 	@Override
 	public void addComputerPlayer(AiType AI){
-		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		PlayerFactory playerFactory = PlayerFactoryImpl.getInstance();
 		Player p = playerFactory.createComputerPlayer(AI);
 		addPlayer(p);
 	}
 	
 	@Override
 	public void addHumanPlayer(String username){
-		PlayerFactory playerFactory = new PlayerFactoryImpl();
+		PlayerFactory playerFactory = PlayerFactoryImpl.getInstance();
 		Player p = playerFactory.createHumanPlayer(username);
 		addPlayer(p);
 	}
 	
-	public void addPlayer(Player player){
+	private void addPlayer(Player player){
 		player.changeGameType(gameType);
 		players.add(player);
-	}
-
-	public void deal(){
-		int numCards = gameType.numCards();
-		deck = DeckFactory.getDeckFactory().getDeck();
-		deck.shuffleDeck();
-		for(Player player: players){
-			player.receiveCards(deck.dealCards(numCards));
-		}
 	}
 
 	@Override
@@ -64,8 +53,17 @@ public class GameManagerImpl implements GameManager {
 		listener.announceWinner(evaluateWinner());
 		deletePlayerCards();
 	}
+	
+	private void deal(){
+		int numCards = gameType.numCards();
+		deck = DeckFactory.getDeckFactory().getDeck();
+		deck.shuffleDeck();
+		for(Player player: players){
+			player.receiveCards(deck.dealCards(numCards));
+		}
+	}
 
-	public void playersChangeCards(){
+	private void playersChangeCards(){
 		for(Player player: players){
 			int cardsToSwap = player.exchangeCards();
 			if(cardsToSwap > 0){
@@ -79,24 +77,19 @@ public class GameManagerImpl implements GameManager {
 		}
 	}
 
-	public List<Player> evaluateWinner(){
-		List<Player> tempList = new ArrayList<Player>();
-		for(Player player: players){
-			tempList.add(player);
-		}
+	private List<Player> evaluateWinner(){
+		List<Player> result = new LinkedList<Player>();
 		Comparator<Player> c = Player.getCheckResultRanking();
-		Collections.sort(tempList, c);
-		List<Player> result = new ArrayList<Player>();
-		result.add(tempList.get(tempList.size() - 1));
-		for(int i = tempList.size() - 2; i >= 0; i--){
-			if(c.compare(tempList.get(tempList.size() - 1), tempList.get(i)) == 0){
-				result.add(tempList.get(i));
+		Player winner = Collections.max(players, c);
+		for (Player player : players) {
+			if (c.compare(winner,player)==0) {
+				result.add(player);
 			}
 		}
 		return result;
 	}
 
-	public void deletePlayerCards(){
+	private void deletePlayerCards(){
 		for(Player player: players){
 			player.removeCards();
 		}

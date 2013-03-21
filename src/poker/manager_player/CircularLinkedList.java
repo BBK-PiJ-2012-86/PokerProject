@@ -1,11 +1,12 @@
 package poker.manager_player;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
  * @param <T>
  */
-public interface CircularLinkedList<T> extends Iterable<T> {
+public interface CircularLinkedList<T> extends Collection<T> {
 
 	/**
 	 * @return true if the list has no elements, else false
@@ -14,14 +15,15 @@ public interface CircularLinkedList<T> extends Iterable<T> {
 
 	/**
 	 * @param t the element to be added
+	 * @return true
 	 */
-	void add(T t);
+	boolean add(T t);
 
 	/**
-	 * @param t the element to be removed
+	 * @param o the element to be removed
 	 * @return true if successful, else false
 	 */
-	boolean remove(T t);
+	boolean remove(Object o);
 
 	/**
 	 * Moves the head of the list around

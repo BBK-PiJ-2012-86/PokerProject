@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class CircularLinkedListImpl<T> implements CircularLinkedList<T>{
+public class CircularLinkedListImpl<T> extends  java.util.AbstractCollection<T> implements CircularLinkedList<T> {
 
 	private int size = 0;
 	private Node<T> head = null;
@@ -36,7 +36,7 @@ public class CircularLinkedListImpl<T> implements CircularLinkedList<T>{
 
 
 	@Override
-	public void add(T t) {
+	public boolean add(T t) {
 		Node<T> newNode = new Node<T>();
 		newNode.contents = t;
 		if (isEmpty()) {
@@ -49,10 +49,13 @@ public class CircularLinkedListImpl<T> implements CircularLinkedList<T>{
 		tail.next = newNode;
 		tail = newNode;
 		size++;
+		return true;
 	}
 
 	@Override
-	public boolean remove(T t) {
+	public boolean remove(Object o) {
+		//@SuppressWarnings("unchecked")
+		T t = (T) o ;		//really??
 		if (isEmpty()) {
 			return false;
 		}
