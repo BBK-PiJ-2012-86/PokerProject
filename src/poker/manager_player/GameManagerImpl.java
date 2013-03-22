@@ -6,11 +6,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import lombok.Setter;
-import poker.hand_card.Card;
-import poker.hand_card.Deck;
-import poker.hand_card.DeckFactory;
-
 
 /**
  * This is the manager class for the poker game
@@ -18,16 +13,17 @@ import poker.hand_card.DeckFactory;
  */
 public class GameManagerImpl implements GameManager {
 	private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
-	private Deck deck = null;
+	private CardDealer cardDealer;
 	private GameType gameType;
 	private GameListener listener;
-	@Setter private boolean fixed = false;
+	/*@Setter private boolean fixed = false;
 	@Setter private List<List<Card>> handCards = null;
-	@Setter private List<List<Card>> swapCards = null;
+	@Setter private List<List<Card>> swapCards = null;*/
 
 	public GameManagerImpl(GameType gameType, GameListener listener) {
 		this.gameType = gameType;
 		this.listener = listener;
+		cardDealer = CardDealerFactory.getInstance().getCardDealer();
 	}
 
 	@Override
@@ -51,13 +47,13 @@ public class GameManagerImpl implements GameManager {
 
 	@Override
 	public void playRound(){
-		deal();
-		playersChangeCards();
+		cardDealer.deal(players, gameType.numCards());
+		cardDealer.playersChangeCards(players);
 		listener.announceWinner(evaluateWinner());
 		deletePlayerCards();
 	}
 	
-	private void deal(){
+	/*private void deal(){
 		if (fixed) {
 			int i = 0;
 			for(Player player: players){
@@ -72,9 +68,9 @@ public class GameManagerImpl implements GameManager {
 				player.receiveCards(deck.dealCards(numCards));
 			}
 		}
-	}
+	}*/
 
-	private void playersChangeCards(){
+	/*private void playersChangeCards(){
 		List<Card> cards = new LinkedList<Card>();
 		if (fixed) {
 			int playerNumber = 0;
@@ -99,7 +95,7 @@ public class GameManagerImpl implements GameManager {
 				
 			}
 		}
-	}
+	}*/
 
 	private List<Player> evaluateWinner(){
 		List<Player> result = new LinkedList<Player>();

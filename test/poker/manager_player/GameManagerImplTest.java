@@ -1,17 +1,41 @@
 package poker.manager_player;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static poker.hand_card.TestCards.ACE_SPADE;
+import static poker.hand_card.TestCards.FIVE_CLUB;
+import static poker.hand_card.TestCards.FIVE_SPADE;
+import static poker.hand_card.TestCards.FOUR_CLUB;
+import static poker.hand_card.TestCards.FOUR_SPADE;
+import static poker.hand_card.TestCards.JACK_CLUB;
+import static poker.hand_card.TestCards.JACK_DIAMOND;
+import static poker.hand_card.TestCards.JACK_HEART;
+import static poker.hand_card.TestCards.JACK_SPADE;
+import static poker.hand_card.TestCards.KING_SPADE;
+import static poker.hand_card.TestCards.NINE_SPADE;
+import static poker.hand_card.TestCards.QUEEN_SPADE;
+import static poker.hand_card.TestCards.SIX_CLUB;
+import static poker.hand_card.TestCards.SIX_SPADE;
+import static poker.hand_card.TestCards.TEN_CLUB;
+import static poker.hand_card.TestCards.TEN_DIAMOND;
+import static poker.hand_card.TestCards.TEN_SPADE;
+import static poker.hand_card.TestCards.THREE_CLUB;
+import static poker.hand_card.TestCards.TWO_CLUB;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static poker.hand_card.TestCards.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import poker.hand_card.Card;
 import poker.hand_card.TestUtil;
@@ -25,8 +49,8 @@ public class GameManagerImplTest {
 	@Before
 	public void setUp(){
 		System.setOut(new PrintStream(outContent));
-		GameListener listener = new GameConsoleListener();
-		gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
+		//GameListener listener = new GameConsoleListener();
+		//gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
 	}
 	
 	@After
@@ -39,6 +63,8 @@ public class GameManagerImplTest {
 		String input = "0"+eol;
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
+		GameListener listener = new GameConsoleListener();
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
 		gameManager.addComputerPlayer(AiType.NORMAL);
 		gameManager.addHumanPlayer("Bob");
 		gameManager.playRound();
@@ -49,6 +75,8 @@ public class GameManagerImplTest {
 		String input = "1"+eol+"1";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
+		GameListener listener = new GameConsoleListener();
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
 		gameManager.addComputerPlayer(AiType.NORMAL);
 		gameManager.addHumanPlayer("Bob");
 		gameManager.playRound();
@@ -128,25 +156,70 @@ public class GameManagerImplTest {
 	}
 
 	private void fixedTest(Card[] compArr, Card[] humArr, Card[] compSwap, Card[] humSwap, String humInput, String expected) {
-		List<List<Card>> handCards = new LinkedList<List<Card>>();
+		final List<List<Card>> handCards = new LinkedList<List<Card>>();
 		List<Card> compCards = TestUtil.toLinkedList(compArr);
 		List<Card> humCards = TestUtil.toLinkedList(humArr);
 		handCards.add(compCards);
 		handCards.add(humCards);
 		
-		List<List<Card>> swapCards = new LinkedList<List<Card>>();
+		final List<List<Card>> swapCards = new LinkedList<List<Card>>();
 		List<Card> compSwapCards = TestUtil.toLinkedList(compSwap);
 		List<Card> humSwapCards = TestUtil.toLinkedList(humSwap);
 		swapCards.add(compSwapCards);
 		swapCards.add(humSwapCards);
 		
+		
+		
+		CardDealer mockCardDealer = mock(CardDealer.class);
+		/*when(mockCardDealer.deal((CircularLinkedList<Player>) anyObject(), anyInt())).thenAnswer(new Answer<Void>() {
+		    @Override
+		    public Void answer(InvocationOnMock invocation) {
+		          Object[] args = invocation.getArguments();
+		          //do nothing
+		    }
+		});*/
+		doAnswer(new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				CircularLinkedList<Player> players = (CircularLinkedList<Player>) args[0];
+				int i = 0;
+				for(Player player: players){
+					player.receiveCards(handCards.get(i));
+					i++;
+				}
+				return null;
+			}}).when(mockCardDealer).deal((CircularLinkedList<Player>) anyObject(), anyInt());
+		
+		doAnswer(new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				CircularLinkedList<Player> players = (CircularLinkedList<Player>) args[0];
+				List<Card> cards = new LinkedList<Card>();
+				int playerNumber = 0;
+				for(Player player: players){
+					int cardsToSwap = player.exchangeCards();
+					if(cardsToSwap > 0){
+						cards = swapCards.get(playerNumber);
+						player.receiveCards(cards);
+					}
+					playerNumber++;
+				}
+				return null;
+			}}).when(mockCardDealer).playersChangeCards((CircularLinkedList<Player>) anyObject());
+		
+		CardDealerFactory.getInstance().setMockCardDealer(mockCardDealer);
+		
+		GameListener listener = new GameConsoleListener();
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
+		
 		ByteArrayInputStream in = new ByteArrayInputStream(humInput.getBytes());
 		System.setIn(in);
 		gameManager.addComputerPlayer(AiType.NORMAL);
 		gameManager.addHumanPlayer("Bob");
-		gameManager.setFixed(true);
+		
+		/*gameManager.setFixed(true);
 		gameManager.setHandCards(handCards);
-		gameManager.setSwapCards(swapCards);
+		gameManager.setSwapCards(swapCards);*/
 		gameManager.playRound();
 		
 		String actual = outContent.toString();
