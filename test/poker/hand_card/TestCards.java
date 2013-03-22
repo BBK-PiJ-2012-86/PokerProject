@@ -4,7 +4,7 @@
 package poker.hand_card;
 
 
- //Some re-usable pre-made cards to use in testing.	!!Think about mocks for these too.. ??
+ //Some re-usable pre-made cards to use in testing.
 
 public class TestCards {
 	
@@ -26,7 +26,11 @@ public class TestCards {
 	public static final Card SIX_SPADE = new Card(Rank.SIX, Suit.SPADES);
 	
 	public static final Card FIVE_CLUB = new Card(Rank.FIVE, Suit.CLUBS);
+	public static final Card FIVE_SPADE = new Card(Rank.FIVE, Suit.SPADES);
+	
 	public static final Card FOUR_CLUB = new Card(Rank.FOUR, Suit.CLUBS);
+	public static final Card FOUR_SPADE = new Card(Rank.FOUR, Suit.SPADES);
+	
 	public static final Card THREE_CLUB = new Card(Rank.THREE, Suit.CLUBS);
 	public static final Card TWO_CLUB = new Card(Rank.TWO, Suit.CLUBS);
 
