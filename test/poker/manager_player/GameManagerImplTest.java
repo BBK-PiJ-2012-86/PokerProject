@@ -56,7 +56,8 @@ public class GameManagerImplTest {
 	public void tearDown() throws Exception {
 		System.setOut(null);
 	}
-		
+	
+	
 	@Test
 	public void testChangeZeroFixed() {
 		Card[] compArr = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
@@ -163,7 +164,7 @@ public class GameManagerImplTest {
 		assertEquals(expected, actual);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private CardDealer makeMockDealer(final List<List<Card>> handCards,
 			final List<List<Card>> swapCards) {
 		CardDealer mockCardDealer = mock(CardDealer.class);
