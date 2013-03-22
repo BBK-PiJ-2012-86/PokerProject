@@ -1,4 +1,10 @@
-package poker.manager_player;
+package poker;
+
+import poker.manager_player.AiType;
+import poker.manager_player.GameConsoleListener;
+import poker.manager_player.GameManager;
+import poker.manager_player.GameManagerImpl;
+import poker.manager_player.GameType;
 
 public class GameScript {
 
