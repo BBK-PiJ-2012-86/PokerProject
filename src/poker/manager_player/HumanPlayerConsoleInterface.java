@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import lombok.Setter;
 import poker.hand_card.Card;
 import poker.hand_card.Hand;
 
@@ -15,7 +14,7 @@ import poker.hand_card.Hand;
  */
 public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 
-	@Setter private Scanner scanner = new Scanner(System.in);	//setter used in testing
+	private Scanner scanner = new Scanner(System.in);
 	private Hand hand = null;
 
 	public void onReceiveCards(Hand hand){

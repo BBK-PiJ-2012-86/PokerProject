@@ -13,7 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +27,6 @@ public class HumanPlayerConsoleInterfaceTest {
 	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	String eol = System.getProperty("line.separator");
-	private HumanPlayerConsoleInterface hpci;
 	private final static Hand mockHand = mock(Hand.class);
 	
 	@BeforeClass
@@ -44,16 +42,17 @@ public class HumanPlayerConsoleInterfaceTest {
 	@Before
 	public void setUp() throws Exception {
 		System.setOut(new PrintStream(outContent));
-		hpci = new HumanPlayerConsoleInterface();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		System.setOut(null);
+		
 	}
 
 	@Test
 	public void testOnReceiveCards() {
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		hpci.onReceiveCards(mockHand);
 		String expected = "Your hand is..."+eol+"Hand"+eol;
 		String actual = outContent.toString();
@@ -63,7 +62,8 @@ public class HumanPlayerConsoleInterfaceTest {
 	@Test
 	public void testGetCountOfCardsToSwapZero() {
 		ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		
 		int expectedInt = 0;
 		int actualInt = hpci.getCountOfCardsToSwap(3);
@@ -77,7 +77,8 @@ public class HumanPlayerConsoleInterfaceTest {
 	@Test
 	public void testGetCountOfCardsToSwapOne() {
 		ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		
 		int expectedInt = 1;
 		int actualInt = hpci.getCountOfCardsToSwap(3);
@@ -92,7 +93,8 @@ public class HumanPlayerConsoleInterfaceTest {
 	public void testGetCountOfCardsToSwapWrongNumber() {
 		String input = "9"+eol+"0";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		
 		int expectedInt = 0;
 		int actualInt = hpci.getCountOfCardsToSwap(3);
@@ -109,7 +111,8 @@ public class HumanPlayerConsoleInterfaceTest {
 	public void testGetCountOfCardsToSwapString() {
 		String input = "foo"+eol+"0";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		
 		int expectedInt = 0;
 		int actualInt = hpci.getCountOfCardsToSwap(3);
@@ -124,6 +127,7 @@ public class HumanPlayerConsoleInterfaceTest {
 	
 	@Test
 	public void testSelectCardsToRemoveZero() {
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
 		List<Card> expectedCards = new LinkedList<Card>();
 		List<Card> actualCards = hpci.selectCardsToRemove(0);
 		assertEquals(expectedCards, actualCards);
@@ -135,11 +139,11 @@ public class HumanPlayerConsoleInterfaceTest {
 	
 	@Test
 	public void testSelectCardsToRemoveOne() {
-		hpci.onReceiveCards(mockHand);
-		
 		String input = "1";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
+		hpci.onReceiveCards(mockHand);
 		
 		List<Card> expectedCards = new LinkedList<Card>();
 		expectedCards.add(ACE_SPADE);
@@ -155,11 +159,11 @@ public class HumanPlayerConsoleInterfaceTest {
 	
 	@Test
 	public void testSelectCardsToRemoveTwo() {
-		hpci.onReceiveCards(mockHand);
-		
 		String input = "1"+eol+"2";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
+		hpci.onReceiveCards(mockHand);
 		
 		List<Card> expectedCards = new LinkedList<Card>();
 		expectedCards.add(ACE_SPADE);
@@ -177,11 +181,13 @@ public class HumanPlayerConsoleInterfaceTest {
 
 	@Test
 	public void testSelectCardsToRemoveRepeated() {
-		hpci.onReceiveCards(mockHand);
+		
 		
 		String input = "1"+eol+"1"+eol+"2";
 		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		hpci.setScanner(new Scanner(in));
+		System.setIn(in);
+		HumanPlayerConsoleInterface hpci = new HumanPlayerConsoleInterface();
+		hpci.onReceiveCards(mockHand);
 		
 		List<Card> expectedCards = new LinkedList<Card>();
 		expectedCards.add(ACE_SPADE);
