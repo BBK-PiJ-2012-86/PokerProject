@@ -64,7 +64,7 @@ public class GameManagerImplTest {
 		String expected = "Your hand is..."+eol
 				+"[jack of clubs, jack of diamonds, jack of hearts, ten of clubs, ten of diamonds]"+eol
 				+"How many cards would you like to swap (max 3): The winner(s):"+eol
-				+"Computer 3"+eol
+				+"Computer 1"+eol
 				+"Their hand(s):"+eol
 				+"[ace of spades, king of spades, queen of spades, jack of spades, ten of spades]"+eol;
 
@@ -83,7 +83,7 @@ public class GameManagerImplTest {
 				+"How many cards would you like to swap (max 3): Which card would you like to swap (From 1 - 5)?: Your hand is..."+eol
 				+"[jack of diamonds, jack of hearts, ten of clubs, ten of diamonds, two of clubs]"+eol
 				+"The winner(s):"+eol
-				+"Computer 4"+eol
+				+"Computer 1"+eol
 				+"Their hand(s):"+eol
 				+"[ace of spades, king of spades, queen of spades, jack of spades, ten of spades]"+eol;
 
@@ -100,7 +100,7 @@ public class GameManagerImplTest {
 		String expected = "Your hand is..."+eol
 				+"[ace of spades, king of spades, queen of spades, jack of spades, four of clubs]"+eol
 				+"How many cards would you like to swap (max 3): The winner(s):"+eol
-				+"Computer 5"+eol
+				+"Computer 1"+eol
 				+"Their hand(s):"+eol
 				+"[ten of clubs, ten of diamonds, jack of hearts, nine of spades, six of clubs]"+eol;
 
@@ -117,7 +117,7 @@ public class GameManagerImplTest {
 		String expected = "Your hand is..."+eol
 			+"[jack of spades, ten of spades, six of spades, five of spades, four of spades]"+eol
 			+"How many cards would you like to swap (max 3): The winner(s):"+eol
-			+"Computer 6"+eol
+			+"Computer 1"+eol
 			+"Their hand(s):"+eol
 			+"[jack of clubs, ten of clubs, six of clubs, five of clubs, four of clubs]"+eol
 			+"Bob"+eol

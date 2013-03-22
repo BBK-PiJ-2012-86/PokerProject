@@ -1,4 +1,4 @@
-package poker.singleton;
+package poker.unused;
 
 public class ComputerIDs {
 	private static ComputerIDs INSTANCE = null; 

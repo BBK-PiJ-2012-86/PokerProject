@@ -1,6 +1,5 @@
 package poker.manager_player;
 
-import poker.singleton.ComputerIDs;
 
 
 public class PlayerFactoryImpl implements PlayerFactory {
@@ -18,8 +17,8 @@ public class PlayerFactoryImpl implements PlayerFactory {
 	}
 	
 	@Override
-	public ComputerPlayer createComputerPlayer(AiType aiType){
-		String username  = "Computer " + ComputerIDs.getInstance().getCounter();
+	public ComputerPlayer createComputerPlayer(AiType aiType, int id){
+		String username  = "Computer " + id;
 		Player computerPlayer = new ComputerPlayer(username, aiType);
 		return (ComputerPlayer) computerPlayer;
 	}

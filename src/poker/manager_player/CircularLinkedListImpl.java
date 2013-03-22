@@ -54,8 +54,8 @@ public class CircularLinkedListImpl<T> extends  java.util.AbstractCollection<T> 
 
 	@Override
 	public boolean remove(Object o) {
-		//@SuppressWarnings("unchecked")
-		T t = (T) o ;		//really??
+		@SuppressWarnings("unchecked")
+		T t = (T) o ;
 		if (isEmpty()) {
 			return false;
 		}

@@ -33,7 +33,7 @@ public class GameManagerImpl implements GameManager {
 	@Override
 	public void addComputerPlayer(AiType AI){
 		PlayerFactory playerFactory = PlayerFactoryImpl.getInstance();
-		Player p = playerFactory.createComputerPlayer(AI);
+		Player p = playerFactory.createComputerPlayer(AI, idGenerator.getId());
 		addPlayer(p);
 	}
 	
@@ -118,4 +118,13 @@ public class GameManagerImpl implements GameManager {
 			player.removeCards();
 		}
 	}
+	
+	private class GameUniqueIdGenerator {
+		private int id = 1;
+		public int getId() {
+			return id++;
+		}
+	}
+	
+	private final GameUniqueIdGenerator idGenerator = new GameUniqueIdGenerator();
 }
