@@ -14,7 +14,7 @@ import poker.hand_card.Hand;
  */
 public class HumanPlayerConsoleInterface implements HumanPlayerListener {
 
-	private Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in, "UTF-8");
 	private Hand hand = null;
 
 	public void onReceiveCards(Hand hand){
