@@ -42,46 +42,21 @@ import poker.hand_card.TestUtil;
 
 public class GameManagerImplTest {
 
-	private GameManagerImpl gameManager;
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private String eol = System.getProperty("line.separator");
+	private GameListener listener;
 	
 	@Before
 	public void setUp(){
 		System.setOut(new PrintStream(outContent));
-		//GameListener listener = new GameConsoleListener();
-		//gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
+		listener = new GameConsoleListener();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		System.setOut(null);
 	}
-	
-	@Test
-	public void testChangeZero() {
-		String input = "0"+eol;
-		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-		GameListener listener = new GameConsoleListener();
-		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
-		gameManager.addComputerPlayer(AiType.NORMAL);
-		gameManager.addHumanPlayer("Bob");
-		gameManager.playRound();
-	}
-	
-	@Test
-	public void testChangeOne() {
-		String input = "1"+eol+"1";
-		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-		GameListener listener = new GameConsoleListener();
-		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
-		gameManager.addComputerPlayer(AiType.NORMAL);
-		gameManager.addHumanPlayer("Bob");
-		gameManager.playRound();
-	}
-	
+		
 	@Test
 	public void testChangeZeroFixed() {
 		Card[] compArr = new Card[] {ACE_SPADE, KING_SPADE, QUEEN_SPADE, JACK_SPADE, TEN_SPADE};
@@ -168,16 +143,31 @@ public class GameManagerImplTest {
 		swapCards.add(compSwapCards);
 		swapCards.add(humSwapCards);
 		
+		fixedTestList(humInput, expected, handCards, swapCards);
+	}
+
+	private void fixedTestList(String humInput, String expected, 
+			final List<List<Card>> handCards, final List<List<Card>> swapCards) {
+		CardDealer mockCardDealer = makeMockDealer(handCards, swapCards);
+		CardDealerFactory.getInstance().setMockCardDealer(mockCardDealer);
 		
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
+		ByteArrayInputStream in = new ByteArrayInputStream(humInput.getBytes());
+		System.setIn(in);
+		gameManager.addComputerPlayer(AiType.NORMAL);
+		gameManager.addHumanPlayer("Bob");
+		gameManager.playRound();
 		
+		String actual = outContent.toString();
+		
+		assertEquals(expected, actual);
+	}
+
+	@SuppressWarnings("unchecked")
+	private CardDealer makeMockDealer(final List<List<Card>> handCards,
+			final List<List<Card>> swapCards) {
 		CardDealer mockCardDealer = mock(CardDealer.class);
-		/*when(mockCardDealer.deal((CircularLinkedList<Player>) anyObject(), anyInt())).thenAnswer(new Answer<Void>() {
-		    @Override
-		    public Void answer(InvocationOnMock invocation) {
-		          Object[] args = invocation.getArguments();
-		          //do nothing
-		    }
-		});*/
+
 		doAnswer(new Answer() {
 			public Object answer(InvocationOnMock invocation) {
 				Object[] args = invocation.getArguments();
@@ -206,24 +196,29 @@ public class GameManagerImplTest {
 				}
 				return null;
 			}}).when(mockCardDealer).playersChangeCards((CircularLinkedList<Player>) anyObject());
-		
-		CardDealerFactory.getInstance().setMockCardDealer(mockCardDealer);
-		
-		GameListener listener = new GameConsoleListener();
-		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
-		
-		ByteArrayInputStream in = new ByteArrayInputStream(humInput.getBytes());
+		return mockCardDealer;
+	}
+	
+	//just check it runs normally
+	@Test
+	public void testChangeZero() {
+		String input = "0"+eol;
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
 		gameManager.addComputerPlayer(AiType.NORMAL);
 		gameManager.addHumanPlayer("Bob");
-		
-		/*gameManager.setFixed(true);
-		gameManager.setHandCards(handCards);
-		gameManager.setSwapCards(swapCards);*/
 		gameManager.playRound();
-		
-		String actual = outContent.toString();
-		
-		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testChangeOne() {
+		String input = "1"+eol+"1";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		GameManager gameManager = new GameManagerImpl(GameType.FIVE_CARD_DRAW, listener);
+		gameManager.addComputerPlayer(AiType.NORMAL);
+		gameManager.addHumanPlayer("Bob");
+		gameManager.playRound();
 	}
 }

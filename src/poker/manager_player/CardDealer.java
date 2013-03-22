@@ -8,12 +8,9 @@ import poker.hand_card.Deck;
 import poker.hand_card.DeckFactory;
 
 public class CardDealer {
-	//private CircularLinkedList<Player> players = new CircularLinkedListImpl<Player>();
 	private Deck deck = null;
-	//private GameType gameType;
 
 	public void deal(CircularLinkedList<Player> players, int numCards){
-		//int numCards = gameType.numCards();
 		deck = DeckFactory.getDeckFactory().getDeck();
 		deck.shuffleDeck();
 		for(Player player: players){
