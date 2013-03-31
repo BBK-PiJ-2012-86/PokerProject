@@ -1,5 +1,7 @@
 package poker;
-
+/*
+ * Poker Project by Ruth Baylis and Ed Hogarth
+ */
 import poker.manager_player.AiType;
 import poker.manager_player.GameConsoleListener;
 import poker.manager_player.GameManager;
